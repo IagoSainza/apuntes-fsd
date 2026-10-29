@@ -74,6 +74,9 @@ td code{white-space:nowrap}
 svg text{font-family:var(--f-body)}
 .empty{display:none;color:var(--muted);padding:30px 0;text-align:center}
 .span2{grid-column:1/-1}
+.card.esencial{background:var(--accent-soft)}
+.card.esencial li{margin:3px 0}
+
 .diagram{overflow-x:auto;margin:10px 0 6px}
 .diagram svg{display:block;width:100%;min-width:540px;height:auto}
 .fc-box{fill:var(--surface);stroke:var(--dot);stroke-width:1.6}
@@ -119,6 +122,15 @@ svg text{font-family:var(--f-body)}
 <h2>Terminal (Unix)</h2>
 <p class="intro">Moverte por carpetas y gestionar archivos sin ratón. Antes de hacer algo peligroso: <code>pwd</code> y <code>ls</code> para saber dónde estás.</p>
 <div class="grid">
+  <div class="card span2 esencial"><h3>Lo esencial</h3>
+  <ul>
+    <li><code>pwd</code> dónde estoy · <code>ls</code> qué hay aquí. Si te pierdes, estas dos.</li>
+    <li><code>cd carpeta</code> entra · <code>cd ..</code> sube · <code>cd ~</code> a tu usuario.</li>
+    <li><code>mkdir</code> crea carpetas · <code>touch</code> crea archivos · <code>cp</code> copia · <code>mv</code> mueve o renombra.</li>
+    <li><code>rm</code> borra <b>para siempre</b> (no hay papelera). <code>rm -rf</code> sin preguntar: cuidado.</li>
+    <li>Si un nombre tiene espacios, va entre comillas: <code>cd "Trabajo clase"</code>.</li>
+  </ul></div>
+
   <div class="card span2"><h3>Tu entorno de trabajo</h3>
   <ul>
     <li><b>Terminal (Warp o Git Bash):</b> la ventana donde escribes comandos. En Windows se configura Warp para que use Git Bash, así los comandos son iguales que en Mac/Linux.</li>
@@ -158,6 +170,15 @@ svg text{font-family:var(--f-body)}
 <h2>Git</h2>
 <p class="intro">Git guarda "fotos" (commits) de tu código. Un archivo pasa por tres sitios: <b>carpeta de trabajo</b> → <b>staging</b> (preparado) → <b>commit</b> (guardado) → y luego al <b>remoto</b> (GitHub).</p>
 <div class="grid">
+  <div class="card span2 esencial"><h3>Lo esencial</h3>
+  <ul>
+    <li>Un cambio pasa por: <b>carpeta</b> → <code>add</code> → <b>staging</b> → <code>commit</code> → <b>historial</b> → <code>push</code> → <b>GitHub</b>.</li>
+    <li><code>git status</code> a todas horas: te dice en qué rama estás y qué falta por guardar.</li>
+    <li>Una <b>rama</b> por tarea: <code>git switch -c feature/algo</code>. Al acabar: push, Pull Request y merge en GitHub.</li>
+    <li>Antes de empezar: <code>git switch main</code> + <code>git pull</code>. Commits pequeños con verbo: "Añade…", "Corrige…".</li>
+    <li>Nunca <code>git init</code> dentro de otra carpeta que ya tenga Git. El repo del profe: solo <code>git pull</code>, no se toca.</li>
+  </ul></div>
+
   <div class="card span2"><h3>El ciclo que harás siempre</h3>
   <div class="flow"><span>editas código</span><i>→</i><span>git status</span><i>→</i><span>git add .</span><i>→</i><span>git commit -m "mensaje"</span><i>→</i><span>git push</span></div>
 <pre><code>git switch -c feature-login        // 1. creo rama nueva y me cambio a ella
@@ -165,6 +186,26 @@ git status                         // 2. ¿qué he cambiado?
 git add .                          // 3. preparo todos los cambios
 git commit -m "Login con JWT"      // 4. guardo una versión
 git push -u origin feature-login   // 5. la subo (-u solo la primera vez)</code></pre></div>
+
+  <div class="card span2"><h3>Chuleta de Git: qué quiero hacer → qué escribo</h3>
+  <div class="tbl"><table>
+    <tr><th>Quiero…</th><th>Escribo</th></tr>
+    <tr><td>ver cómo está todo</td><td><code>git status</code></td></tr>
+    <tr><td>bajarme un repo de GitHub</td><td><code>git clone &lt;url&gt;</code></td></tr>
+    <tr><td>actualizar con lo nuevo de GitHub</td><td><code>git pull</code></td></tr>
+    <tr><td>empezar una tarea nueva</td><td><code>git switch main</code> → <code>git pull</code> → <code>git switch -c feature/nombre</code></td></tr>
+    <tr><td>cambiarme a otra rama</td><td><code>git switch rama</code></td></tr>
+    <tr><td>guardar un paso que funciona</td><td><code>git add archivo</code> → <code>git commit -m "Verbo + qué hace"</code></td></tr>
+    <tr><td>subir la rama a GitHub (la primera vez)</td><td><code>git push -u origin feature/nombre</code></td></tr>
+    <tr><td>subir más commits a esa rama</td><td><code>git push</code></td></tr>
+    <tr><td>juntar mi rama con main</td><td>en GitHub: Pull Request → Merge → luego <code>git switch main</code> + <code>git pull</code></td></tr>
+    <tr><td>ver el historial</td><td><code>git log --oneline</code></td></tr>
+    <tr><td>ver qué he cambiado</td><td><code>git diff</code></td></tr>
+    <tr><td>tirar los cambios de un archivo</td><td><code>git restore archivo</code></td></tr>
+    <tr><td>deshacer un <code>add</code></td><td><code>git restore --staged archivo</code></td></tr>
+    <tr><td>deshacer el último commit (sin perder cambios)</td><td><code>git reset HEAD~1</code></td></tr>
+    <tr><td>que Git ignore una carpeta (node_modules)</td><td>archivo <code>.gitignore</code> con <code>node_modules</code></td></tr>
+  </table></div></div>
 
   <div class="card"><h3>Empezar y día a día</h3>
   <div class="tbl"><table>
@@ -272,6 +313,13 @@ git push -u origin feature-login   // 5. la subo (-u solo la primera vez)</code>
 <h2>HTML + JavaScript en el navegador</h2>
 <p class="intro">Cuando escribes <code>www.marca.com</code>, el DNS lo traduce a una IP (ej. 234.45.64.78) y el navegador pide la página por <b>http/https</b>. Recibe HTML y lo pinta.</p>
 <div class="grid">
+  <div class="card span2 esencial"><h3>Lo esencial</h3>
+  <ul>
+    <li>El navegador pide la página y recibe <b>HTML</b> (estructura), <b>CSS</b> (aspecto) y <b>JS</b> (comportamiento).</li>
+    <li>El <code>&lt;script&gt;</code> va al final del <code>&lt;body&gt;</code>, para que el HTML ya exista cuando JS lo busque.</li>
+    <li>JS en el navegador cambia la página; JS con <b>Node</b> funciona en la terminal o en un servidor, sin página.</li>
+  </ul></div>
+
   <div class="card"><h3>Dónde poner el &lt;script&gt;</h3>
 <pre><code>&lt;head&gt;
   &lt;title&gt;Document&lt;/title&gt;
@@ -295,6 +343,15 @@ h1.textContent = "hola"                 // le cambio el texto</code></pre>
 <section class="area" id="js" data-a="js">
 <h2>JavaScript básico</h2>
 <div class="grid">
+  <div class="card span2 esencial"><h3>Lo esencial</h3>
+  <ul>
+    <li><code>const</code> por defecto; <code>let</code> solo si el valor va a cambiar dentro del programa.</li>
+    <li>Tipos: texto <code>"hola"</code>, número <code>19.90</code> (con punto), booleano <code>true</code>/<code>false</code>.</li>
+    <li>Template string: <code>`Hola ${nombre}`</code>. Fuera de <code>${ }</code> todo sale tal cual.</li>
+    <li><code>=</code> guarda · <code>===</code> compara (valor <b>y</b> tipo: <code>7 === "7"</code> es false).</li>
+    <li><code>%</code> da el resto (par si <code>n % 2 === 0</code>) · <code>&amp;&amp;</code> y · <code>||</code> o · <code>!</code> no.</li>
+  </ul></div>
+
   <div class="card"><h3>Variables: let y const</h3>
 <pre><code>let edad = 25      // let: puede cambiar
 edad = 26          // ✔ válido
@@ -377,6 +434,15 @@ console.log('tiene ${edad} años')
 <h2>Condicionales (control de flujo)</h2>
 <p class="intro">Hacen que el programa tome un camino u otro según una condición que da <code>true</code> o <code>false</code>.</p>
 <div class="grid">
+  <div class="card span2 esencial"><h3>Lo esencial</h3>
+  <ul>
+    <li><code>if / else if / else</code> entra <b>solo en el primer camino</b> que se cumple.</li>
+    <li>Por eso la condición <b>más exigente va arriba</b> (≥ 9 antes que ≥ 5).</li>
+    <li>El <code>else</code> no lleva paréntesis: es "en cualquier otro caso".</li>
+    <li><code>if</code> + <code>if</code> son preguntas independientes (pueden cumplirse las dos); <code>else if</code> es una sola decisión.</li>
+    <li>Sin <code>;</code> detrás del <code>if (...)</code>: si lo pones, el if no hace nada.</li>
+  </ul></div>
+
   <div class="card"><h3>if · if/else</h3>
 <pre><code>// if: solo se ejecuta si la condición es true
 if (edad &gt;= 18) {
@@ -440,6 +506,15 @@ else { texto2 = "Apagado" }</code></pre>
 <h2>Bucles (repetir código)</h2>
 <p class="intro">Un bucle repite un bloque de código mientras se cumpla una condición. Así no escribes lo mismo 100 veces.</p>
 <div class="grid">
+  <div class="card span2 esencial"><h3>Lo esencial</h3>
+  <ul>
+    <li><code>for (inicio; condición; paso)</code>: pregunta → hace lo de dentro → cambia <code>i</code> → vuelve a preguntar.</li>
+    <li>En la primera vuelta <code>i</code> vale lo del inicio; el paso (<code>i++</code>) se hace <b>al final</b> de cada vuelta.</li>
+    <li>Para recorrer un array: <code>i &lt; lista.length</code> (no <code>&lt;=</code>), y recorre la lista que estás procesando.</li>
+    <li><code>for…of</code> te da cada <b>valor</b>, sin posición. Si necesitas la posición, <code>for</code> con <code>i</code>.</li>
+    <li>Lo que va dentro del bucle se repite en <b>cada vuelta</b>; lo que va después, una sola vez.</li>
+  </ul></div>
+
   <div class="card"><h3>for: cuando sabes cuántas vueltas</h3>
 <pre><code>for (let i = 0; i < 5; i++) {
   console.log(`Vuelta número ${i}`)   // 0, 1, 2, 3, 4
@@ -480,6 +555,15 @@ for (let fruta of frutas) {
 <h2>Funciones</h2>
 <p class="intro">Una función es un trozo de código con nombre que puedes usar todas las veces que quieras. Escribes la lógica una vez y la reutilizas (<b>DRY</b>: Don't Repeat Yourself, no te repitas).</p>
 <div class="grid">
+  <div class="card span2 esencial"><h3>Lo esencial</h3>
+  <ul>
+    <li>Una función es una receta: se <b>declara</b> una vez y no hace nada hasta que la <b>llamas</b>.</li>
+    <li>Los <b>parámetros</b> son los ingredientes: <code>function sumar(a, b)</code> → <code>sumar(2, 3)</code>.</li>
+    <li><code>return</code> <b>devuelve</b> el resultado para usarlo fuera; <code>console.log</code> solo lo enseña.</li>
+    <li>Cuando llega a un <code>return</code>, la función se acaba. En los bucles, el return va <b>después</b> del for.</li>
+    <li>Lo creado dentro de una función solo existe dentro (ámbito).</li>
+  </ul></div>
+
   <div class="card"><h3>Las dos partes: declarar y llamar</h3>
 <pre><code>// 1. DECLARACIÓN: las reglas del juego (aún no se ejecuta)
 function sumar() {
@@ -593,6 +677,15 @@ sumar(10, 10, 10, 10, 10) // 50</code></pre>
 <h2>Arrays (listas)</h2>
 <p class="intro">Un array es una lista ordenada de valores guardada en una sola variable.</p>
 <div class="grid">
+  <div class="card span2 esencial"><h3>Lo esencial</h3>
+  <ul>
+    <li>Las posiciones empiezan en <b>0</b>. <code>length</code> cuenta desde 1: la última está en <code>length - 1</code>.</li>
+    <li>Una posición que no existe da <code>undefined</code>.</li>
+    <li><code>lista.push(x)</code> añade al final (funciona aunque sea <code>const</code>).</li>
+    <li>Los <code>[ ]</code> solo en arrays: <code>precios[2]</code>. Una variable normal va sin ellos.</li>
+    <li>Con <code>[ ]</code> a un texto sacas una letra: <code>"Marta"[0]</code> → "M".</li>
+  </ul></div>
+
   <div class="card"><h3>Crear y leer</h3>
 <pre><code>const frutas = ['Pera', 'Manzana', 'Platano', 'Ciruela']
 //   posición:     0        1          2          3
@@ -662,6 +755,15 @@ console.log(filtrarPares(12, 5, 8, 19, 24))   // [12, 8, 24]</code></pre>
 <h2>Objetos y métodos de arrays</h2>
 <p class="intro">Clase 9 (26/10, sesión 5 especial). El puente entre SQL y JavaScript: lo que en la base de datos es una fila, en JS es un objeto; y la tabla entera, un array de objetos.</p>
 <div class="grid">
+  <div class="card span2 esencial"><h3>Lo esencial</h3>
+  <ul>
+    <li>Objeto = datos de una cosa por <b>nombre</b>: <code>producto.precio</code>. Array de objetos = una <b>tabla</b>.</li>
+    <li><code>filter</code> → todos los que cumplen (array) · <code>find</code> → el primero (o undefined) · <code>map</code> → todos transformados.</li>
+    <li><code>push / pop / unshift / shift</code> cambian el original; <code>filter / map / find</code> te dan algo nuevo: guárdalo en una variable.</li>
+    <li>Dentro va una función flecha: <code>producto =&gt; producto.precio &lt; 20</code> ("para cada producto, ¿cumple?").</li>
+    <li>Por pasos: filter → guardas → map → guardas. Mejor que todo en una línea.</li>
+  </ul></div>
+
   <div class="card"><h3>Objetos: clave → valor</h3>
 <pre><code>const producto = {
     nombre: 'Leche desnatada',
@@ -787,6 +889,35 @@ const nombres = productos.map(producto => producto.nombre)
     <li>Si cabe en una línea no lleva <code>return</code> ni llaves: lo de después de la flecha ya se devuelve solo.</li>
   </ul></div>
 
+  <div class="card span2"><h3>Chuleta: todos los métodos de arrays</h3>
+  <div class="tbl"><table>
+    <tr><th>Método</th><th>Qué hace</th><th>¿Cambia el original?</th><th>Devuelve</th></tr>
+    <tr><td><code>push(x)</code></td><td>añade al final</td><td><b>sí</b></td><td>la nueva longitud</td></tr>
+    <tr><td><code>pop()</code></td><td>quita el último</td><td><b>sí</b></td><td>el elemento quitado</td></tr>
+    <tr><td><code>unshift(x)</code></td><td>añade al principio</td><td><b>sí</b></td><td>la nueva longitud</td></tr>
+    <tr><td><code>shift()</code></td><td>quita el primero</td><td><b>sí</b></td><td>el elemento quitado</td></tr>
+    <tr><td><code>splice(pos, n)</code></td><td>quita (o mete) en una posición: <code>splice(2, 1)</code> quita 1 en la posición 2</td><td><b>sí</b></td><td>array con lo quitado</td></tr>
+    <tr><td><code>sort(fn)</code></td><td>ordena</td><td><b>sí</b></td><td>el mismo array ordenado</td></tr>
+    <tr><td><code>reverse()</code></td><td>le da la vuelta</td><td><b>sí</b></td><td>el mismo array al revés</td></tr>
+    <tr><td><code>includes(x)</code></td><td>¿está?</td><td>no</td><td><code>true</code> / <code>false</code></td></tr>
+    <tr><td><code>indexOf(x)</code></td><td>¿en qué posición está?</td><td>no</td><td>la posición o <b>-1</b></td></tr>
+    <tr><td><code>find(fn)</code></td><td>el primero que cumple</td><td>no</td><td>el elemento o <code>undefined</code></td></tr>
+    <tr><td><code>findIndex(fn)</code></td><td>posición del primero que cumple</td><td>no</td><td>la posición o <b>-1</b></td></tr>
+    <tr><td><code>some(fn)</code></td><td>¿alguno cumple?</td><td>no</td><td><code>true</code> / <code>false</code></td></tr>
+    <tr><td><code>every(fn)</code></td><td>¿todos cumplen?</td><td>no</td><td><code>true</code> / <code>false</code></td></tr>
+    <tr><td><code>filter(fn)</code></td><td>todos los que cumplen</td><td>no</td><td>array nuevo</td></tr>
+    <tr><td><code>map(fn)</code></td><td>transforma cada uno</td><td>no</td><td>array nuevo, mismo tamaño</td></tr>
+    <tr><td><code>reduce(fn, inicial)</code></td><td>lo junta todo en un valor</td><td>no</td><td>un valor (suma, total…)</td></tr>
+    <tr><td><code>forEach(fn)</code></td><td>hace algo con cada uno (como un for…of)</td><td>no</td><td>nada (<code>undefined</code>)</td></tr>
+    <tr><td><code>toSorted(fn)</code></td><td>ordena una copia</td><td>no</td><td>array nuevo</td></tr>
+    <tr><td><code>toReversed()</code></td><td>copia al revés</td><td>no</td><td>array nuevo</td></tr>
+    <tr><td><code>slice(a, b)</code></td><td>copia un trozo, de <code>a</code> hasta <code>b</code> (sin incluir <code>b</code>)</td><td>no</td><td>array nuevo</td></tr>
+    <tr><td><code>join(", ")</code></td><td>junta todo en un texto</td><td>no</td><td>un texto</td></tr>
+  </table></div>
+  <p class="tip"><b>Regla rápida:</b> los que <b>añaden, quitan u ordenan</b> (push, pop, unshift, shift, splice, sort, reverse) cambian el original. Los que <b>preguntan o crean algo nuevo</b> no lo tocan: guarda su resultado en una variable.</p>
+  <p class="tip"><b>Trampa de <code>sort</code>:</b> sin función ordena como si fueran textos: <code>[10, 9, 1].sort()</code> da <code>[1, 10, 9]</code>. Para números: <code>sort((a, b) =&gt; a - b)</code> de menor a mayor, <code>(a, b) =&gt; b - a</code> de mayor a menor.</p>
+  <p class="tip"><b>-1 frente a <code>undefined</code>:</b> los que buscan una <b>posición</b> (<code>indexOf</code>, <code>findIndex</code>) dicen "no está" con -1, porque 0 es una posición de verdad. Los que buscan un <b>elemento</b> (<code>find</code>) devuelven <code>undefined</code>. Es tu pósit de la búsqueda.</p></div>
+
   <div class="card"><h3>Darle la vuelta: reverse y toReversed</h3>
 <pre><code>const animales = ['Leon', 'Gato', 'Perro']
 const alReves = animales.toReversed()
@@ -872,6 +1003,15 @@ for (let numero of numeros) {
 <section class="area" id="trucos" data-a="ej">
 <h2>Trucos que salen en los ejercicios</h2>
 <div class="grid">
+  <div class="card span2 esencial"><h3>Lo esencial</h3>
+  <ul>
+    <li><b>Contador</b> (0, suma 1) · <b>acumulador</b> (0, suma el valor) · <b>máximo</b> (guarda la posición del mayor).</li>
+    <li><b>Búsqueda:</b> empieza en <b>-1</b> ("no encontrado") porque 0 es una posición real.</li>
+    <li>Calcula primero, muestra después. <code>toFixed(2)</code> solo al mostrar: devuelve texto.</li>
+    <li>Comparar sin mayúsculas: <code>.toLowerCase()</code> en los <b>dos</b> lados.</li>
+    <li>Si un porcentaje sale 100 veces más grande, falta <code>/ 100</code>.</li>
+  </ul></div>
+
   <div class="card"><h3>¿Par o impar? → <code>%</code></h3>
 <pre><code>if (numero % 2 === 0) console.log('par')
 else console.log('impar')</code></pre>
@@ -1008,6 +1148,14 @@ console.log(`Total: ${total.toFixed(2)} €`);</code></pre>
 <h2>Estudiar con IA</h2>
 <p class="intro">La IA sirve para entender, no para copiar. Si te da el código hecho, no aprendes a sacarlo tú.</p>
 <div class="grid">
+  <div class="card span2 esencial"><h3>Lo esencial</h3>
+  <ul>
+    <li>La IA como <b>tutor</b>: pregunta → pista → pseudocódigo. No el código entero.</li>
+    <li>Si te ayudó, <b>decláralo</b> (IA.md y comentario <code>// IA:</code>).</li>
+    <li>Si no sabes explicar una línea, no es tuya: pide que te la expliquen hasta entenderla.</li>
+    <li>Lee siempre lo que te da antes de ejecutarlo (sobre todo comandos que borran o SQL con UPDATE/DELETE).</li>
+  </ul></div>
+
   <div class="card"><h3>Prompt de tutor</h3>
 <pre><code>Quiero que actúes como un experto profesor de programación
 en JavaScript. Me han puesto unos ejercicios que quiero
@@ -1028,6 +1176,43 @@ pero no me des el código. Quiero sacarlo por mí mismo.</code></pre></div>
 <h2>Bases de datos y SQL</h2>
 <p class="intro">Asignatura de Bases de Datos (MySQL y MongoDB) · Profesor Moisés Carretero · desde el 14/10. Una base de datos guarda la información de forma permanente y compartida, y SQL es el idioma para pedirle datos.</p>
 <div class="grid">
+  <div class="card span2 esencial"><h3>Lo esencial</h3>
+  <ul>
+    <li>Se escribe: SELECT → FROM → JOIN → WHERE → GROUP BY → HAVING → ORDER BY → LIMIT ("Si Fulano Juega Wii…").</li>
+    <li>En SQL se compara con un solo <code>=</code>. Textos entre comillas simples, números sin comillas.</li>
+    <li><code>WHERE</code> filtra filas (antes de agrupar) · <code>HAVING</code> filtra grupos (después).</li>
+    <li><code>JOIN</code> une tablas por la FK = PK. <code>IS NULL</code>, nunca <code>= NULL</code>.</li>
+    <li><code>UPDATE</code> y <code>DELETE</code> <b>siempre con WHERE</b>; antes, un SELECT con el mismo WHERE.</li>
+  </ul></div>
+
+  <div class="card span2"><h3>Chuleta de SQL: plantillas para copiar</h3>
+<pre><code>-- Ver columnas con condición
+SELECT columna1, columna2 FROM tabla WHERE condicion;
+
+-- Las 5 mejores
+SELECT * FROM tabla ORDER BY columna DESC LIMIT 5;
+
+-- Buscar por parte del texto
+SELECT * FROM tabla WHERE nombre LIKE '%texto%';
+
+-- Cuántos hay por grupo, solo grupos de más de 3
+SELECT grupo, COUNT(*) AS total FROM tabla GROUP BY grupo HAVING COUNT(*) &gt; 3;
+
+-- Media redondeada
+SELECT ROUND(AVG(columna), 2) AS media FROM tabla;
+
+-- Juntar dos tablas
+SELECT a.columna, b.columna FROM tabla_a a JOIN tabla_b b ON a.b_id = b.id;
+
+-- Lo que no tiene pareja
+SELECT a.columna FROM tabla_a a LEFT JOIN tabla_b b ON b.a_id = a.id WHERE b.id IS NULL;
+
+-- Meter, cambiar y borrar (siempre con WHERE)
+INSERT INTO tabla (col1, col2) VALUES ('texto', 10);
+UPDATE tabla SET col1 = 'nuevo' WHERE id = 5;
+DELETE FROM tabla WHERE id = 5;</code></pre>
+  <p class="tip">Cambia <code>tabla</code>, <code>columna</code> y <code>condicion</code> por los tuyos. Si no sabes cuál usar, mira "Traducir el enunciado a SQL".</p></div>
+
   <div class="card"><h3>¿Para qué sirve una base de datos?</h3>
   <ul>
     <li><b>Persistencia:</b> los datos sobreviven a recargas, apagones y reinicios.</li>
@@ -1362,6 +1547,15 @@ DELETE FROM series WHERE id = 35;</code></pre>
 <h2>Node.js y API REST</h2>
 <p class="intro">Clase 10 (28/10). Empieza el módulo de Node con Juan: el backend que une lo de SQL con lo de JavaScript. El objetivo de estos días no es pintar una web, es <b>sacar los datos de la base de datos y devolverlos como un array de objetos</b>.</p>
 <div class="grid">
+  <div class="card span2 esencial"><h3>Lo esencial</h3>
+  <ul>
+    <li>Node = JavaScript fuera del navegador. La API REST devuelve <b>datos en JSON</b>, no páginas.</li>
+    <li>GET ↔ SELECT · POST ↔ INSERT · PUT ↔ UPDATE · DELETE ↔ DELETE. Siempre se responde algo.</li>
+    <li>Pedir datos tarda: es <b>asíncrono</b>. Una promesa acaba en <code>resolve</code> (esperado) o <code>reject</code> (error).</li>
+    <li>Se usa con <code>await</code> dentro de una función <code>async</code>, y <code>try / catch</code> para el error.</li>
+    <li>Cada proyecto: <code>npm init</code> (con <code>"type": "module"</code>) · librerías con <code>npm install</code> · <code>export</code> / <code>import</code> con <code>.js</code>.</li>
+  </ul></div>
+
   <div class="card span2"><h3>Por qué existe una API REST</h3>
   <ul>
     <li><b>Antes (hasta ~2010):</b> el backend (PHP, Java…) pedía los datos a la base de datos y él mismo montaba el HTML de la página.</li>

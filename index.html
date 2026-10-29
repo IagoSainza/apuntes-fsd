@@ -1,0 +1,1523 @@
+<title>Apuntes Full Stack</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: cabecera + barra de navegación/buscador fija, tarjetas temáticas en rejilla de 2 columnas que pasan a 1 en móvil */
+:root{
+  --bg:#f3f5f9; --surface:#ffffff; --fg:#17202e; --muted:#5b6678; --line:#dbe1ea;
+  --accent:#2545c4; --accent-soft:#e4e9fb; --mark:#fff1a8; --code-bg:#f0f2f7;
+  --c-term:#0f7a5a; --c-git:#c2410c; --c-html:#7c3aed; --c-js:#2545c4; --c-cond:#b4237a; --c-loop:#0e7490; --c-fn:#a16207; --c-arr:#4d7c0f; --c-ia:#6b5b95; --c-sql:#9f1239; --c-obj:#a21caf; --c-node:#15803d;
+  --ok:#0f7a5a; --bad:#b42318;
+  --tok-com:#6b7686; --tok-str:#0f7a5a; --tok-kw:#9f1f9f; --tok-num:#b45309;
+  --f-display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f141c; --surface:#171e2a; --fg:#e6ebf3; --muted:#9aa5b8; --line:#2a3445;
+  --accent:#8ea4ff; --accent-soft:#1f2a4a; --mark:#5a4b0d; --code-bg:#111823;
+  --c-term:#4fd1a5; --c-git:#fb923c; --c-html:#b79cff; --c-js:#8ea4ff; --c-cond:#f472b6; --c-loop:#22d3ee; --c-fn:#facc15; --c-arr:#a3e635; --c-ia:#c4b5fd; --c-sql:#fb7185; --c-obj:#e879f9; --c-node:#86efac;
+  --ok:#4fd1a5; --bad:#f87171;
+  --tok-com:#7d889b; --tok-str:#6ee7b7; --tok-kw:#f0abfc; --tok-num:#fdba74; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f141c; --surface:#171e2a; --fg:#e6ebf3; --muted:#9aa5b8; --line:#2a3445;
+  --accent:#8ea4ff; --accent-soft:#1f2a4a; --mark:#5a4b0d; --code-bg:#111823;
+  --c-term:#4fd1a5; --c-git:#fb923c; --c-html:#b79cff; --c-js:#8ea4ff; --c-cond:#f472b6; --c-loop:#22d3ee; --c-fn:#facc15; --c-arr:#a3e635; --c-ia:#c4b5fd; --c-sql:#fb7185; --c-obj:#e879f9; --c-node:#86efac;
+  --ok:#4fd1a5; --bad:#f87171;
+  --tok-com:#7d889b; --tok-str:#6ee7b7; --tok-kw:#f0abfc; --tok-num:#fdba74; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--f-body);padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:1180px;margin:0 auto}
+header.top{padding-block:28px 14px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:end;justify-content:space-between}
+h1{font:800 clamp(28px,5vw,42px)/1.05 var(--f-display);margin:0;letter-spacing:-.02em;text-wrap:balance}
+h1 small{display:block;font:500 13px/1.4 var(--f-body);color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.warn{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--muted)}
+.warn b{color:var(--bad)}
+
+nav.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+nav.bar a{font:600 13px var(--f-body);text-decoration:none;color:var(--fg);padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);display:inline-flex;gap:6px;align-items:center}
+nav.bar a::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--dot)}
+nav.bar a:hover,nav.bar a:focus-visible{border-color:var(--dot);outline:none}
+.search{flex:1 1 200px;min-width:0;display:flex}
+.search input{width:100%;font:inherit;padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg)}
+.search input:focus{outline:2px solid var(--accent);outline-offset:1px}
+
+section.area{margin-top:34px;scroll-margin-top:70px}
+section.area>h2{font:800 24px/1.1 var(--f-display);margin:0 0 4px;display:flex;align-items:center;gap:10px}
+section.area>h2::before{content:"";width:14px;height:14px;border-radius:4px;background:var(--dot)}
+section.area>p.intro{margin:0 0 14px;color:var(--muted);max-width:70ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:0;border-top:3px solid var(--dot)}
+.card h3{font:600 17px/1.25 var(--f-display);margin:0 0 8px}
+.card p{margin:6px 0}
+.card ul{margin:6px 0;padding-left:20px}
+.card li{margin:3px 0}
+.idea{background:var(--mark);padding:1px 4px;border-radius:3px}
+code{font:13px/1.5 var(--f-mono);background:var(--code-bg);padding:1px 5px;border-radius:4px}
+pre{font:13px/1.55 var(--f-mono);background:var(--code-bg);border-radius:8px;padding:12px 14px;margin:10px 0;overflow-x:auto;white-space:pre}
+pre code{background:none;padding:0}
+.t-com{color:var(--tok-com);font-style:italic}.t-str{color:var(--tok-str)}.t-kw{color:var(--tok-kw);font-weight:600}.t-num{color:var(--tok-num)}
+.tbl{overflow-x:auto;margin:8px 0}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 12px var(--f-body);text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+td code{white-space:nowrap}
+.tip{font-size:13.5px;color:var(--muted);border-left:3px solid var(--dot);padding:2px 0 2px 10px;margin:10px 0 2px}
+.tip b{color:var(--fg)}
+.fix{font-size:13.5px;background:var(--accent-soft);border-radius:6px;padding:8px 10px;margin-top:10px}
+.ok{color:var(--ok);font-weight:600}.no{color:var(--bad);font-weight:600}
+.tt{font-variant-numeric:tabular-nums}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0}
+.flow span{font:600 12.5px var(--f-mono);padding:4px 8px;border-radius:6px;background:var(--code-bg);border:1px solid var(--line)}
+.flow i{color:var(--muted);font-style:normal}
+svg text{font-family:var(--f-body)}
+.empty{display:none;color:var(--muted);padding:30px 0;text-align:center}
+.span2{grid-column:1/-1}
+.diagram{overflow-x:auto;margin:10px 0 6px}
+.diagram svg{display:block;width:100%;min-width:540px;height:auto}
+.fc-box{fill:var(--surface);stroke:var(--dot);stroke-width:1.6}
+.fc-dec{fill:var(--code-bg);stroke:var(--dot);stroke-width:1.6}
+.fc-end{fill:var(--accent-soft);stroke:var(--dot);stroke-width:1.6}
+.fc-line{stroke:var(--muted);stroke-width:1.6;fill:none}
+.fc-arrow{fill:var(--muted)}
+.fc-t{fill:var(--fg);font:500 13px var(--f-body);text-anchor:middle;dominant-baseline:middle}
+.fc-m{font-family:var(--f-mono);font-size:12px}
+.fc-lab{fill:var(--muted);font:600 12px var(--f-body);dominant-baseline:middle}
+.fc-dot{fill:var(--dot)}
+.fc-dot2{fill:var(--c-git)}
+
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+[data-a="term"]{--dot:var(--c-term)}[data-a="git"]{--dot:var(--c-git)}[data-a="html"]{--dot:var(--c-html)}[data-a="js"]{--dot:var(--c-js)}[data-a="cond"]{--dot:var(--c-cond)}[data-a="ej"]{--dot:var(--accent)}[data-a="loop"]{--dot:var(--c-loop)}[data-a="fn"]{--dot:var(--c-fn)}[data-a="arr"]{--dot:var(--c-arr)}[data-a="ia"]{--dot:var(--c-ia)}[data-a="sql"]{--dot:var(--c-sql)}[data-a="obj"]{--dot:var(--c-obj)}[data-a="node"]{--dot:var(--c-node)}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <h1><small>202609FSDLIVE · Bootcamp Full Stack · Fundamentos y Lógica · Clases 1 a 10 · Bases de datos (SQL) · Node.js</small>Apuntes de clase</h1>
+  <div class="warn"><b>Regla de oro:</b> el repo del profe no se toca. Trabaja en tu copia.</div>
+</header>
+
+<nav class="bar" aria-label="Secciones">
+  <a href="#terminal" data-a="term">Terminal</a>
+  <a href="#git" data-a="git">Git</a>
+  <a href="#html" data-a="html">HTML + JS</a>
+  <a href="#js" data-a="js">JavaScript básico</a>
+  <a href="#cond" data-a="cond">Condicionales</a>
+  <a href="#bucles" data-a="loop">Bucles</a>
+  <a href="#funciones" data-a="fn">Funciones</a>
+  <a href="#arrays" data-a="arr">Arrays</a>
+  <a href="#objetos" data-a="obj">Objetos y métodos</a>
+  <a href="#trucos" data-a="ej">Trucos de ejercicios</a>
+  <a href="#ia" data-a="ia">Estudiar con IA</a>
+  <a href="#sql" data-a="sql">SQL</a>
+  <a href="#node" data-a="node">Node.js y API</a>
+  <label class="search"><input id="q" type="search" placeholder="Buscar: %, for…of, filter, WHERE, npm, await…" aria-label="Buscar en los apuntes"></label>
+</nav>
+
+<!-- ============ TERMINAL ============ -->
+<section class="area" id="terminal" data-a="term">
+<h2>Terminal (Unix)</h2>
+<p class="intro">Moverte por carpetas y gestionar archivos sin ratón. Antes de hacer algo peligroso: <code>pwd</code> y <code>ls</code> para saber dónde estás.</p>
+<div class="grid">
+  <div class="card span2"><h3>Tu entorno de trabajo</h3>
+  <ul>
+    <li><b>Terminal (Warp o Git Bash):</b> la ventana donde escribes comandos. En Windows se configura Warp para que use Git Bash, así los comandos son iguales que en Mac/Linux.</li>
+    <li><b>VS Code:</b> el editor donde escribes el código. Extensiones recomendadas: <b>Prettier</b> + <b>Format on Save</b> (te ordena el código al guardar) y <b>VS Code Icons</b> (iconos para ver qué es cada archivo).</li>
+    <li><b>Node.js (versión LTS):</b> permite ejecutar JavaScript en la terminal sin navegador: <code>node archivo.js</code>.</li>
+  </ul></div>
+  <div class="card"><h3>Moverse</h3>
+  <div class="tbl"><table>
+    <tr><th>Comando</th><th>Qué hace (en sencillo)</th></tr>
+    <tr><td><code>pwd</code></td><td>Te dice en qué carpeta estás ahora mismo. Úsalo cuando te pierdas.</td></tr>
+    <tr><td><code>ls</code> · <code>ls -l</code> · <code>ls -la</code></td><td>Te enseña qué hay dentro de la carpeta. <code>-l</code> añade detalles (tamaño, fecha) y <code>-a</code> muestra también los archivos ocultos (los que empiezan por punto, como <code>.git</code>).</td></tr>
+    <tr><td><code>cd carpeta</code></td><td>Te metes dentro de esa carpeta (como hacer doble clic en ella).</td></tr>
+    <tr><td><code>cd ..</code></td><td>Sales a la carpeta de arriba (la que contiene a la actual).</td></tr>
+    <tr><td><code>cd ~</code></td><td>Te lleva a tu carpeta de usuario, el "inicio".</td></tr>
+    <tr><td><code>cd -</code></td><td>Vuelves a donde estabas justo antes, como el botón "atrás".</td></tr>
+  </table></div></div>
+  <div class="card"><h3>Crear, copiar, mover, borrar</h3>
+  <div class="tbl"><table>
+    <tr><th>Comando</th><th>Qué hace (en sencillo)</th></tr>
+    <tr><td><code>touch app.js</code></td><td>Crea un archivo nuevo y vacío con ese nombre.</td></tr>
+    <tr><td><code>mkdir src</code> · <code>mkdir -p a/b/c</code></td><td>Crea una carpeta nueva. Con <code>-p</code> crea varias carpetas una dentro de otra de golpe.</td></tr>
+    <tr><td><code>cp a.txt b.txt</code> · <code>cp -r src/ backup/</code></td><td>Hace una copia. Primero lo que copias, luego dónde. Para copiar carpetas hace falta <code>-r</code>.</td></tr>
+    <tr><td><code>mv viejo.txt nuevo.txt</code></td><td>Cambia el nombre de un archivo o lo mueve a otra carpeta (cortar y pegar).</td></tr>
+    <tr><td><code>rm archivo</code></td><td>Borra el archivo para siempre. No va a la papelera.</td></tr>
+    <tr><td><code>rm -r carpeta/</code></td><td>Borra una carpeta con todo lo que tiene dentro.</td></tr>
+    <tr><td><code>rmdir carpeta</code></td><td>Borra una carpeta, pero solo si no tiene nada dentro (más seguro).</td></tr>
+  </table></div>
+  <p class="tip"><b>Cuidado con <code>rm -rf</code></b>: -r = recursivo, -f = sin preguntar. No hay deshacer.</p></div>
+  <div class="card span2"><h3>Diagrama: moverse por las carpetas con <code>cd</code></h3>
+<div class="diagram"><svg viewBox="0 0 640 290" role="img" aria-label="Árbol de carpetas y comandos cd"><defs><marker id="ah7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fc-arrow"/></marker></defs><rect x="20" y="14" width="150" height="34" rx="8" class="fc-box"/><text x="95.0" y="31.0" class="fc-t fc-m">~  (usuario)</text><rect x="60" y="74" width="150" height="34" rx="8" class="fc-box"/><text x="135.0" y="91.0" class="fc-t fc-m">Desktop</text><rect x="100" y="134" width="250" height="34" rx="8" class="fc-end"/><text x="225.0" y="151.0" class="fc-t fc-m">mi-proyecto</text><rect x="140" y="194" width="140" height="34" rx="8" class="fc-box"/><text x="210.0" y="211.0" class="fc-t fc-m">ejercicio-1</text><rect x="140" y="244" width="140" height="34" rx="8" class="fc-box"/><text x="210.0" y="261.0" class="fc-t fc-m">ejercicio-2</text><path d="M40,48 L40,91 L60,91" class="fc-line"/><path d="M80,108 L80,151 L100,151" class="fc-line"/><path d="M120,168 L120,261 L140,261 M120,211 L140,211" class="fc-line"/><text x="358" y="138" class="fc-lab" text-anchor="start">estás aquí (pwd)</text><path d="M350,155 L500,155 L500,91 L216,91" class="fc-line" marker-end="url(#ah7)"/><text x="508" y="122" class="fc-lab" text-anchor="start">cd ..  (sube)</text><path d="M320,168 L320,211 L286,211" class="fc-line" marker-end="url(#ah7)"/><text x="328" y="194" class="fc-lab" text-anchor="start">cd ejercicio-1  (entra)</text><path d="M176,31 L580,31 L580,60" class="fc-line" marker-start="url(#ah7)"/><text x="588" y="48" class="fc-lab" text-anchor="start">cd ~</text></svg></div>
+  <p>Las carpetas son como un árbol: cada una está <b>dentro</b> de la de arriba. <code>cd nombre</code> baja un nivel (entras), <code>cd ..</code> sube uno (sales) y <code>cd ~</code> te lleva arriba del todo, a tu usuario. Si te pierdes: <code>pwd</code>.</p></div>
+</div>
+</section>
+
+<!-- ============ GIT ============ -->
+<section class="area" id="git" data-a="git">
+<h2>Git</h2>
+<p class="intro">Git guarda "fotos" (commits) de tu código. Un archivo pasa por tres sitios: <b>carpeta de trabajo</b> → <b>staging</b> (preparado) → <b>commit</b> (guardado) → y luego al <b>remoto</b> (GitHub).</p>
+<div class="grid">
+  <div class="card span2"><h3>El ciclo que harás siempre</h3>
+  <div class="flow"><span>editas código</span><i>→</i><span>git status</span><i>→</i><span>git add .</span><i>→</i><span>git commit -m "mensaje"</span><i>→</i><span>git push</span></div>
+<pre><code>git switch -c feature-login        // 1. creo rama nueva y me cambio a ella
+git status                         // 2. ¿qué he cambiado?
+git add .                          // 3. preparo todos los cambios
+git commit -m "Login con JWT"      // 4. guardo una versión
+git push -u origin feature-login   // 5. la subo (-u solo la primera vez)</code></pre></div>
+
+  <div class="card"><h3>Empezar y día a día</h3>
+  <div class="tbl"><table>
+    <tr><th>Comando</th><th>Qué hace (en sencillo)</th></tr>
+    <tr><td><code>git config --global user.name "Tu nombre"</code></td><td>Le dices a Git tu nombre (y con <code>user.email</code> tu correo) para que firme tus commits. Se hace una sola vez en el ordenador.</td></tr>
+    <tr><td><code>git init</code></td><td>Empieza a vigilar esta carpeta con Git. Crea la carpeta oculta <code>.git</code>.</td></tr>
+    <tr><td><code>git clone &lt;url&gt;</code></td><td>Te bajas una copia completa de un proyecto de GitHub (así conseguiste el repo del profe).</td></tr>
+    <tr><td><code>git status</code></td><td>Te dice qué archivos has modificado, cuáles son nuevos y cuáles ya están preparados. Úsalo a todas horas.</td></tr>
+    <tr><td><code>git add archivo</code> · <code>git add .</code></td><td>Mete los cambios en la "caja" de lo que vas a guardar. El punto <code>.</code> significa "todo".</td></tr>
+    <tr><td><code>git commit -m "..."</code></td><td>Guarda una foto del proyecto con un mensaje que explica qué hiciste.</td></tr>
+    <tr><td><code>git log --oneline --graph</code></td><td>Muestra la lista de commits (versiones guardadas), uno por línea.</td></tr>
+    <tr><td><code>git diff</code> · <code>git diff --staged</code></td><td>Enseña línea a línea qué has cambiado. Con <code>--staged</code>, lo que ya preparaste con add.</td></tr>
+  </table></div></div>
+
+  <div class="card"><h3>Ramas y remoto</h3>
+  <div class="tbl"><table>
+    <tr><th>Comando</th><th>Qué hace (en sencillo)</th></tr>
+    <tr><td><code>git branch</code></td><td>Muestra las ramas que tienes; la marcada con <code>*</code> es en la que estás.</td></tr>
+    <tr><td><code>git switch main</code></td><td>Te pasas a trabajar en otra rama.</td></tr>
+    <tr><td><code>git switch -c nueva</code></td><td>Crea una rama nueva y te mueve a ella en un solo paso.</td></tr>
+    <tr><td><code>git merge otra</code></td><td>Junta los cambios de otra rama con la rama en la que estás.</td></tr>
+    <tr><td><code>git branch -d rama</code></td><td>Elimina una rama que ya no necesitas.</td></tr>
+    <tr><td><code>git pull</code></td><td>Descarga lo nuevo de GitHub y lo junta con lo tuyo. Es "actualizar".</td></tr>
+    <tr><td><code>git fetch</code></td><td>Descarga lo nuevo pero no toca tus archivos todavía; solo para ver qué hay.</td></tr>
+    <tr><td><code>git remote -v</code></td><td>Muestra a qué dirección de GitHub está conectado tu proyecto.</td></tr>
+  </table></div>
+  <p class="tip"><b>Para traer lo nuevo del profe</b> a tu copia: <code>git pull</code>.</p></div>
+
+  <div class="card"><h3>Deshacer</h3>
+  <div class="tbl"><table>
+    <tr><th>Comando</th><th>Qué hace (en sencillo)</th></tr>
+    <tr><td><code>git restore app.js</code></td><td>Tira a la basura lo que cambiaste en ese archivo y lo deja como en el último commit.</td></tr>
+    <tr><td><code>git restore --staged app.js</code></td><td>Quita el archivo de "preparado" (deshace el add), pero no pierdes los cambios.</td></tr>
+    <tr><td><code>git reset --soft HEAD~1</code></td><td>Deshace el último commit; los cambios siguen <b>preparados</b> (en staging).</td></tr>
+    <tr><td><code>git reset HEAD~1</code> (= <code>--mixed</code>)</td><td>Deshace el último commit; los cambios siguen en los archivos pero <b>sin preparar</b>. Es la opción por defecto.</td></tr>
+    <tr><td><code>git reset --hard HEAD~1</code></td><td>Deshace el commit y <b>borra los cambios</b> de los archivos. Cuidado, se pierden.</td></tr>
+    <tr><td><code>git revert a1b2c3d</code></td><td>Crea un commit que hace lo contrario de otro. No borra historia, así que es seguro.</td></tr>
+    <tr><td><code>git stash</code> · <code>git stash pop</code></td><td>Guarda tus cambios a un lado sin hacer commit (por ejemplo, para cambiar de rama) y luego los recuperas.</td></tr>
+  </table></div>
+  <p class="tip"><b>reset vs revert:</b> reset reescribe el historial; revert no. Si ya lo subiste y otros trabajan en esa rama, usa <b>revert</b>.</p></div>
+
+  <div class="card"><h3>Trabajo en equipo con GitHub</h3>
+  <p><b>GitHub</b> es la web donde se guarda el repositorio en la nube para compartirlo. Para conectarte se usa un <b>token (PAT)</b> en vez de contraseña.</p>
+  <p>Orden para no pisar el trabajo de nadie:</p>
+  <div class="flow"><span>git fetch origin main</span><i>→</i><span>git pull origin main</span><i>→</i><span>git push origin main</span></div>
+  <ol>
+    <li><b>fetch</b>: mira si hay algo nuevo en GitHub, sin tocar tus archivos.</li>
+    <li><b>pull</b>: lo descarga y lo junta con lo tuyo.</li>
+    <li><b>push</b>: sube tus commits.</li>
+  </ol>
+  <ul>
+    <li><b>Una rama por tarea</b> (<code>feature/login</code>). No se trabaja directamente en main ni develop.</li>
+    <li><code>git checkout -b feature/login</code> hace lo mismo que <code>git switch -c</code>: crea la rama y te cambia a ella.</li>
+    <li><b>Conflicto</b>: dos personas cambiaron las mismas líneas. VS Code te deja elegir: <i>Accept Current</i> (lo tuyo), <i>Accept Incoming</i> (lo que llega) o <i>Accept Both</i> (las dos). Luego haces commit.</li>
+    <li><b>Nunca</b> hagas <code>git init</code> o <code>git clone</code> dentro de otra carpeta que ya es un repositorio.</li>
+  </ul></div>
+
+  <div class="card span2"><h3>Diagrama: la rama de cada ejercicio</h3>
+<div class="diagram"><svg viewBox="0 0 760 170" role="img" aria-label="Diagrama del flujo de Git de cada ejercicio"><defs><marker id="ah5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fc-arrow"/></marker></defs><path d="M20,45 L740,45" class="fc-line"/><text x="20" y="22" class="fc-lab" text-anchor="start">main</text><path d="M70,45 C95,45 95,125 125,125 L520,125 C555,125 560,45 600,45" class="fc-line"/><circle cx="70" cy="45" r="9" class="fc-dot"/><circle cx="600" cy="45" r="9" class="fc-dot"/><circle cx="180" cy="125" r="8" class="fc-dot2"/><circle cx="280" cy="125" r="8" class="fc-dot2"/><circle cx="380" cy="125" r="8" class="fc-dot2"/><circle cx="470" cy="125" r="8" class="fc-dot2"/><text x="70" y="72" class="fc-lab" text-anchor="middle">pull</text><text x="115" y="152" class="fc-lab" text-anchor="middle">switch -c feature/…</text><text x="325" y="152" class="fc-lab" text-anchor="middle">add + commit en cada paso que funciona</text><text x="520" y="152" class="fc-lab" text-anchor="middle">push</text><text x="572" y="102" class="fc-lab" text-anchor="start">Pull Request + merge</text><text x="600" y="22" class="fc-lab" text-anchor="middle">main actualizado</text><text x="618" y="70" class="fc-lab" text-anchor="start">switch main + pull</text></svg></div>
+  <p>Línea de arriba: <b>main</b>. Sales de ella con una rama nueva (abajo), haces tus commits (puntos naranjas), la subes con <b>push</b> y vuelve a main con la <b>Pull Request</b>. Después actualizas main en tu ordenador.</p></div>
+
+  <div class="card span2"><h3>Flujo de trabajo con una rama</h3>
+  <p>Sirve para cada ejercicio o cada cosa nueva que hagas. Si lo sigues en orden, Git no da sorpresas:</p>
+  <ol>
+    <li><b>Partir de main actualizado:</b> <code>git switch main</code> y <code>git pull</code>.</li>
+    <li><b>Crear la rama del ejercicio:</b> <code>git switch -c feature/ejX-nombre</code>. Si ya existe, sin <code>-c</code>.</li>
+    <li><b>Programar por pasos</b> y hacer un commit cada vez que un paso funciona: <code>git add archivo</code> + <code>git commit -m "Verbo + qué hace"</code>.</li>
+    <li><b>Si usaste IA,</b> decláralo como lo pida el profe.</li>
+    <li><b>Explicar lo que has hecho en el README</b> antes de cerrar la rama.</li>
+    <li><b>Comprobar:</b> <code>git status</code> tiene que decir <i>nothing to commit, working tree clean</i>.</li>
+    <li><b>Subir la rama:</b> <code>git push -u origin feature/ejX-nombre</code>.</li>
+    <li><b>En GitHub:</b> Pull Request → Merge pull request → Confirm merge. <b>No</b> borrar la rama.</li>
+    <li><b>Volver a main:</b> <code>git switch main</code> y <code>git pull</code>.</li>
+  </ol>
+  <p class="tip"><b>git add archivo</b> solo mete ese archivo en el commit. <b>git add .</b> mete todo lo que has cambiado. Lo que esté en verde en <code>git status</code> es lo que entrará.</p>
+  <p class="tip"><b>Mensajes de commit:</b> empiezan por un verbo en presente y dicen qué hiciste ("Calcula la media", "Corrige el saludo vacío"). Nada de "cambios" o "fix".</p></div>
+
+  <div class="card"><h3>Gitflow: para qué sirve cada rama</h3>
+  <svg viewBox="0 0 440 150" width="100%" role="img" aria-label="Esquema Gitflow">
+    <g font-size="11" fill="var(--muted)">
+      <text x="0" y="20">main</text><text x="0" y="48">hotfix</text><text x="0" y="76">release</text><text x="0" y="104">develop</text><text x="0" y="132">feature</text></g>
+    <g stroke="var(--line)" stroke-width="2"><line x1="60" y1="16" x2="430" y2="16"/><line x1="60" y1="100" x2="430" y2="100"/></g>
+    <g stroke="var(--muted)" stroke-width="1.5" fill="none">
+      <path d="M80 16 L80 100"/><path d="M80 16 L150 44 L220 16"/><path d="M150 44 L170 100"/>
+      <path d="M120 100 L150 128 L230 128 L260 100"/><path d="M300 100 L330 72 L380 72 L410 16"/><path d="M380 72 L410 100"/></g>
+    <g><circle cx="80" cy="16" r="7" fill="var(--c-js)"/><circle cx="220" cy="16" r="7" fill="var(--c-js)"/><circle cx="410" cy="16" r="7" fill="var(--c-js)"/>
+      <circle cx="150" cy="44" r="7" fill="var(--c-git)"/>
+      <circle cx="330" cy="72" r="7" fill="var(--c-term)"/><circle cx="380" cy="72" r="7" fill="var(--c-term)"/>
+      <circle cx="80" cy="100" r="7" fill="var(--c-html)"/><circle cx="120" cy="100" r="7" fill="var(--c-html)"/><circle cx="170" cy="100" r="7" fill="var(--c-html)"/><circle cx="260" cy="100" r="7" fill="var(--c-html)"/><circle cx="300" cy="100" r="7" fill="var(--c-html)"/><circle cx="410" cy="100" r="7" fill="var(--c-html)"/>
+      <circle cx="150" cy="128" r="7" fill="var(--c-cond)"/><circle cx="230" cy="128" r="7" fill="var(--c-cond)"/></g>
+    <g font-size="10" fill="var(--fg)"><text x="70" y="146"></text><text x="205" y="10">v0.2</text><text x="395" y="10">v1.0</text></g>
+  </svg>
+  <ul>
+    <li><b>main</b>: solo versiones que funcionan (v0.1, v1.0…).</li>
+    <li><b>develop</b>: donde se junta el trabajo del día a día.</li>
+    <li><b>feature</b>: una rama por funcionalidad; sale de develop y vuelve a develop.</li>
+    <li><b>release</b>: se prepara una versión; va a main y a develop.</li>
+    <li><b>hotfix</b>: arreglo urgente desde main; vuelve a main y a develop.</li>
+  </ul></div>
+</div>
+</section>
+
+<!-- ============ HTML + JS ============ -->
+<section class="area" id="html" data-a="html">
+<h2>HTML + JavaScript en el navegador</h2>
+<p class="intro">Cuando escribes <code>www.marca.com</code>, el DNS lo traduce a una IP (ej. 234.45.64.78) y el navegador pide la página por <b>http/https</b>. Recibe HTML y lo pinta.</p>
+<div class="grid">
+  <div class="card"><h3>Dónde poner el &lt;script&gt;</h3>
+<pre><code>&lt;head&gt;
+  &lt;title&gt;Document&lt;/title&gt;
+  &lt;!-- zona 1: aquí aún NO existe el &lt;h1&gt; --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Titulo de la pagina&lt;/h1&gt;
+&lt;/body&gt;
+&lt;!-- zona 2: al final, cuando JS va a modificar el HTML --&gt;
+&lt;script src="main.js"&gt;&lt;/script&gt;</code></pre>
+  <p class="tip"><b>Por qué al final:</b> el HTML se lee de arriba abajo. Si el script va antes, intenta buscar el <code>h1</code> y todavía no existe.</p></div>
+  <div class="card"><h3>main.js: cambiar el HTML desde JS</h3>
+<pre><code>const h1 = document.querySelector('h1') // busco el primer &lt;h1&gt;
+h1.textContent = "hola"                 // le cambio el texto</code></pre>
+  <ul><li><code>document</code> = la página entera, vista desde JS.</li><li><code>const h1 = ...</code> = guardo ese elemento en una variable para usarlo.</li><li><code>querySelector('selector')</code> = busca un elemento como en CSS (<code>'h1'</code>, <code>'.clase'</code>, <code>'#id'</code>).</li><li><code>textContent</code> = el texto de dentro.</li></ul>
+  <p class="tip"><b>Dos formas de ejecutar JS:</b> en el navegador (con HTML) o en la terminal con <code>node archivo.js</code>.</p></div>
+</div>
+</section>
+
+<!-- ============ JS BÁSICO ============ -->
+<section class="area" id="js" data-a="js">
+<h2>JavaScript básico</h2>
+<div class="grid">
+  <div class="card"><h3>Variables: let y const</h3>
+<pre><code>let edad = 25      // let: puede cambiar
+edad = 26          // ✔ válido
+const IVA = 21     // const: NO puede cambiar
+IVA = 10           // ✘ Error: asignación a constante</code></pre>
+  <ul><li><b>=</b> es <b>asignación</b>: lo de la derecha se guarda en la izquierda.</li>
+  <li>JS distingue mayúsculas: <code>console</code> ≠ <code>Console</code>.</li>
+  <li>Nombres en <b>camelCase</b>: primera palabra en minúscula y las siguientes empiezan en mayúscula (<code>numeroComensales</code>, <code>alumnoInscrito</code>).</li>
+  <li><b>Números mágicos</b>: no escribas <code>9/5</code> o <code>32</code> sueltos; ponles nombre en una constante (<code>const FAHRENHEIT_DESPLAZAMIENTO = 32</code>).</li></ul></div>
+
+  <div class="card"><h3>Tipos de datos</h3>
+  <div class="tbl"><table>
+    <tr><th>Tipo</th><th>Ejemplo</th><th>Nota</th></tr>
+    <tr><td>string</td><td><code>"hola"</code> <code>'hola'</code> <code>`hola`</code></td><td>Texto. <code>"565"</code> es texto, no número</td></tr>
+    <tr><td>number</td><td><code>23</code> <code>-23</code> <code>24.56</code></td><td>Enteros y decimales, todo es number</td></tr>
+    <tr><td>boolean</td><td><code>true</code> <code>false</code></td><td>Sí / no</td></tr>
+    <tr><td>undefined</td><td><code>let nombre</code></td><td>Declarada pero sin valor</td></tr>
+    <tr><td>null</td><td><code>ciudad = null</code></td><td>Vaciada a propósito. <code>typeof null</code> da <code>"object"</code> (rareza de JS)</td></tr>
+  </table></div>
+  <p class="tip"><b>Saber el tipo:</b> <code>typeof variable</code> te dice qué tipo de dato hay dentro (ej. <code>typeof 5</code> → "number").</p><p class="tip"><b>console.log(algo)</b> = escribe "algo" en la consola para ver qué vale. Es tu herramienta para comprobar todo.</p></div>
+
+  <div class="card"><h3>Template strings (comillas francesas)</h3>
+<pre><code>let nombre = "Juan Antonio"; let edad = 44
+console.log(`Se llama ${nombre} y tiene ${edad} años`)
+// ✔ Se llama Juan Antonio y tiene 44 años
+console.log('tiene ${edad} años')
+// ✘ con comillas normales NO se sustituye: tiene ${edad} años</code></pre>
+  <p>Solo las <b>backticks</b> <code>`</code> meten variables con <code>${ }</code>.</p></div>
+
+  <div class="card"><h3>Operadores matemáticos</h3>
+  <div class="tbl"><table class="tt">
+    <tr><th>Op.</th><th>Qué hace</th><th>Ejemplo</th><th>Resultado</th></tr>
+    <tr><td><code>+</code></td><td>Suma</td><td><code>10 + 24</code></td><td>34</td></tr>
+    <tr><td><code>-</code></td><td>Resta</td><td><code>10 - 24</code></td><td>-14</td></tr>
+    <tr><td><code>*</code></td><td>Multiplica</td><td><code>10 * 24</code></td><td>240</td></tr>
+    <tr><td><code>/</code></td><td>Divide</td><td><code>10 / 24</code></td><td>0.4166…</td></tr>
+    <tr><td><code>**</code></td><td>Potencia</td><td><code>24 ** 2</code></td><td>576</td></tr>
+    <tr><td><code>%</code></td><td><span class="idea">Resto</span> de la división</td><td><code>12 % 5</code></td><td>2</td></tr>
+  </table></div>
+  <p class="tip"><b>Quitar decimales:</b> <code>parseInt(12.9)</code> → 12 · <code>Math.trunc(12.9)</code> → 12</p></div>
+
+  <div class="card"><h3>Operadores de comparación (dan true/false)</h3>
+  <div class="tbl"><table>
+    <tr><th>Op.</th><th>Significa</th><th>Ejemplo</th></tr>
+    <tr><td><code>&gt;</code> <code>&gt;=</code></td><td>Mayor · mayor o igual</td><td><code>10 &gt; 24</code> → <span class="no">false</span></td></tr>
+    <tr><td><code>&lt;</code> <code>&lt;=</code></td><td>Menor · menor o igual</td><td><code>10 &lt;= 24</code> → <span class="ok">true</span></td></tr>
+    <tr><td><code>==</code></td><td>Igual (solo valor)</td><td><code>5 == "5"</code> → <span class="ok">true</span></td></tr>
+    <tr><td><code>===</code></td><td>Igual estricto (valor <b>y</b> tipo)</td><td><code>5 === "5"</code> → <span class="no">false</span></td></tr>
+    <tr><td><code>!=</code></td><td>Distinto (solo valor)</td><td><code>5 != "5"</code> → <span class="no">false</span></td></tr>
+    <tr><td><code>!==</code></td><td>Distinto estricto</td><td><code>5 !== "5"</code> → <span class="ok">true</span></td></tr>
+  </table></div>
+  <p class="tip"><b>Usa siempre <code>===</code> y <code>!==</code></b>, evitan sorpresas con los tipos.</p></div>
+
+  <div class="card"><h3>Operadores lógicos</h3>
+  <div class="tbl"><table class="tt">
+    <tr><th>A</th><th>B</th><th><code>A &amp;&amp; B</code> (Y)</th><th><code>A || B</code> (O)</th></tr>
+    <tr><td>true</td><td>true</td><td class="ok">true</td><td class="ok">true</td></tr>
+    <tr><td>true</td><td>false</td><td class="no">false</td><td class="ok">true</td></tr>
+    <tr><td>false</td><td>true</td><td class="no">false</td><td class="ok">true</td></tr>
+    <tr><td>false</td><td>false</td><td class="no">false</td><td class="no">false</td></tr>
+  </table></div>
+  <ul><li><b>&amp;&amp;</b>: true solo si <b>las dos</b> son true.</li><li><b>||</b>: true si <b>al menos una</b> es true.</li><li><b>!</b> invierte: <code>!true</code> → false.</li></ul>
+<pre><code>(movil &lt;= 300) &amp;&amp; (marca !== 'samsung') // barato Y no samsung
+(movil &lt;= 300) || (marca !== 'samsung') // barato O no samsung</code></pre>
+  <p class="fix">Ojo: en <code>operadores.js</code> los comentarios del <code>||</code> están copiados del <code>&amp;&amp;</code> y dicen <code>false &amp;&amp; true =&gt; true</code>. Lo correcto es la tabla de arriba.</p></div>
+
+  <div class="card"><h3>Pensamiento computacional (las 4 ideas)</h3>
+  <ol>
+    <li><b>Descomposición</b>: partir un problema grande en partes pequeñas.</li>
+    <li><b>Patrones</b>: reconocer algo que ya has resuelto.</li>
+    <li><b>Abstracción</b>: quedarte solo con lo relevante.</li>
+    <li><b>Algoritmo</b>: los pasos exactos para resolverlo.</li>
+  </ol>
+  <p class="tip"><b>Truco:</b> antes de programar, escribe el pseudocódigo en comentarios (<code>SI… ENTONCES… SINO</code>) y luego tradúcelo.</p></div>
+</div>
+</section>
+
+<!-- ============ CONDICIONALES ============ -->
+<section class="area" id="cond" data-a="cond">
+<h2>Condicionales (control de flujo)</h2>
+<p class="intro">Hacen que el programa tome un camino u otro según una condición que da <code>true</code> o <code>false</code>.</p>
+<div class="grid">
+  <div class="card"><h3>if · if/else</h3>
+<pre><code>// if: solo se ejecuta si la condición es true
+if (edad &gt;= 18) {
+  console.log("Eres mayor de edad")
+}
+
+// if/else: un camino u otro, siempre entra en uno
+if (temperatura &gt; 25) {
+  console.log("Hace calor")
+} else {
+  console.log("No hace calor")
+}</code></pre></div>
+
+  <div class="card"><h3>else if: varias opciones</h3>
+<pre><code>if (edad &gt;= 0 &amp;&amp; edad &lt; 18) {
+  console.log("Eres menor de edad")
+} else if (edad &gt;= 18 &amp;&amp; edad &lt;= 110) {
+  console.log("Eres mayor de edad")
+} else {
+  console.log("Valor no valido")   // -30, 123…
+}</code></pre>
+  <ul><li>Se comprueba <b>de arriba abajo</b> y entra solo en el <b>primero</b> que cumpla.</li>
+  <li><span class="idea">Pon primero la condición más restrictiva</span> y al final la más genérica.</li>
+  <li>El <code>else</code> final recoge "todo lo demás" (valores no válidos).</li></ul></div>
+
+  <div class="card span2"><h3>Diagrama: if / else if / else (ejemplo de notas)</h3>
+<div class="diagram"><svg viewBox="0 0 620 400" role="img" aria-label="Diagrama de flujo de if, else if y else"><defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fc-arrow"/></marker></defs><polygon points="200,20 340,60 200,100 60,60" class="fc-dec"/><text x="200" y="60.0" class="fc-t">¿nota &gt;= 9?</text><path d="M340,60 L390,60" class="fc-line" marker-end="url(#ah2)"/><text x="352" y="48" class="fc-lab" text-anchor="start">sí</text><rect x="390" y="40" width="170" height="40" rx="8" class="fc-box"/><text x="475.0" y="60.0" class="fc-t">Sobresaliente</text><path d="M200,100 L200,130" class="fc-line" marker-end="url(#ah2)"/><text x="208" y="115" class="fc-lab" text-anchor="start">no</text><polygon points="200,130 340,170 200,210 60,170" class="fc-dec"/><text x="200" y="170.0" class="fc-t">¿nota &gt;= 5?</text><path d="M340,170 L390,170" class="fc-line" marker-end="url(#ah2)"/><text x="352" y="158" class="fc-lab" text-anchor="start">sí</text><rect x="390" y="150" width="170" height="40" rx="8" class="fc-box"/><text x="475.0" y="170.0" class="fc-t">Aprobado</text><path d="M200,210 L200,250" class="fc-line" marker-end="url(#ah2)"/><text x="208" y="230" class="fc-lab" text-anchor="start">no</text><rect x="110" y="250" width="180" height="40" rx="8" class="fc-box"/><text x="200.0" y="270.0" class="fc-t">Suspenso</text><path d="M560,60 L590,60 L590,370 L290,370" class="fc-line" marker-end="url(#ah2)"/><path d="M560,170 L590,170" class="fc-line" /><path d="M200,290 L200,350" class="fc-line" marker-end="url(#ah2)"/><rect x="110" y="350" width="180" height="40" rx="8" class="fc-end"/><text x="200.0" y="370.0" class="fc-t">sigue el programa</text></svg></div>
+  <p>Pregunta de arriba abajo y entra <b>solo en el primer camino que cumple</b>. Los demás se los salta. Por eso las condiciones más exigentes van primero. Al final, todos los caminos siguen por el mismo sitio.</p></div>
+
+  <div class="card"><h3>switch: comparar un valor con muchos casos</h3>
+<pre><code>switch (color.toLowerCase()) {   // 'ROJO' → 'rojo'
+  case "azul":
+    console.log('blue')
+    break                        // ¡sin break sigue al siguiente!
+  case "rojo":
+  case "bermellon":              // dos casos, mismo resultado
+    console.log('red')
+    break
+  default:                       // si no coincide ninguno
+    console.log('no esta en el diccionario')
+}</code></pre>
+  <p class="tip"><b>Cuándo usarlo:</b> cuando miras si una variable es <b>igual</b> a valores concretos (colores, días…). Para rangos (<code>&gt;</code>, <code>&lt;</code>) usa if/else if.</p></div>
+
+  <div class="card"><h3>Operador ternario: if/else en una línea</h3>
+<pre><code>// condición ? valorSiTrue : valorSiFalse
+const texto = estado ? "Encendido" : "Apagado"
+
+// es lo mismo que:
+let texto2
+if (estado) { texto2 = "Encendido" }
+else { texto2 = "Apagado" }</code></pre>
+  <p>Úsalo para elegir entre <b>dos valores</b> simples. Si hay más lógica, if/else.</p>
+  <p>Ayuda a evitar el <b>"Hadouken code"</b>: muchos if dentro de if, con el código cada vez más metido hacia la derecha.</p>
+  <p class="tip"><b>Texto a mayúsc./minúsc.:</b> <code>.toLowerCase()</code> · <code>.toUpperCase()</code></p></div>
+</div>
+</section>
+
+
+<!-- ============ BUCLES ============ -->
+<section class="area" id="bucles" data-a="loop">
+<h2>Bucles (repetir código)</h2>
+<p class="intro">Un bucle repite un bloque de código mientras se cumpla una condición. Así no escribes lo mismo 100 veces.</p>
+<div class="grid">
+  <div class="card"><h3>for: cuando sabes cuántas vueltas</h3>
+<pre><code>for (let i = 0; i < 5; i++) {
+  console.log(`Vuelta número ${i}`)   // 0, 1, 2, 3, 4
+}</code></pre>
+  <div class="tbl"><table>
+    <tr><th>Parte</th><th>Qué hace (en sencillo)</th></tr>
+    <tr><td><code>let i = 0</code></td><td>Empieza a contar en 0.</td></tr>
+    <tr><td><code>i &lt; 5</code></td><td>Sigue mientras i sea menor que 5.</td></tr>
+    <tr><td><code>i++</code></td><td>Al acabar cada vuelta suma 1 a i.</td></tr>
+  </table></div></div>
+  <div class="card"><h3>while y do-while</h3>
+<pre><code>let n = 0
+while (n < 3) {       // mira la condición ANTES
+  console.log(n)
+  n++                 // ¡si no cambias n, bucle infinito!
+}
+
+do {
+  console.log("al menos una vez")
+} while (false)       // mira la condición DESPUÉS</code></pre>
+  <ul><li><b>while</b>: si la condición es falsa desde el principio, no entra nunca.</li>
+  <li><b>do-while</b>: entra siempre <b>al menos una vez</b> y luego comprueba.</li></ul></div>
+  <div class="card span2"><h3>Diagrama: cómo da vueltas un <code>for</code></h3>
+<div class="diagram"><svg viewBox="0 0 580 345" role="img" aria-label="Diagrama de flujo de un bucle for"><defs><marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fc-arrow"/></marker></defs><rect x="180" y="10" width="160" height="40" rx="8" class="fc-box"/><text x="260.0" y="30.0" class="fc-t fc-m">let i = 0</text><path d="M260,50 L260,80" class="fc-line" marker-end="url(#ah1)"/><polygon points="260,80 390,120 260,160 130,120" class="fc-dec"/><text x="260" y="112.5" class="fc-t">¿i &lt; alumnos.length?</text><text x="260" y="127.5" class="fc-t">¿quedan renglones?</text><path d="M260,160 L260,200" class="fc-line" marker-end="url(#ah1)"/><text x="268" y="180" class="fc-lab" text-anchor="start">sí</text><rect x="150" y="200" width="220" height="50" rx="8" class="fc-box"/><text x="260.0" y="217.0" class="fc-t">Código de dentro del for</text><text x="260.0" y="233.0" class="fc-t">usa alumnos[i]</text><path d="M260,250 L260,290" class="fc-line" marker-end="url(#ah1)"/><rect x="155" y="290" width="210" height="40" rx="8" class="fc-box"/><text x="260.0" y="310.0" class="fc-t fc-m">i++  (siguiente renglón)</text><path d="M155,310 L50,310 L50,120 L130,120" class="fc-line" marker-end="url(#ah1)"/><text x="40" y="215" class="fc-lab" text-anchor="middle" transform="rotate(-90 40 215)">vuelve a preguntar</text><path d="M390,120 L430,120" class="fc-line" marker-end="url(#ah1)"/><text x="398" y="108" class="fc-lab" text-anchor="start">no</text><rect x="430" y="95" width="130" height="50" rx="8" class="fc-end"/><text x="495.0" y="112.0" class="fc-t">Sale del bucle</text><text x="495.0" y="128.0" class="fc-t">sigue el código</text></svg></div>
+  <p>Antes de cada vuelta <b>pregunta</b>. Si la respuesta es sí, ejecuta lo de dentro, suma 1 a <code>i</code> y <b>vuelve a preguntar</b>. Cuando la respuesta es no, sale y sigue con lo que hay debajo del bucle.</p></div>
+
+  <div class="card span2"><h3>for…of: recorrer una lista elemento a elemento</h3>
+<pre><code>const frutas = ['Pera', 'Manzana', 'Platano']
+for (let fruta of frutas) {
+  console.log(fruta)   // Pera, luego Manzana, luego Platano
+}</code></pre>
+  <p>En cada vuelta, <code>fruta</code> vale el siguiente elemento. No necesitas <code>i</code> ni <code>.length</code>. Es la forma más cómoda de recorrer arrays (ver <a href="#arrays">Arrays</a>).</p></div>
+</div>
+</section>
+
+<!-- ============ FUNCIONES ============ -->
+<section class="area" id="funciones" data-a="fn">
+<h2>Funciones</h2>
+<p class="intro">Una función es un trozo de código con nombre que puedes usar todas las veces que quieras. Escribes la lógica una vez y la reutilizas (<b>DRY</b>: Don't Repeat Yourself, no te repitas).</p>
+<div class="grid">
+  <div class="card"><h3>Las dos partes: declarar y llamar</h3>
+<pre><code>// 1. DECLARACIÓN: las reglas del juego (aún no se ejecuta)
+function sumar() {
+  let suma = 12 + 4
+  console.log(suma)
+}
+
+// 2. LLAMADA: aquí sí se ejecuta
+sumar()   // 16
+sumar()   // 16 otra vez</code></pre>
+  <p class="tip"><b>Sin los paréntesis <code>()</code> no se ejecuta.</b> Escribir <code>sumar</code> solo nombra la función.</p></div>
+
+  <div class="card span2"><h3>Diagrama: qué pasa al llamar a una función</h3>
+<div class="diagram"><svg viewBox="0 0 700 200" role="img" aria-label="Diagrama de una función con return"><defs><marker id="ah4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fc-arrow"/></marker></defs><rect x="10" y="75" width="180" height="50" rx="8" class="fc-box"/><text x="100.0" y="100.0" class="fc-t fc-m">const r = sumar(2, 3)</text><path d="M190,100 L255,100" class="fc-line" marker-end="url(#ah4)"/><text x="222" y="84" class="fc-lab" text-anchor="middle">1. llama</text><rect x="255" y="15" width="220" height="170" rx="10" class="fc-dec"/><text x="365" y="40" class="fc-t fc-m">function sumar(a, b) {</text><text x="365" y="75" class="fc-t">a recibe 2 · b recibe 3</text><text x="365" y="110" class="fc-t fc-m">return a + b</text><text x="365" y="140" class="fc-t">calcula 5 y lo devuelve</text><text x="365" y="170" class="fc-t fc-m">}</text><path d="M475,110 L560,110" class="fc-line" marker-end="url(#ah4)"/><text x="517" y="94" class="fc-lab" text-anchor="middle">2. devuelve</text><rect x="560" y="85" width="130" height="50" rx="8" class="fc-end"/><text x="625.0" y="110.0" class="fc-t">r vale 5</text></svg></div>
+  <p><b>1.</b> La llamada manda los valores (2 y 3) a los parámetros (a y b). <b>2.</b> La función hace su trabajo y con <code>return</code> <b>devuelve</b> el resultado al sitio desde donde la llamaste, que se guarda en <code>r</code>.</p>
+  <p class="tip"><b>console.log</b> dentro de la función solo enseña el valor; no lo devuelve. Para usar el resultado fuera, hace falta <b>return</b>.</p></div>
+
+  <div class="card"><h3>Parámetros y return</h3>
+<pre><code>function sumar(numero1, numero2) {  // parámetros: los "huecos"
+  return numero1 + numero2          // devuelve el resultado
+}
+
+let resultado = sumar(2, 3)        // argumentos: lo que metes en los huecos
+console.log(resultado)             // 5</code></pre>
+  <ul><li><b>Parámetros</b>: datos que la función necesita para trabajar.</li>
+  <li><b>return</b>: devuelve un valor para guardarlo en una variable. Después del return la función termina.</li>
+  <li><b>console.log</b> solo enseña el valor por pantalla; <b>return</b> te lo da para seguir usándolo.</li></ul></div>
+
+  <div class="card"><h3>Parámetros por defecto (opcionales)</h3>
+<pre><code>function nombreCompleto(name, surname = "Lopez") {
+  console.log(`${name} ${surname}`)
+}
+nombreCompleto('Juan')           // Juan Lopez
+nombreCompleto('Juan', 'Perez')  // Juan Perez</code></pre>
+  <p>Si no le pasas ese dato, usa el valor por defecto.</p>
+  <p class="tip"><b>Orden obligatorio:</b> primero los parámetros obligatorios y al final los opcionales.</p></div>
+
+  <div class="card"><h3>Funciones que usan otras funciones</h3>
+<pre><code>function sumar(a, b, c, d) { return a + b + c + d }
+function dividir(a, b) { return a / b }
+
+function media(n1, n2, n3, n4) {
+  let suma = sumar(n1, n2, n3, n4)
+  return dividir(suma, 4)
+}
+console.log(media(4, 5, 8, 3))   // 5</code></pre>
+  <p>Descomposición en acción: cada función hace una sola cosa y luego las combinas.</p></div>
+
+  <div class="card"><h3>Ámbito (scope): dónde existe una variable</h3>
+<pre><code>let global = "me ven en todo el archivo"
+
+function restar(n1, n2) {
+  let resultado = n1 - n2   // local: solo existe aquí dentro
+  return resultado
+}
+console.log(resultado)      // ✘ Error: resultado no existe fuera</code></pre>
+  <ul><li><b>Global</b>: declarada fuera de todo. Se usa desde cualquier sitio.</li>
+  <li><b>Local / de bloque</b>: declarada dentro de una función o de unas llaves <code>{ }</code> con let/const. Solo existe ahí y desaparece al terminar.</li>
+  <li>Por eso varias funciones pueden tener su propia variable <code>resultado</code> sin chocar.</li></ul></div>
+
+  <div class="card"><h3>Los 3 tipos de funciones</h3>
+<pre><code>// 1. Declarativa
+function multiplicar(a, b) {
+  return a * b
+}
+
+// 2. Expresiva o anónima (sin nombre, guardada en una const)
+const multiplicar2 = function (a, b) {
+  return a * b
+}
+
+// 3. Flecha (arrow function)
+const multiplicar3 = (a, b) => a * b</code></pre>
+  <ul><li><b>Declarativa</b>: tiene <b>hoisting</b>, puedes llamarla incluso en una línea anterior a donde la escribiste.</li>
+  <li><b>Expresiva y flecha</b>: sin hoisting, hay que declararlas antes de usarlas.</li>
+  <li>Las tres se llaman igual: <code>multiplicar(2, 4)</code> → 8.</li></ul></div>
+
+  <div class="card"><h3>Receta: convertir a función flecha</h3>
+  <ol>
+    <li>Quita la palabra <code>function</code> y pon <code>=&gt;</code> <b>después</b> de los paréntesis.</li>
+    <li>Si tiene <b>un solo parámetro</b> (ni 0 ni 2), puedes quitar los paréntesis.</li>
+    <li>Si dentro de las llaves hay <b>una sola línea</b>, puedes quitar las llaves. Si esa línea tiene <code>return</code>, <b>tienes que quitarlo</b> (se devuelve solo).</li>
+  </ol>
+<pre><code>// antes
+const doble = function (n) { return n * 2 }
+// paso 1
+const doble = (n) => { return n * 2 }
+// paso 2 y 3
+const doble = n => n * 2
+
+// con ternario, del profe:
+const restar = (a, b) => (a >= b) ? a - b : b - a</code></pre></div>
+
+  <div class="card"><h3>Parámetros indefinidos (rest <code>...</code>)</h3>
+<pre><code>function sumar(...numeros) {   // numeros es un array
+  let suma = 0
+  for (let i = 0; i < numeros.length; i++) {
+    suma = suma + numeros[i]      // o: suma += numeros[i]
+  }
+  return suma
+}
+sumar(2, 5)               // 7
+sumar(10, 10, 10, 10, 10) // 50</code></pre>
+  <p>Los tres puntos <code>...</code> recogen <b>todos</b> los argumentos que le pases, sean 2 o 20, y los meten en un array.</p>
+  <p class="tip"><b>Atajo:</b> <code>suma += x</code> es lo mismo que <code>suma = suma + x</code>.</p></div>
+</div>
+</section>
+
+<!-- ============ ARRAYS ============ -->
+<section class="area" id="arrays" data-a="arr">
+<h2>Arrays (listas)</h2>
+<p class="intro">Un array es una lista ordenada de valores guardada en una sola variable.</p>
+<div class="grid">
+  <div class="card"><h3>Crear y leer</h3>
+<pre><code>const frutas = ['Pera', 'Manzana', 'Platano', 'Ciruela']
+//   posición:     0        1          2          3
+
+frutas[0]                  // 'Pera' (el primero)
+frutas.length              // 4 (cuántos hay)
+frutas[frutas.length - 1]  // 'Ciruela' (el último)</code></pre>
+  <ul><li>Las posiciones (índices) <b>empiezan en 0</b>.</li>
+  <li>El último está en <code>length - 1</code>.</li>
+  <li>Se declaran con <b>const</b>: la variable siempre será ese array, pero puedes cambiar lo que hay dentro.</li>
+  <li>Un texto funciona parecido: <code>'Marta'[0]</code> → 'M'.</li></ul></div>
+
+  <div class="card span2"><h3>Diagrama: un array son cajas numeradas</h3>
+<div class="diagram"><svg viewBox="0 0 600 170" role="img" aria-label="Array con sus posiciones"><defs><marker id="ah8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fc-arrow"/></marker></defs><text x="20" y="60" class="fc-t fc-m" style="text-anchor:start">frutas</text><rect x="100" y="40" width="110" height="40" rx="8" class="fc-box"/><text x="155.0" y="60.0" class="fc-t fc-m">'Pera'</text><text x="155" y="100" class="fc-lab" text-anchor="middle">posición 0</text><rect x="220" y="40" width="110" height="40" rx="8" class="fc-box"/><text x="275.0" y="60.0" class="fc-t fc-m">'Manzana'</text><text x="275" y="100" class="fc-lab" text-anchor="middle">posición 1</text><rect x="340" y="40" width="110" height="40" rx="8" class="fc-box"/><text x="395.0" y="60.0" class="fc-t fc-m">'Platano'</text><text x="395" y="100" class="fc-lab" text-anchor="middle">posición 2</text><rect x="460" y="40" width="110" height="40" rx="8" class="fc-box"/><text x="515.0" y="60.0" class="fc-t fc-m">'Ciruela'</text><text x="515" y="100" class="fc-lab" text-anchor="middle">posición 3</text><path d="M155,148 L155,112" class="fc-line" marker-end="url(#ah8)"/><text x="163" y="150" class="fc-lab" text-anchor="start">frutas[0]  (el primero)</text><path d="M515,148 L515,112" class="fc-line" marker-end="url(#ah8)"/><text x="507" y="150" class="fc-lab" text-anchor="end">frutas[frutas.length - 1]</text><text x="315" y="18" class="fc-lab" text-anchor="middle">length = 4 cajas, pero la última es la posición 3</text></svg></div>
+  <p>Cada valor va en una caja con su número. Se empieza a contar en <b>0</b>, por eso la última caja es <code>length - 1</code> y no <code>length</code>.</p></div>
+
+  <div class="card"><h3>Añadir y recorrer</h3>
+<pre><code>const pares = []
+pares.push(12)   // añade al final → [12]
+pares.push(8)    // → [12, 8]
+
+function pintarLista(lista) {
+  for (let elemento of lista) {
+    console.log(elemento)
+  }
+}
+pintarLista(frutas)   // sirve para cualquier lista</code></pre></div>
+
+  <div class="card"><h3>Filtrar: recorrer + if</h3>
+<pre><code>const numeros = [7, 23, 42, 5, 18, 91, 36]
+for (let numero of numeros) {
+  if (numero % 2 === 0) {
+    console.log(numero)   // 42, 18, 36
+  }
+}</code></pre>
+  <p>El patrón es siempre: recorres la lista y con un <code>if</code> te quedas solo con los que cumplen.</p></div>
+
+  <div class="card"><h3>Buscar nombres por letra</h3>
+<pre><code>const nombres = ['Ana', 'Marta', 'Carlos', 'Miguel', 'Sofía']
+
+function buscarPorLetra(letra, lista, posicion) {
+  for (let nombre of lista) {
+    if (nombre[posicion] === letra) {
+      console.log(nombre)
+    }
+  }
+}
+buscarPorLetra('a', nombres, 1)   // Marta, Carlos (2ª letra 'a')
+buscarPorLetra('M', nombres, 0)   // Marta, Miguel</code></pre>
+  <p class="tip"><b>Ojo con mayúsculas:</b> 'M' ≠ 'm'. Para que dé igual, compara con <code>.toLowerCase()</code> en los dos lados.</p></div>
+
+  <div class="card span2"><h3>Todo junto: función flecha + rest + for…of + push</h3>
+<pre><code>const filtrarPares = (...lista) => {
+  const pares = []
+  for (let num of lista) {
+    if (num % 2 === 0) pares.push(num)
+  }
+  return pares
+}
+console.log(filtrarPares(12, 5, 8, 19, 24))   // [12, 8, 24]</code></pre>
+  <p class="tip"><b>Detalle:</b> <code>num % 2 === 0</code> ya da true o false. No hace falta escribir <code>(num % 2 === 0) ? true : false</code>.</p></div>
+</div>
+</section>
+
+<!-- ============ OBJETOS ============ -->
+<section class="area" id="objetos" data-a="obj">
+<h2>Objetos y métodos de arrays</h2>
+<p class="intro">Clase 9 (26/10, sesión 5 especial). El puente entre SQL y JavaScript: lo que en la base de datos es una fila, en JS es un objeto; y la tabla entera, un array de objetos.</p>
+<div class="grid">
+  <div class="card"><h3>Objetos: clave → valor</h3>
+<pre><code>const producto = {
+    nombre: 'Leche desnatada',
+    precio: 2,
+    cantidad: 10,
+    stock: true
+}
+
+producto.nombre        // 'Leche desnatada'  ← lo normal
+producto['nombre']     // lo mismo, con corchetes
+producto.precio = 3    // cambiar un valor</code></pre>
+  <div class="tbl"><table>
+    <tr><th></th><th>Array <code>[ ]</code></th><th>Objeto <code>{ }</code></th></tr>
+    <tr><td>Se busca por…</td><td><b>posición</b>: <code>lista[0]</code></td><td><b>nombre</b> (clave): <code>producto.precio</code></td></tr>
+    <tr><td>Sirve para…</td><td>muchas cosas del mismo tipo</td><td>los datos de <b>una</b> cosa</td></tr>
+  </table></div>
+  <p class="tip">El profe lo llama "JSON" o "array asociativo". En JS se llama <b>objeto</b>. JSON es el formato de texto en el que viajan estos datos entre backend y frontend, y se escribe casi igual (con las claves entre comillas).</p></div>
+
+  <div class="card"><h3>Array de objetos = una tabla</h3>
+<pre><code>const productos = [
+    { nombre: 'Leche', precio: 2,  cantidad: 10 },
+    { nombre: 'Pan',   precio: 1,  cantidad: 100 },
+    { nombre: 'Carne', precio: 12, cantidad: 0 }
+]
+
+productos[2]            // el objeto entero de la carne (una fila)
+productos[2].nombre     // 'Carne'  (fila 2, columna nombre)
+
+for (let producto of productos) {
+    if (producto.precio &lt; 10) {
+        console.log(producto.nombre, producto.precio)
+    }
+}</code></pre>
+  <div class="tbl"><table>
+    <tr><th>JavaScript</th><th>SQL</th></tr>
+    <tr><td>un objeto <code>{ }</code></td><td>una fila</td></tr>
+    <tr><td>sus claves</td><td>las columnas</td></tr>
+    <tr><td>array de objetos <code>[{…}, {…}]</code></td><td>la tabla</td></tr>
+  </table></div>
+  <p class="tip"><b>Adiós arrays paralelos:</b> en vez de <code>productos[i]</code>, <code>precios[i]</code> y <code>stock[i]</code>, un solo array y <code>productos[i].precio</code>. Con <code>for…of</code> ya no hace falta la <code>i</code>.</p></div>
+
+  <div class="card span2"><h3>Añadir y quitar: push, pop, unshift, shift</h3>
+  <div class="tbl"><table>
+    <tr><th>Método</th><th>Qué hace</th><th>Dónde</th></tr>
+    <tr><td><code>push(a, b…)</code></td><td>añade uno o varios</td><td>al <b>final</b></td></tr>
+    <tr><td><code>pop()</code></td><td>quita uno (y te lo devuelve)</td><td>del <b>final</b></td></tr>
+    <tr><td><code>unshift(a)</code></td><td>añade</td><td>al <b>principio</b></td></tr>
+    <tr><td><code>shift()</code></td><td>quita uno (y te lo devuelve)</td><td>del <b>principio</b></td></tr>
+  </table></div>
+<pre><code>const animales = ['Leon', 'Gato', 'Perro']
+animales.push('Hipopotamo')     // ['Leon', 'Gato', 'Perro', 'Hipopotamo']
+animales.unshift('Rana')        // ['Rana', 'Leon', 'Gato', 'Perro', 'Hipopotamo']
+animales.pop()                  // quita 'Hipopotamo'
+animales.shift()                // quita 'Rana'
+
+alumnos.push({ nombre: 'Mario', edad: 28, nota: 10 })   // también con objetos</code></pre>
+  <p class="tip"><b>Pringles:</b> <code>pop</code> saca el último que metiste, como la última patata del bote. Para quitar varios hay que llamarlo varias veces.</p>
+  <p class="tip"><b>Ojo:</b> estos cuatro <b>cambian el array original</b>. Por eso funcionan aunque el array sea <code>const</code>: no cambias el array por otro, cambias lo que hay dentro.</p></div>
+
+  <div class="card span2"><h3>Diagrama: filter, find y map</h3>
+<div class="diagram"><svg viewBox="0 0 660 290" role="img" aria-label="Qué devuelven filter, find y map"><text x="8" y="29" class="fc-t fc-m" style="text-anchor:start">precios</text><rect x="200" y="12" width="56" height="34" rx="7" class="fc-box"/><text x="228.0" y="29" class="fc-t fc-m">2</text><rect x="266" y="12" width="56" height="34" rx="7" class="fc-box"/><text x="294.0" y="29" class="fc-t fc-m">15</text><rect x="332" y="12" width="56" height="34" rx="7" class="fc-box"/><text x="360.0" y="29" class="fc-t fc-m">8</text><rect x="398" y="12" width="56" height="34" rx="7" class="fc-box"/><text x="426.0" y="29" class="fc-t fc-m">30</text><text x="8" y="99" class="fc-t fc-m" style="text-anchor:start">.filter(p => p &lt; 10)</text><rect x="200" y="82" width="56" height="34" rx="7" class="fc-end"/><text x="228.0" y="99" class="fc-t fc-m">2</text><rect x="266" y="82" width="56" height="34" rx="7" class="fc-end"/><text x="294.0" y="99" class="fc-t fc-m">8</text><text x="200" y="132" class="fc-lab" style="text-anchor:start">[ ] array con TODOS los que cumplen</text><text x="8" y="169" class="fc-t fc-m" style="text-anchor:start">.find(p => p &lt; 10)</text><rect x="200" y="152" width="56" height="34" rx="7" class="fc-end"/><text x="228.0" y="169" class="fc-t fc-m">2</text><text x="200" y="202" class="fc-lab" style="text-anchor:start">un solo valor: el PRIMERO que cumple</text><text x="8" y="239" class="fc-t fc-m" style="text-anchor:start">.map(p => p * 2)</text><rect x="200" y="222" width="56" height="34" rx="7" class="fc-end"/><text x="228.0" y="239" class="fc-t fc-m">4</text><rect x="266" y="222" width="56" height="34" rx="7" class="fc-end"/><text x="294.0" y="239" class="fc-t fc-m">30</text><rect x="332" y="222" width="56" height="34" rx="7" class="fc-end"/><text x="360.0" y="239" class="fc-t fc-m">16</text><rect x="398" y="222" width="56" height="34" rx="7" class="fc-end"/><text x="426.0" y="239" class="fc-t fc-m">60</text><text x="200" y="272" class="fc-lab" style="text-anchor:start">[ ] array del MISMO tamaño, todos cambiados</text></svg></div>
+  <div class="tbl"><table>
+    <tr><th>Método</th><th>Pregunta que responde</th><th>Devuelve</th><th>En SQL sería…</th></tr>
+    <tr><td><code>filter</code></td><td>¿cuáles cumplen?</td><td>un <b>array</b> (puede ser más corto o vacío <code>[]</code>)</td><td><code>WHERE</code></td></tr>
+    <tr><td><code>find</code></td><td>¿cuál es el primero que cumple?</td><td><b>un elemento</b> (o <code>undefined</code> si no hay)</td><td><code>WHERE … LIMIT 1</code></td></tr>
+    <tr><td><code>map</code></td><td>¿cómo queda cada uno si le hago esto?</td><td>un <b>array del mismo tamaño</b></td><td><code>SELECT columna</code> o un cálculo</td></tr>
+  </table></div>
+  <p class="tip">Ninguno de los tres cambia el array original: siempre te dan uno nuevo, así que guárdalo en una variable (<code>const baratos = …</code>).</p></div>
+
+  <div class="card"><h3>filter: todos los que cumplen</h3>
+<pre><code>// productos con más de 10 unidades
+const muchos = productos.filter(producto => producto.cantidad > 10)
+
+// precio menor que 20
+const baratos = productos.filter(producto => producto.precio &lt; 20)
+
+// el nombre contiene "é"
+const conE = productos.filter(producto =>
+    producto.nombre.toLowerCase().includes('é'))</code></pre>
+  <p>Es lo mismo que hacías a mano, pero en una línea:</p>
+<pre><code>const baratos = []
+for (let producto of productos) {
+    if (producto.precio &lt; 20) baratos.push(producto)
+}</code></pre>
+  <p class="tip"><code>.includes('texto')</code> dice si un texto contiene otro (true/false). Es el <code>LIKE '%texto%'</code> de JS.</p></div>
+
+  <div class="card"><h3>find: el primero que cumple</h3>
+<pre><code>// el primer alumno suspenso
+const suspenso = alumnos.find(alumno => alumno.nota &lt; 5)
+
+// el primero entre 20 y 30 años
+const joven = alumnos.find(alumno =>
+    alumno.edad >= 20 &amp;&amp; alumno.edad &lt;= 30)</code></pre>
+  <p>Como un <code>for</code> con <code>if</code> que hace <code>break</code> en cuanto encuentra uno:</p>
+<pre><code>for (let alumno of alumnos) {
+    if (alumno.nota &lt; 5) {
+        console.log(alumno)
+        break          // para el bucle
+    }
+}</code></pre>
+  <p class="tip">Es el primo de tu <code>buscarProducto</code>: aquella devolvía la <b>posición</b> (o -1); <code>find</code> devuelve el <b>objeto entero</b> (o <code>undefined</code>).</p></div>
+
+  <div class="card"><h3>map: transformar todos</h3>
+<pre><code>const numeros = [1, 2, 3, 4, 5]
+const dobles = numeros.map(numero => numero * 2)       // [2, 4, 6, 8, 10]
+
+const ciudades = ['Madrid', 'Sevilla', 'Vigo']
+const minus = ciudades.map(ciudad => ciudad.toLowerCase())
+// ['madrid', 'sevilla', 'vigo']
+
+// de un array de objetos, quedarte con una "columna"
+const nombres = productos.map(producto => producto.nombre)
+// ['Leche', 'Pan', 'Carne']</code></pre>
+  <p class="tip">"Mapear" no es solo hacer cuentas: es aplicar <b>la misma operación</b> a cada elemento. Siempre sale un array con la misma cantidad de elementos.</p></div>
+
+  <div class="card"><h3>La función flecha de dentro (callback)</h3>
+  <p>Lo que va dentro de <code>filter</code>, <code>find</code> y <code>map</code> es una <b>función flecha</b> que el método ejecuta <b>una vez por cada elemento</b>. Se llama <b>callback</b>: una función que le pasas a otra.</p>
+<pre><code>productos.filter( producto  =>  producto.precio &lt; 20 )
+//                 ↑ cada uno     ↑ lo que preguntas o calculas</code></pre>
+  <ul>
+    <li><b>Antes de la flecha:</b> el nombre que le das a cada elemento (el que tú quieras: <code>producto</code>, <code>p</code>…). Es como la variable del <code>for…of</code>.</li>
+    <li><b>Después de la flecha:</b> en <code>filter</code> y <code>find</code>, una condición (true/false); en <code>map</code>, el valor nuevo.</li>
+    <li>Si cabe en una línea no lleva <code>return</code> ni llaves: lo de después de la flecha ya se devuelve solo.</li>
+  </ul></div>
+
+  <div class="card"><h3>Darle la vuelta: reverse y toReversed</h3>
+<pre><code>const animales = ['Leon', 'Gato', 'Perro']
+const alReves = animales.toReversed()
+console.log(animales)   // ['Leon', 'Gato', 'Perro']   (sin tocar)
+console.log(alReves)    // ['Perro', 'Gato', 'Leon']</code></pre>
+  <ul>
+    <li><code>toReversed()</code>: te da un array nuevo y deja el original como estaba.</li>
+    <li><code>reverse()</code>: le da la vuelta <b>al original</b>.</li>
+  </ul>
+  <p class="tip"><code>toReversed()</code> es reciente: necesita Node 20 o más. Si te da error <code>is not a function</code>, mira tu versión con <code>node -v</code>.</p></div>
+
+  <div class="card span2"><h3>Corrección de los deberes (lo que hay que recordar)</h3>
+  <ul>
+    <li><b>pop:</b> no "tira" el elemento, <b>te lo devuelve</b>. Sirve, por ejemplo, para sacar a alguien de la lista de suspensos y meterlo en la de aprobados: <code>const ultimo = lista.pop()</code>.</li>
+    <li><b>map no es solo para cuentas:</b> también para <b>sacar una propiedad</b> de cada objeto: <code>usuarios.map(usuario =&gt; usuario.email)</code> te da solo los emails.</li>
+    <li><b>Dos condiciones en un filter:</b> se unen con <code>&amp;&amp;</code>: <code>p.precio &gt; 50 &amp;&amp; p.enStock</code>. Poner <code>p.enStock === true</code> también vale, pero sobra: <code>p.enStock</code> ya es true o false.</li>
+    <li><b>find o filter:</b> ¿quieres <b>uno</b> (el primer paciente del día, el primer suspenso)? <code>find</code>. ¿Quieres <b>varios</b> (un buscador de una web)? <code>filter</code>.</li>
+    <li><b>Sin mayúsculas:</b> <code>p.codigo.toLowerCase() === buscado.toLowerCase()</code>, para que "proy-003" también lo encuentre.</li>
+    <li><b>Por pasos y guardando en variables:</b> se puede encadenar todo en una línea, pero el profe lo desaconseja. Mejor <code>filter</code> → guardas → <code>map</code> → guardas → <code>push</code>. Lo entiendes tú, tu "yo" de dentro de 6 meses y tus compañeros.</li>
+  </ul>
+  <p class="tip"><b>Idea clave del profe:</b> el 80 % de las veces no pintas nada por pantalla: calculas un dato, lo guardas en una variable y lo usas en la línea siguiente.</p>
+  <p class="tip"><b>Documentación:</b> MDN (developer.mozilla.org, en español) es la referencia de JavaScript: busca "MDN Array" y tienes todos los métodos con ejemplos. <b>Reto voluntario:</b> investigar <code>reduce</code> (lo tienes explicado aquí abajo).</p></div>
+
+  <div class="card span2"><h3>Los 5 ejercicios resueltos (sesión 5)</h3>
+<pre><code>// 1. push y pop
+const equipo = ['Teclado', 'Ratón', 'Auriculares']
+equipo.push('Monitor')                  // ['Teclado', 'Ratón', 'Auriculares', 'Monitor']
+const ultimoElemento = equipo.pop()     // 'Monitor' (y equipo vuelve a tener 3)
+
+// 2. map: solo los emails
+const listaCorreos = usuarios.map(usuario =&gt; usuario.email)
+// ['ana@ejemplo.com', 'luis@ejemplo.com', 'marta@ejemplo.com']
+
+// 3. filter con dos condiciones
+const filterByStock = productos.filter(producto =&gt; producto.precio &gt; 50 &amp;&amp; producto.enStock)
+// SSD 1TB y Webcam (la silla no: enStock es false)
+
+// 4. find sin importar mayúsculas
+const nombreProyecto = 'proy-003'
+const miProyecto = proyectos.find(proyecto =&gt;
+    proyecto.codigo.toLowerCase() === nombreProyecto.toLowerCase())
+// { codigo: 'PROY-003', estado: 'Pendiente' }
+
+// 5. filter → map → push, por pasos
+const listaResultante = estudiantes.filter(estudiante =&gt; estudiante.nota &gt;= 7)
+const nombreAlumnos = listaResultante.map(alumno =&gt; alumno.nombre)
+nombreAlumnos.push('Fin de lista')
+// ['Elena', 'Javier', 'Fin de lista']</code></pre>
+  <p class="tip"><b>Para recordar:</b> <code>push</code> y <code>pop</code> <b>cambian</b> el array original; <code>map</code> y <code>filter</code> crean uno <b>nuevo</b>; <code>find</code> devuelve <b>un elemento</b> o <code>undefined</code> si no encuentra nada.</p></div>
+
+  <div class="card span2"><h3>reduce: juntarlo todo en un solo valor (el reto)</h3>
+  <p><code>reduce</code> recorre el array y va <b>acumulando</b> hasta quedarse con <b>un solo resultado</b>. Es tu patrón del acumulador (<code>total = total + …</code>) en una línea.</p>
+<pre><code>const numeros = [1, 2, 3, 4, 5, 6]
+
+const suma = numeros.reduce((acumulador, numeroActual) =&gt; acumulador + numeroActual, 0)
+console.log(suma)   // 21
+//                                                                    ↑ valor inicial del acumulador</code></pre>
+  <div class="tbl"><table>
+    <tr><th>Vuelta</th><th>acumulador (antes)</th><th>numeroActual</th><th>nuevo acumulador</th></tr>
+    <tr><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+    <tr><td>2</td><td>1</td><td>2</td><td>3</td></tr>
+    <tr><td>3</td><td>3</td><td>3</td><td>6</td></tr>
+    <tr><td>4</td><td>6</td><td>4</td><td>10</td></tr>
+    <tr><td>5</td><td>10</td><td>5</td><td>15</td></tr>
+    <tr><td>6</td><td>15</td><td>6</td><td>21 ← lo que devuelve</td></tr>
+  </table></div>
+  <ul>
+    <li><b>acumulador:</b> lo que llevas sumado hasta ahora (como el <code>subtotal</code> de tu tienda).</li>
+    <li><b>numeroActual:</b> el elemento de esta vuelta.</li>
+    <li><b>El <code>0</code> del final:</b> desde dónde empieza. Si pones 10, el resultado sería 31.</li>
+  </ul>
+<pre><code>// lo mismo, a mano
+let suma = 0
+for (let numero of numeros) {
+    suma = suma + numero
+}</code></pre>
+  <p class="tip">Pon siempre el valor inicial: si no lo pones, usa el primer elemento como inicio, y con un array vacío da error.</p>
+  <p class="tip"><b>Con objetos:</b> el total de un carrito sería <code>carrito.reduce((total, p) =&gt; total + p.precio * p.cantidad, 0)</code>.</p></div>
+</div>
+</section>
+
+<!-- ============ TRUCOS ============ -->
+<section class="area" id="trucos" data-a="ej">
+<h2>Trucos que salen en los ejercicios</h2>
+<div class="grid">
+  <div class="card"><h3>¿Par o impar? → <code>%</code></h3>
+<pre><code>if (numero % 2 === 0) console.log('par')
+else console.log('impar')</code></pre>
+  <p>Si el resto de dividir entre 2 es 0, es par.</p></div>
+
+  <div class="card"><h3>Descomponer cantidades → <code>/</code> y <code>%</code></h3>
+<pre><code>// 34567 segundos → horas, minutos, segundos
+let horas = parseInt(34567 / 3600)   // 9
+let resto = 34567 % 3600             // lo que sobra
+let minutos = parseInt(resto / 60)   // 36
+let segundos = resto % 60            // 7</code></pre>
+  <p class="tip"><b>Math.floor(x)</b> redondea hacia abajo: <code>Math.floor(185 / 50)</code> → 3 billetes de 50.</p>
+  <p>Mismo patrón para el <b>cajero</b> (185 € → 3×50, 1×20, 1×10, 1×5): divides entre el billete grande, te quedas la parte entera y sigues con el resto (<code>%</code>).</p></div>
+
+  <div class="card"><h3>Intercambiar dos variables</h3>
+<pre><code>// opción 1: variable temporal
+let temp = x; x = y; y = temp
+
+// opción 2: desestructuración
+[a, b] = [b, a]</code></pre></div>
+
+  <div class="card"><h3>Porcentajes (IVA, propina)</h3>
+<pre><code>const iva = precio * 21 / 100       // 50 → 10.5
+const pvp = precio + iva            // 60.5
+const propina = cuenta * 0.10       // 84 → 8.4
+const porPersona = (cuenta + propina) / 4  // 23.1</code></pre></div>
+
+  <div class="card"><h3>Celsius → Fahrenheit</h3>
+<pre><code>const FACTOR = 9 / 5
+const DESPLAZAMIENTO = 32
+const f = celsius * FACTOR + DESPLAZAMIENTO
+// -40 °C = -40 °F (el único punto donde coinciden)</code></pre></div>
+
+  <div class="card"><h3>¿Importa el orden de las condiciones? Sí</h3>
+<pre><code>if (edad &lt; 12 || edad &gt;= 65) precio = 5   // 1º la regla que manda siempre
+else if (dia === 'miercoles') precio = 6
+else precio = 9</code></pre>
+  <p>Si miras el miércoles primero, un jubilado pagaría 6 € en vez de 5 €. Como solo entra en el primer if que cumple, <b>la regla prioritaria va arriba</b>.</p>
+  <p class="tip"><b>Mayor de tres:</b> <code>if (a &gt;= b &amp;&amp; a &gt;= c)</code> → a; <code>else if (b &gt;= c)</code> → b; si no, c. Usa <code>&gt;=</code> para que funcione con empates.</p></div>
+
+  <div class="card span2"><h3>Arrays paralelos</h3>
+  <p>Varios arrays donde <b>la misma posición es el mismo alumno</b>. Como tres libretas con un alumno por renglón:</p>
+<pre><code>const alumnos = ["Ana", "Luis", "Marta"];
+const notas   = [7.5,   4.0,    9.2];
+const faltas  = [2,     5,      0];
+// alumnos[2], notas[2] y faltas[2] son todos de Marta</code></pre>
+<div class="diagram"><svg viewBox="0 0 620 230" role="img" aria-label="Arrays paralelos leídos con la misma posición"><rect x="438" y="28" width="134" height="164" rx="10" class="fc-dec"/><text x="225" y="16" class="fc-lab" text-anchor="middle">i = 0</text><text x="365" y="16" class="fc-lab" text-anchor="middle">i = 1</text><text x="505" y="16" class="fc-lab" text-anchor="middle">i = 2</text><text x="20" y="59" class="fc-t fc-m" style="text-anchor:start">alumnos</text><rect x="170" y="40" width="110" height="38" rx="8" class="fc-box"/><text x="225.0" y="59.0" class="fc-t fc-m">"Ana"</text><rect x="310" y="40" width="110" height="38" rx="8" class="fc-box"/><text x="365.0" y="59.0" class="fc-t fc-m">"Luis"</text><rect x="450" y="40" width="110" height="38" rx="8" class="fc-end"/><text x="505.0" y="59.0" class="fc-t fc-m">"Marta"</text><text x="20" y="109" class="fc-t fc-m" style="text-anchor:start">notas</text><rect x="170" y="90" width="110" height="38" rx="8" class="fc-box"/><text x="225.0" y="109.0" class="fc-t fc-m">7.5</text><rect x="310" y="90" width="110" height="38" rx="8" class="fc-box"/><text x="365.0" y="109.0" class="fc-t fc-m">4.0</text><rect x="450" y="90" width="110" height="38" rx="8" class="fc-end"/><text x="505.0" y="109.0" class="fc-t fc-m">9.2</text><text x="20" y="159" class="fc-t fc-m" style="text-anchor:start">faltas</text><rect x="170" y="140" width="110" height="38" rx="8" class="fc-box"/><text x="225.0" y="159.0" class="fc-t fc-m">2</text><rect x="310" y="140" width="110" height="38" rx="8" class="fc-box"/><text x="365.0" y="159.0" class="fc-t fc-m">5</text><rect x="450" y="140" width="110" height="38" rx="8" class="fc-end"/><text x="505.0" y="159.0" class="fc-t fc-m">0</text><text x="505" y="212" class="fc-lab" text-anchor="middle">misma i = mismo alumno</text></svg></div>
+  <p>Para leer los tres a la vez necesitas la <b>posición</b>, así que se recorren con <code>for (let i = 0; ...)</code> y no con <code>for...of</code> (que solo da el valor).</p></div>
+
+  <div class="card span2"><h3>Contador, acumulador y máximo</h3>
+  <p>Los tres siguen la misma receta: una variable <b>antes</b> del bucle, se cambia <b>dentro</b> y se muestra <b>después</b>.</p>
+  <div class="tbl"><table>
+    <tr><th>Patrón</th><th>Empieza en</th><th>En cada vuelta</th><th>Ejemplo</th></tr>
+    <tr><td><b>Contador</b> (¿cuántos?)</td><td><code>0</code></td><td>Suma <b>1</b> si se cumple algo</td><td>Alumnos aprobados</td></tr>
+    <tr><td><b>Acumulador</b> (¿cuánto en total?)</td><td><code>0</code></td><td>Suma <b>una cantidad</b></td><td>Suma de todas las notas</td></tr>
+    <tr><td><b>Máximo</b> (¿cuál es el mayor?)</td><td><code>0</code> (la posición del primero)</td><td>Si este es mayor que el guardado, guarda <b>su posición</b></td><td>Mejor nota</td></tr>
+  </table></div>
+<pre><code>let aprobados = 0;                   // contador
+let sumaNotas = 0;                   // acumulador
+let posicionMejor = 0;               // máximo
+
+for (let i = 0; i &lt; alumnos.length; i++) {
+    if (notas[i] &gt;= 5) aprobados = aprobados + 1;
+    sumaNotas = sumaNotas + notas[i];
+    if (notas[i] &gt; notas[posicionMejor]) posicionMejor = i;
+}
+console.log(`Aprobados: ${aprobados}`);</code></pre>
+  <p class="tip"><b>Cuidado:</b> al contador se le suma con <code>aprobados = aprobados + 1</code>, no con <code>i++</code>. La <code>i</code> es la que recorre la lista: no se toca.</p>
+  <p class="tip"><b>Máximo:</b> se guarda la <b>posición</b> y no la nota, porque con la posición sacas el nombre (<code>alumnos[pos]</code>) y la nota (<code>notas[pos]</code>).</p></div>
+
+  <div class="card"><h3>Buscar en una lista: el pósit con -1</h3>
+<pre><code>const buscado = "Marta";
+let posicion = -1;                     // -1 = todavía no lo he encontrado
+
+for (let i = 0; i &lt; alumnos.length; i++) {
+    if (alumnos[i] === buscado) {
+        posicion = i;                  // apunto el renglón donde está
+    }
+}
+
+if (posicion === -1) {
+    console.log(`${buscado} no existe`);
+} else {
+    console.log(`Está en la posición ${posicion}`);
+}</code></pre>
+  <p>Empieza en <b>-1</b> porque 0 es una posición real (el primer alumno). Si al final sigue en -1, no estaba.</p>
+  <p class="tip"><b>Sin mayúsculas:</b> <code>alumnos[i].toLowerCase() === buscado.toLowerCase()</code>. Los paréntesis van vacíos y se pone en <b>los dos lados</b>.</p></div>
+
+  <div class="card span2"><h3>Diagrama: buscar en una lista</h3>
+<div class="diagram"><svg viewBox="0 0 700 400" role="img" aria-label="Diagrama de flujo de la búsqueda con -1"><defs><marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fc-arrow"/></marker></defs><rect x="110" y="8" width="220" height="36" rx="8" class="fc-box"/><text x="220.0" y="26.0" class="fc-t fc-m">posicion = -1   ·   i = 0</text><path d="M220,44 L220,69" class="fc-line" marker-end="url(#ah3)"/><polygon points="220,69 340,105 220,141 100,105" class="fc-dec"/><text x="220" y="105.0" class="fc-t">¿quedan alumnos?</text><path d="M220,141 L220,169" class="fc-line" marker-end="url(#ah3)"/><text x="228" y="155" class="fc-lab" text-anchor="start">sí</text><polygon points="220,169 360,205 220,241 80,205" class="fc-dec"/><text x="220" y="205.0" class="fc-t fc-m">¿alumnos[i] === buscado?</text><path d="M220,241 L220,265" class="fc-line" marker-end="url(#ah3)"/><text x="228" y="253" class="fc-lab" text-anchor="start">sí</text><rect x="150" y="265" width="140" height="36" rx="8" class="fc-box"/><text x="220.0" y="283.0" class="fc-t fc-m">posicion = i</text><path d="M220,301 L220,335" class="fc-line" marker-end="url(#ah3)"/><path d="M360,205 L390,205 L390,352 L270,352" class="fc-line" marker-end="url(#ah3)"/><text x="366" y="193" class="fc-lab" text-anchor="start">no</text><rect x="170" y="335" width="100" height="34" rx="8" class="fc-box"/><text x="220.0" y="352.0" class="fc-t fc-m">i++</text><path d="M170,352 L30,352 L30,105 L100,105" class="fc-line" marker-end="url(#ah3)"/><text x="36" y="230" class="fc-lab" text-anchor="start">siguiente</text><path d="M340,105 L560,105 L560,154" class="fc-line" marker-end="url(#ah3)"/><text x="350" y="93" class="fc-lab" text-anchor="start">no: ya miré todos</text><polygon points="560,154 660,190 560,226 460,190" class="fc-dec"/><text x="560" y="190.0" class="fc-t fc-m">¿posicion === -1?</text><path d="M560,226 L560,262" class="fc-line" marker-end="url(#ah3)"/><text x="568" y="244" class="fc-lab" text-anchor="start">no</text><rect x="470" y="262" width="180" height="44" rx="8" class="fc-end"/><text x="560.0" y="276.0" class="fc-t">Mostrar nombre, nota</text><text x="560.0" y="292.0" class="fc-t">y faltas con [posicion]</text><path d="M660,190 L685,190 L685,370 L650,370" class="fc-line" marker-end="url(#ah3)"/><text x="666" y="178" class="fc-lab" text-anchor="start">sí</text><rect x="470" y="350" width="180" height="40" rx="8" class="fc-end"/><text x="560.0" y="370.0" class="fc-t">Aviso: no existe</text></svg></div>
+  <p>Dos partes: el <b>bucle</b> (izquierda) recorre todos los alumnos y apunta la posición si lo encuentra. Cuando termina, un <b>if / else</b> (derecha) mira el pósit <b>una sola vez</b> y decide qué mostrar.</p></div>
+
+  <div class="card"><h3>for recorre, if / else pregunta una vez</h3>
+  <div class="tbl"><table>
+    <tr><th><code>for</code></th><th><code>if / else</code></th></tr>
+    <tr><td><b>Repite</b> algo, una vez por cada elemento</td><td>Hace <b>una sola</b> pregunta</td></tr>
+    <tr><td>Sirve para <b>recorrer</b> una lista</td><td>Sirve para <b>elegir</b> entre dos caminos</td></tr>
+  </table></div>
+<pre><code>let asiento = 7;
+if (asiento === -1) {
+    console.log("Todavía no tienes asiento");
+} else {
+    console.log(`Tu asiento es el ${asiento}`);   // escribe lo que vale asiento
+}</code></pre>
+  <p><code>${asiento}</code> escribe en la frase <b>lo que vale la variable en ese momento</b>.</p></div>
+
+  <div class="card"><h3>¿Cuándo se ponen los [ ]?</h3>
+  <ul>
+    <li><b>Arrays</b> (muchos valores) → llevan <code>[ ]</code> para decir qué posición: <code>notas[2]</code>.</li>
+    <li><b>Variables normales</b> (un solo valor) → <b>sin</b> <code>[ ]</code>: <code>buscado</code>, <code>posicion</code>, <code>media</code>.</li>
+    <li>La <code>i</code> solo existe <b>dentro</b> del <code>for</code>. Fuera, usa la variable donde guardaste la posición: <code>notas[posicion]</code>.</li>
+  </ul>
+  <p class="tip"><b>Ojo:</b> <code>"Marta"[2]</code> es la letra "r". Si pones <code>[ ]</code> a un texto, sacas una letra, no un alumno.</p></div>
+
+  <div class="card"><h3>Calcular primero, mostrar después</h3>
+<pre><code>// 1. datos
+const cuenta = 38;
+// 2. cálculos (sin console.log)
+const propina = cuenta * 10 / 100;
+const total = cuenta + propina;
+// 3. resumen
+console.log(`Total: ${total.toFixed(2)} €`);</code></pre>
+  <ul>
+    <li><b>.toFixed(2)</b> solo al <b>mostrar</b>: devuelve texto, y si lo usas en cálculos <code>38 + "3.80"</code> los pega en vez de sumar.</li>
+    <li>Una variable que guarda "cuánto vale algo" se <b>asigna</b>: <code>propina = 0</code> o <code>propina = 2</code>. No siempre hay que calcular.</li>
+    <li>Si un resultado sale <b>100 veces más grande</b>, falta dividir entre 100 en un porcentaje.</li>
+  </ul></div>
+</div>
+</section>
+
+
+<!-- ============ IA ============ -->
+<section class="area" id="ia" data-a="ia">
+<h2>Estudiar con IA</h2>
+<p class="intro">La IA sirve para entender, no para copiar. Si te da el código hecho, no aprendes a sacarlo tú.</p>
+<div class="grid">
+  <div class="card"><h3>Prompt de tutor</h3>
+<pre><code>Quiero que actúes como un experto profesor de programación
+en JavaScript. Me han puesto unos ejercicios que quiero
+aprender a resolver y entender. No me los resuelvas: dame
+pistas, explícamelo con pseudocódigo o un diagrama de flujo,
+pero no me des el código. Quiero sacarlo por mí mismo.</code></pre></div>
+  <div class="card"><h3>Cómo pedir ayuda</h3>
+  <ul>
+    <li>Pide la explicación en <b>pseudocódigo</b> o <b>diagrama de flujo</b>.</li>
+    <li>Pide ejemplos de la sintaxis con un <b>problema distinto</b> al de tu ejercicio.</li>
+    <li>No le pegues todo el proyecto: cuanto más texto le metes, antes se le acaba la memoria de la conversación (tokens).</li>
+  </ul></div>
+</div>
+</section>
+
+<!-- ============ SQL ============ -->
+<section class="area" id="sql" data-a="sql">
+<h2>Bases de datos y SQL</h2>
+<p class="intro">Asignatura de Bases de Datos (MySQL y MongoDB) · Profesor Moisés Carretero · desde el 14/10. Una base de datos guarda la información de forma permanente y compartida, y SQL es el idioma para pedirle datos.</p>
+<div class="grid">
+  <div class="card"><h3>¿Para qué sirve una base de datos?</h3>
+  <ul>
+    <li><b>Persistencia:</b> los datos sobreviven a recargas, apagones y reinicios.</li>
+    <li><b>Integridad:</b> reglas que impiden datos sin sentido (edades negativas, pedidos sin cliente).</li>
+    <li><b>Seguridad:</b> usuarios y permisos; cada uno ve y toca solo lo suyo.</li>
+    <li><b>Concurrencia:</b> miles de usuarios leyendo y escribiendo a la vez sin pisarse.</li>
+    <li><b>Consultas rápidas:</b> encontrar un registro entre millones en milisegundos.</li>
+    <li><b>Copias y recuperación:</b> backups y transacciones: <i>o se guarda todo, o no se guarda nada</i>.</li>
+  </ul></div>
+
+  <div class="card"><h3>Array de JS vs base de datos</h3>
+  <div class="tbl"><table>
+    <tr><th></th><th>Array / localStorage</th><th>Base de datos</th></tr>
+    <tr><td><b>Persistencia</b></td><td>Se pierde al recargar o cerrar</td><td>Permanente en el servidor</td></tr>
+    <tr><td><b>Alcance</b></td><td>Solo en el navegador de un usuario</td><td>Compartida entre todos los usuarios</td></tr>
+    <tr><td><b>Rendimiento</b></td><td>Lento con muchos datos</td><td>Búsquedas optimizadas con índices</td></tr>
+  </table></div>
+  <p class="tip">Los arrays paralelos (alumnos, notas, faltas) son justo lo que en una base de datos sería <b>una tabla</b> con tres columnas.</p></div>
+
+  <div class="card"><h3>Arquitectura en 3 capas</h3>
+  <div class="flow"><span>Frontend</span><i>⇄</i><span>Backend</span><i>⇄</i><span>Base de datos</span></div>
+  <ol>
+    <li><b>Frontend (cliente):</b> HTML, CSS y JavaScript. Lo que ve el usuario.</li>
+    <li><b>Backend (servidor):</b> la lógica, por ejemplo con Node.js. Recibe las peticiones.</li>
+    <li><b>Base de datos:</b> donde se guarda todo (MySQL, MongoDB).</li>
+  </ol>
+  <p class="tip"><b>Regla de oro:</b> el frontend <b>nunca</b> habla directamente con la base de datos. Todo pasa por el backend.</p>
+  <p class="tip"><b>Como un restaurante:</b> el comedor es el frontend, el camarero el backend y la despensa la base de datos. El cliente nunca entra en la despensa: se lo pide al camarero.</p></div>
+
+  <div class="card"><h3>Tablas, filas, columnas y claves</h3>
+  <ul>
+    <li><b>Tabla:</b> la información de una cosa (pokémon, alumnos…). Como un array de objetos.</li>
+    <li><b>Fila (registro):</b> un elemento concreto.</li>
+    <li><b>Columna (atributo):</b> un dato que tienen todos (nombre, edad…).</li>
+    <li><b>Clave primaria (PK):</b> identificador único de cada fila. No se repite nunca (normalmente <code>id</code>).</li>
+    <li><b>Clave foránea (FK):</b> columna que apunta a la PK de <b>otra</b> tabla para enlazarlas.</li>
+  </ul>
+  <div class="tbl"><table>
+    <tr><th colspan="3">pokemon</th><th></th><th colspan="2">tipos</th></tr>
+    <tr><td><b>id</b> (PK)</td><td>nombre</td><td><b>tipo_id</b> (FK)</td><td>→</td><td><b>id</b> (PK)</td><td>nombre</td></tr>
+    <tr><td>4</td><td>Charmander</td><td>2</td><td></td><td>2</td><td>Fuego</td></tr>
+  </table></div>
+  <p class="tip">Separar en tablas evita repetir datos y escribirlos mal. Para volver a juntarlas se usa <code>JOIN</code>, uniendo <code>pokemon.tipo_id = tipos.id</code>.</p></div>
+
+  <div class="card span2"><h3>Diseñar la base de datos: entidades, atributos y relaciones</h3>
+  <p>Antes de crear tablas se piensa el diseño (modelo entidad-relación). Un truco: lee la descripción del proyecto y fíjate en el tipo de palabra.</p>
+  <div class="tbl"><table>
+    <tr><th>Pieza</th><th>Truco</th><th>Se convierte en…</th><th>Ejemplo</th></tr>
+    <tr><td><b>Entidad</b></td><td>sustantivos</td><td>una <b>tabla</b></td><td><code>usuarios</code>, <code>productos</code>, <code>pokemon</code></td></tr>
+    <tr><td><b>Atributo</b></td><td>propiedades de la entidad</td><td>una <b>columna</b></td><td><code>nombre</code>, <code>precio</code>, <code>email</code></td></tr>
+    <tr><td><b>Relación</b></td><td>verbos</td><td>una <b>FK</b> o una tabla intermedia</td><td>un usuario <i>publica</i> productos, un entrenador <i>captura</i> pokémon</td></tr>
+  </table></div>
+  <div class="tbl"><table>
+    <tr><th>Cardinalidad</th><th>Qué significa</th><th>Cómo se hace en SQL</th></tr>
+    <tr><td><b>1:1</b> (uno a uno)</td><td>Cada A tiene un solo B y al revés (país y capital)</td><td>Casi siempre se mete todo en la misma tabla</td></tr>
+    <tr><td><b>1:N</b> (uno a muchos)</td><td>Un tipo tiene muchos pokémon, pero cada pokémon tiene un solo tipo</td><td>La <b>FK va en el lado de los "muchos"</b>: <code>pokemon.tipo_id → tipos.id</code></td></tr>
+    <tr><td><b>N:M</b> (muchos a muchos)</td><td>Un entrenador captura muchos pokémon y un pokémon lo capturan muchos entrenadores</td><td>Hace falta una <b>tabla intermedia</b> con las dos FK (y, si quieres, datos de la relación como la fecha)</td></tr>
+  </table></div>
+<div class="diagram"><svg viewBox="0 0 680 170" role="img" aria-label="Relación muchos a muchos con tabla intermedia"><defs><marker id="ah9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fc-arrow"/></marker></defs><rect x="10" y="40" width="170" height="84" rx="8" class="fc-box"/><text x="95.0" y="58" class="fc-t" style="font-weight:700">entrenadores</text><text x="95.0" y="82" class="fc-t fc-m">id (PK)</text><text x="95.0" y="100" class="fc-t fc-m">nombre</text><rect x="250" y="22" width="180" height="120" rx="8" class="fc-end"/><text x="340.0" y="40" class="fc-t" style="font-weight:700">capturas</text><text x="340.0" y="64" class="fc-t fc-m">id (PK)</text><text x="340.0" y="82" class="fc-t fc-m">entrenador_id (FK)</text><text x="340.0" y="100" class="fc-t fc-m">pokemon_id (FK)</text><text x="340.0" y="118" class="fc-t fc-m">fecha_captura</text><rect x="500" y="40" width="170" height="84" rx="8" class="fc-box"/><text x="585.0" y="58" class="fc-t" style="font-weight:700">pokemon</text><text x="585.0" y="82" class="fc-t fc-m">id (PK)</text><text x="585.0" y="100" class="fc-t fc-m">nombre</text><path d="M250,100 L180,100" class="fc-line" marker-end="url(#ah9)"/><path d="M430,118 L500,100" class="fc-line" marker-end="url(#ah9)"/><text x="340" y="162" class="fc-lab" text-anchor="middle">la tabla del medio guarda las dos FK: cada fila es "este entrenador capturó este pokémon"</text></svg></div>
+<pre><code>CREATE TABLE capturas (
+  id            INT AUTO_INCREMENT PRIMARY KEY,
+  entrenador_id INT NOT NULL,
+  pokemon_id    INT NOT NULL,
+  fecha_captura DATE,
+  FOREIGN KEY (entrenador_id) REFERENCES entrenadores(id),
+  FOREIGN KEY (pokemon_id)    REFERENCES pokemon(id)
+);</code></pre>
+  <p class="tip"><b>Ya lo has visto:</b> <code>valoraciones</code> de la base de series es una tabla intermedia (usuarios N:M series), por eso hace de "puente" en el JOIN de tres tablas.</p>
+  <p class="tip">Los diagramas de diseño se pueden dibujar en <b>Mermaid</b> (texto que se convierte en dibujo). Si se lo pides a la IA, pásale los <code>CREATE TABLE</code> para que no se invente columnas.</p></div>
+
+  <div class="card"><h3>Imágenes, archivos y contraseñas</h3>
+  <ul>
+    <li><b>Nunca se guardan archivos</b> (fotos, vídeos, PDF) dentro de la base de datos: la llenan, las consultas van lentas y las copias de seguridad pesan muchísimo.</li>
+    <li>El archivo va en el servidor o en la nube (por ejemplo AWS S3) y en la tabla solo se guarda <b>la ruta o URL</b>, en un <code>VARCHAR</code> o <code>TEXT</code>.</li>
+  </ul>
+<pre><code>foto_url VARCHAR(255)   -- 'https://.../zapatillas.jpg'</code></pre>
+  <p class="tip"><b>Contraseñas:</b> en los ejemplos de clase se ve <code>password VARCHAR(255)</code> con texto como <code>'1234pass'</code>. Eso vale para practicar, pero en una app de verdad <b>nunca</b> se guarda la contraseña tal cual: el backend guarda un <i>hash</i> (una versión cifrada que no se puede deshacer). Por eso la columna es tan larga.</p></div>
+
+  <div class="card"><h3>SELECT: pedir datos</h3>
+<pre><code>SELECT columna1, columna2 FROM nombre_tabla;
+SELECT * FROM nombre_tabla;     -- * = todas las columnas</code></pre>
+  <ul>
+    <li><code>SELECT</code> = qué columnas quiero. <code>FROM</code> = de qué tabla.</li>
+    <li>Las sentencias acaban en <code>;</code>. Con una sola consulta algunas herramientas no lo exigen, pero en cuanto hay varias seguidas es obligatorio: mejor ponerlo siempre.</li>
+    <li>Las palabras de SQL se escriben en MAYÚSCULAS por costumbre, para distinguirlas de los nombres de tablas y columnas.</li>
+  </ul></div>
+
+  <div class="card"><h3>WHERE: filtrar filas</h3>
+<pre><code>SELECT nombre, edad FROM clase WHERE ciudad = 'Madrid';
+SELECT * FROM clase WHERE edad &gt; 25;</code></pre>
+  <div class="tbl"><table>
+    <tr><th>SQL</th><th>Significa</th><th>En JavaScript</th></tr>
+    <tr><td><code>=</code></td><td>igual</td><td><code>===</code></td></tr>
+    <tr><td><code>&lt;&gt;</code> (o <code>!=</code>)</td><td>distinto</td><td><code>!==</code></td></tr>
+    <tr><td><code>&gt;</code> <code>&lt;</code> <code>&gt;=</code> <code>&lt;=</code></td><td>mayor, menor…</td><td>igual que en JS</td></tr>
+  </table></div>
+  <p class="tip"><b>Comillas:</b> textos y fechas van con comillas simples (<code>'Madrid'</code>). Los números van sin comillas (<code>25</code>).</p>
+  <p class="tip"><b>Ojo:</b> en SQL la igualdad es un solo <code>=</code>, no tres como en JavaScript.</p></div>
+
+  <div class="card"><h3>AND, OR, NOT, IN, BETWEEN</h3>
+<pre><code>WHERE tipo = 'Fuego' AND ataque &gt; 80          -- se cumplen las dos
+WHERE tipo = 'Hielo' OR tipo = 'Dragón'       -- se cumple al menos una
+WHERE NOT tipo = 'Agua'                       -- lo contrario
+WHERE tipo IN ('Hielo', 'Dragón', 'Hada')     -- cualquiera de la lista
+WHERE velocidad BETWEEN 100 AND 120           -- de 100 a 120, ambos incluidos</code></pre>
+  <p><code>IN</code> es un atajo de varios <code>OR</code> seguidos. <code>BETWEEN</code> incluye los dos extremos: es lo mismo que <code>velocidad &gt;= 100 AND velocidad &lt;= 120</code>.</p>
+  <p class="tip">Son los mismos que en JS: <code>AND</code> = <code>&amp;&amp;</code>, <code>OR</code> = <code>||</code>, <code>NOT</code> = <code>!</code>.</p>
+<pre><code>-- Paréntesis para mezclar AND y OR
+WHERE (tipo = 'Fuego' OR tipo = 'Agua') AND ataque &gt; 80</code></pre>
+  <p class="tip"><b>Ojo con mezclar:</b> <code>AND</code> va antes que <code>OR</code> (como multiplicar antes que sumar). Sin paréntesis, lo de arriba significaría "los de Fuego (con cualquier ataque) o los de Agua con ataque &gt; 80". Si mezclas, pon paréntesis siempre.</p>
+<pre><code>WHERE pais IS NULL          -- la casilla está vacía
+WHERE pais IS NOT NULL      -- la casilla tiene algo</code></pre>
+  <p class="tip"><b>Ojo:</b> para preguntar si algo está vacío se usa siempre <code>IS NULL</code>, nunca <code>= NULL</code> (con <code>=</code> no te sale nada).</p></div>
+
+  <div class="card"><h3>LIKE: buscar por partes del texto</h3>
+  <ul><li><code>%</code> = cualquier cantidad de letras (incluso ninguna).</li><li><code>_</code> = exactamente <b>una</b> letra.</li></ul>
+<pre><code>WHERE nombre LIKE 'Char%'    -- empieza por "Char"
+WHERE nombre LIKE '%chu%'    -- contiene "chu"
+WHERE nombre LIKE '%ite'     -- termina en "ite"
+WHERE nombre LIKE '_e%'      -- la 2ª letra es "e"</code></pre>
+  <p class="tip">Es como el ejercicio de buscar nombres por letra de clase, pero sin bucle: lo hace la base de datos.</p></div>
+
+  <div class="card"><h3>ORDER BY, LIMIT y DISTINCT</h3>
+<pre><code>SELECT * FROM pokemon ORDER BY ataque DESC;   -- de mayor a menor
+SELECT * FROM pokemon ORDER BY nombre;        -- ASC (de menor a mayor) por defecto
+SELECT * FROM pokemon ORDER BY tipo, ataque DESC;  -- por tipo y, dentro de cada tipo, por ataque
+SELECT * FROM pokemon LIMIT 5;                -- solo las 5 primeras filas
+SELECT DISTINCT tipo FROM pokemon;            -- cada tipo una sola vez</code></pre>
+  <p class="tip"><b>Top 3:</b> <code>ORDER BY ataque DESC LIMIT 3</code> = los 3 con más ataque.</p></div>
+
+  <div class="card"><h3>Funciones de texto</h3>
+  <div class="tbl"><table>
+    <tr><th>Función</th><th>Qué hace</th><th>En JS sería…</th></tr>
+    <tr><td><code>UPPER(texto)</code> / <code>LOWER(texto)</code></td><td>Todo en mayúsculas / minúsculas</td><td><code>.toUpperCase()</code> / <code>.toLowerCase()</code></td></tr>
+    <tr><td><code>CHAR_LENGTH(texto)</code></td><td>Cuántas letras tiene</td><td><code>.length</code></td></tr>
+    <tr><td><code>LENGTH(texto)</code></td><td>Cuántos <b>bytes</b> ocupa (ver ojo abajo)</td><td></td></tr>
+    <tr><td><code>CONCAT(a, ' ', b)</code></td><td>Junta textos</td><td><code>`${a} ${b}`</code></td></tr>
+    <tr><td><code>TRIM(texto)</code></td><td>Quita los espacios del principio y del final</td><td><code>.trim()</code></td></tr>
+    <tr><td><code>REVERSE(texto)</code></td><td>Le da la vuelta</td><td></td></tr>
+  </table></div>
+<pre><code>SELECT UPPER(nombre), CHAR_LENGTH(nombre) AS letras FROM pokemon;
+SELECT CONCAT(nombre, ' - ', ciudad) AS ficha FROM clase;</code></pre>
+  <p class="tip"><b>Ojo:</b> en MySQL <code>LENGTH</code> cuenta bytes, no letras. Las letras con tilde o la ñ ocupan 2, así que <code>LENGTH('Lucía')</code> da 6. Para contar letras de verdad usa <code>CHAR_LENGTH('Lucía')</code>, que da 5.</p></div>
+
+  <div class="card"><h3>Funciones de agregación</h3>
+  <div class="tbl"><table>
+    <tr><th>Función</th><th>Qué hace</th><th>En JS era…</th></tr>
+    <tr><td><code>COUNT(*)</code></td><td>Cuenta filas</td><td>el contador</td></tr>
+    <tr><td><code>SUM(col)</code></td><td>Suma una columna</td><td>el acumulador</td></tr>
+    <tr><td><code>AVG(col)</code></td><td>Media</td><td>suma / cantidad</td></tr>
+    <tr><td><code>MIN(col)</code> / <code>MAX(col)</code></td><td>Menor / mayor</td><td>el patrón máximo</td></tr>
+    <tr><td><code>ROUND(valor, 2)</code></td><td>Redondea a 2 decimales</td><td><code>.toFixed(2)</code></td></tr>
+    <tr><td><code>AS nombre</code></td><td>Pone nombre a la columna calculada</td><td></td></tr>
+  </table></div>
+<pre><code>SELECT COUNT(*) AS total, ROUND(AVG(ataque), 2) AS media FROM pokemon;</code></pre>
+  <p class="tip"><b>Matiz:</b> <code>COUNT(*)</code> cuenta todas las filas. <code>COUNT(columna)</code> no cuenta las filas donde esa columna está vacía (NULL).</p></div>
+
+  <div class="card"><h3>GROUP BY y HAVING</h3>
+<pre><code>SELECT generacion, COUNT(*) AS total
+FROM pokemon
+GROUP BY generacion
+HAVING total &gt; 5;</code></pre>
+  <ul>
+    <li><b>GROUP BY</b> junta las filas que tienen el mismo valor (por ejemplo, misma generación) y aplica la función a cada grupo.</li>
+    <li><b>WHERE</b> filtra <b>filas</b>, <b>antes</b> de agrupar.</li>
+    <li><b>HAVING</b> filtra <b>grupos</b>, <b>después</b> de agrupar.</li>
+  </ul>
+  <ul>
+    <li>La columna del <code>GROUP BY</code> va también en el <code>SELECT</code>, si no, no sabes de qué grupo es cada número.</li>
+    <li><b>Constrúyelo por pasos:</b> primero el <code>COUNT(*)</code> solo, luego añades el <code>GROUP BY</code>, luego el <code>HAVING</code> y al final el <code>ORDER BY</code>. Si falla, sabes qué paso lo ha roto.</li>
+  </ul>
+  <p class="tip"><b>Matiz:</b> usar el alias en <code>HAVING total &gt; 5</code> funciona en MySQL. En otras bases de datos hay que repetir la función: <code>HAVING COUNT(*) &gt; 5</code>.</p></div>
+
+  <div class="card"><h3>Orden de las partes de una consulta</h3>
+  <p>Se escriben siempre en este orden (las que no uses, te las saltas):</p>
+  <div class="flow"><span>SELECT</span><i>→</i><span>FROM</span><i>→</i><span>JOIN</span><i>→</i><span>WHERE</span><i>→</i><span>GROUP BY</span><i>→</i><span>HAVING</span><i>→</i><span>ORDER BY</span><i>→</i><span>LIMIT</span></div>
+<pre><code>SELECT tipo, AVG(ataque) AS media
+FROM pokemon
+WHERE generacion = 1
+GROUP BY tipo
+HAVING media &gt; 70
+ORDER BY media DESC
+LIMIT 3;</code></pre>
+  <p>En castellano: de los pokémon de la 1ª generación, agrúpalos por tipo, quédate con los tipos cuya media de ataque pase de 70 y enséñame los 3 mejores.</p>
+  <p class="tip"><b>Para acordarte:</b> <b>S</b>i <b>F</b>ulano <b>J</b>uega <b>W</b>ii, <b>G</b>ana <b>H</b>asta <b>O</b>cho <b>L</b>igas (SELECT, FROM, JOIN, WHERE, GROUP BY, HAVING, ORDER BY, LIMIT).</p></div>
+
+  <div class="card"><h3>Diagrama: en qué orden lo procesa la base de datos</h3>
+<div class="diagram"><svg viewBox="0 0 500 378" role="img" aria-label="Orden en el que la base de datos procesa una consulta"><defs><marker id="ah6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fc-arrow"/></marker></defs><rect x="20" y="8" width="120" height="38" rx="8" class="fc-dec"/><text x="80" y="27" class="fc-t fc-m">FROM</text><rect x="150" y="8" width="330" height="38" rx="8" class="fc-box"/><text x="315" y="27" class="fc-t">1. coge la tabla</text><path d="M80,46 L80,62" class="fc-line" marker-end="url(#ah6)"/><rect x="20" y="62" width="120" height="38" rx="8" class="fc-dec"/><text x="80" y="81" class="fc-t fc-m">WHERE</text><rect x="150" y="62" width="330" height="38" rx="8" class="fc-box"/><text x="315" y="81" class="fc-t">2. quita las filas que no cumplen</text><path d="M80,100 L80,116" class="fc-line" marker-end="url(#ah6)"/><rect x="20" y="116" width="120" height="38" rx="8" class="fc-dec"/><text x="80" y="135" class="fc-t fc-m">GROUP BY</text><rect x="150" y="116" width="330" height="38" rx="8" class="fc-box"/><text x="315" y="135" class="fc-t">3. junta las filas en grupos</text><path d="M80,154 L80,170" class="fc-line" marker-end="url(#ah6)"/><rect x="20" y="170" width="120" height="38" rx="8" class="fc-dec"/><text x="80" y="189" class="fc-t fc-m">HAVING</text><rect x="150" y="170" width="330" height="38" rx="8" class="fc-box"/><text x="315" y="189" class="fc-t">4. quita los grupos que no cumplen</text><path d="M80,208 L80,224" class="fc-line" marker-end="url(#ah6)"/><rect x="20" y="224" width="120" height="38" rx="8" class="fc-dec"/><text x="80" y="243" class="fc-t fc-m">SELECT</text><rect x="150" y="224" width="330" height="38" rx="8" class="fc-box"/><text x="315" y="243" class="fc-t">5. elige las columnas y calcula</text><path d="M80,262 L80,278" class="fc-line" marker-end="url(#ah6)"/><rect x="20" y="278" width="120" height="38" rx="8" class="fc-dec"/><text x="80" y="297" class="fc-t fc-m">ORDER BY</text><rect x="150" y="278" width="330" height="38" rx="8" class="fc-box"/><text x="315" y="297" class="fc-t">6. ordena el resultado</text><path d="M80,316 L80,332" class="fc-line" marker-end="url(#ah6)"/><rect x="20" y="332" width="120" height="38" rx="8" class="fc-dec"/><text x="80" y="351" class="fc-t fc-m">LIMIT</text><rect x="150" y="332" width="330" height="38" rx="8" class="fc-box"/><text x="315" y="351" class="fc-t">7. se queda con las primeras n</text></svg></div>
+  <p>Se <b>escribe</b> empezando por <code>SELECT</code>, pero la base de datos lo <b>ejecuta</b> en este otro orden: primero coge la tabla, filtra, agrupa… y elige las columnas casi al final.</p>
+  <p class="tip">Por eso <b>WHERE</b> no puede usar <code>COUNT(*)</code>: cuando se ejecuta WHERE, los grupos todavía no existen. Para filtrar por un recuento se usa <b>HAVING</b>.</p></div>
+
+  <div class="card span2"><h3>Traducir el enunciado a SQL</h3>
+  <p>Antes de escribir, subraya las palabras clave del enunciado. Cada una te dice qué parte de la consulta necesitas:</p>
+  <div class="tbl"><table>
+    <tr><th>Si el enunciado dice…</th><th>Usa…</th></tr>
+    <tr><td>«muestra», «título y nota»</td><td><code>SELECT</code></td></tr>
+    <tr><td>«españolas», «de Netflix», «más de 4 temporadas»</td><td><code>WHERE</code></td></tr>
+    <tr><td>«cuántas»</td><td><code>COUNT(*)</code></td></tr>
+    <tr><td>«media» / «más alta» / «más baja»</td><td><code>AVG()</code> / <code>MAX()</code> / <code>MIN()</code></td></tr>
+    <tr><td>«por género», «cada plataforma»</td><td><code>GROUP BY</code></td></tr>
+    <tr><td>«géneros con más de 4 series»</td><td><code>HAVING</code></td></tr>
+    <tr><td>«de más a menos», «mejor nota»</td><td><code>ORDER BY ... DESC</code></td></tr>
+    <tr><td>«las 5 primeras», «la mejor»</td><td><code>LIMIT</code></td></tr>
+    <tr><td>«sin repetir», «qué géneros hay»</td><td><code>DISTINCT</code></td></tr>
+    <tr><td>un dato que está en otra tabla</td><td><code>JOIN</code></td></tr>
+    <tr><td>«que no tienen ninguna…»</td><td><code>LEFT JOIN</code> + <code>IS NULL</code></td></tr>
+  </table></div>
+<pre><code>-- «Géneros con más de 4 series, de más a menos»
+SELECT genero, COUNT(*) AS total
+FROM series
+GROUP BY genero
+HAVING COUNT(*) &gt; 4
+ORDER BY total DESC;</code></pre>
+  <p class="tip">Es lo mismo que hacías con los enunciados de JS: primero entender qué te piden y en qué orden, luego escribir.</p></div>
+
+  <div class="card span2"><h3>JOIN: juntar varias tablas</h3>
+  <p>Se une por la columna que conecta las tablas: la <b>FK</b> de una con la <b>PK</b> de la otra. En la base de series:</p>
+  <div class="flow"><span>series.plataforma_id → plataformas.id</span><span>valoraciones.usuario_id → usuarios.id</span><span>valoraciones.serie_id → series.id</span></div>
+<pre><code>-- Dos tablas: título + nombre de la plataforma
+SELECT s.titulo, p.nombre
+FROM series s
+JOIN plataformas p ON s.plataforma_id = p.id;
+
+-- Tres tablas: lo que ha valorado Lucía (valoraciones hace de puente)
+SELECT s.titulo, v.puntuacion
+FROM valoraciones v
+JOIN usuarios u ON v.usuario_id = u.id
+JOIN series   s ON v.serie_id   = s.id
+WHERE u.nombre = 'Lucía';
+
+-- «Lo que no tiene pareja»: plataformas sin series
+SELECT p.nombre
+FROM plataformas p
+LEFT JOIN series s ON s.plataforma_id = p.id
+WHERE s.id IS NULL;</code></pre>
+  <ul>
+    <li><code>s</code>, <code>p</code>, <code>u</code>, <code>v</code> son <b>apodos</b> de las tablas, para no escribir el nombre entero. <code>s.titulo</code> = la columna <code>titulo</code> de la tabla <code>series</code>.</li>
+    <li>El <code>ON</code> dice <b>por dónde se cosen</b> las dos tablas: casi siempre FK = PK.</li>
+  </ul>
+  <div class="tbl"><table>
+    <tr><th>Tipo</th><th>Qué devuelve</th><th>Ejemplo: Netflix y HBO tienen series, Filmin no</th></tr>
+    <tr><td><code>JOIN</code></td><td>Solo las filas que tienen pareja en las dos tablas</td><td>Salen Netflix y HBO. Filmin <b>desaparece</b>.</td></tr>
+    <tr><td><code>LEFT JOIN</code></td><td><b>Todas</b> las filas de la tabla de la izquierda (la del <code>FROM</code>); si no tienen pareja, lo de la otra tabla sale como <code>NULL</code></td><td>Salen las tres. Filmin con la serie en <code>NULL</code>, y por eso <code>WHERE s.id IS NULL</code> encuentra justo las que no tienen.</td></tr>
+  </table></div>
+  <p class="tip">Es como los arrays paralelos pero al revés: allí la posición <code>i</code> unía los datos; aquí los une el <b>id</b>.</p></div>
+
+  <div class="card"><h3>Crear la base de datos y las tablas</h3>
+  <p>Crear y cambiar la <b>estructura</b> se llama <b>DDL</b> (<code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>). Meter y cambiar <b>datos</b> es <b>DML</b> (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>) y <b>consultar</b> es <b>DQL</b> (<code>SELECT</code>).</p>
+<pre><code>CREATE DATABASE seriesdb;   -- crea la base de datos
+USE seriesdb;               -- trabaja dentro de ella
+
+CREATE TABLE plataformas (
+  id             INT AUTO_INCREMENT PRIMARY KEY,
+  nombre         VARCHAR(50) NOT NULL UNIQUE,
+  precio_mensual DECIMAL(5,2)
+);
+
+CREATE TABLE series (
+  id            INT AUTO_INCREMENT PRIMARY KEY,
+  titulo        VARCHAR(100) NOT NULL,
+  plataforma_id INT NOT NULL,
+  nota          DECIMAL(3,1),
+  finalizada    BOOLEAN DEFAULT FALSE,
+  FOREIGN KEY (plataforma_id) REFERENCES plataformas(id)
+);</code></pre>
+  <p class="tip">Primero se crea la tabla a la que se apunta (<code>plataformas</code>) y luego la que tiene la FK (<code>series</code>). Al revés da error porque la FK apuntaría a algo que no existe.</p></div>
+
+  <div class="card"><h3>Qué significa cada palabra</h3>
+  <div class="tbl"><table>
+    <tr><th>Palabra</th><th>Qué hace (en sencillo)</th></tr>
+    <tr><td><code>PRIMARY KEY</code> (PK)</td><td>El DNI de cada fila: identifica y no se repite</td></tr>
+    <tr><td><code>AUTO_INCREMENT</code></td><td>El id se pone solo: 1, 2, 3…</td></tr>
+    <tr><td><code>FOREIGN KEY ... REFERENCES</code> (FK)</td><td>Apunta a la PK de otra tabla</td></tr>
+    <tr><td><code>NOT NULL</code></td><td>Obligatorio, no puede quedar vacío</td></tr>
+    <tr><td><code>UNIQUE</code></td><td>No puede repetirse (dos plataformas no se llaman igual)</td></tr>
+    <tr><td><code>DEFAULT</code></td><td>Valor que se pone si no dices otro</td></tr>
+    <tr><td><code>CHECK (...)</code></td><td>Regla que se tiene que cumplir, p. ej. <code>CHECK (nota BETWEEN 0 AND 10)</code></td></tr>
+    <tr><td><code>INT</code> · <code>DECIMAL(3,1)</code> · <code>VARCHAR(n)</code> · <code>BOOLEAN</code> · <code>DATE</code></td><td>Entero · decimal (3 cifras, 1 decimal: hasta 99.9) · texto de hasta n letras · verdadero/falso (se guarda como <code>1</code>/<code>0</code>) · fecha</td></tr>
+    <tr><td><code>FLOAT</code></td><td>Decimal aproximado (pesos, horas). Para dinero mejor <code>DECIMAL</code>, que es exacto. <code>DECIMAL(5,2)</code> llega hasta 999.99</td></tr>
+    <tr><td><code>TEXT</code></td><td>Texto largo sin límite fijo (descripciones, artículos)</td></tr>
+    <tr><td><code>DATE</code></td><td>Fecha, siempre con el formato <code>'AAAA-MM-DD'</code> y entre comillas: <code>'2026-10-21'</code></td></tr>
+    <tr><td><code>ALTER TABLE</code></td><td>Cambia una tabla ya creada, p. ej. <code>ALTER TABLE usuarios ADD COLUMN telefono VARCHAR(20);</code></td></tr>
+    <tr><td><code>DROP TABLE</code></td><td>Borra la tabla <b>entera</b> con todos sus datos</td></tr>
+  </table></div></div>
+
+  <div class="card span2"><h3>Meter, cambiar y borrar datos</h3>
+<pre><code>-- Añadir filas (sin el id: lo pone AUTO_INCREMENT)
+INSERT INTO plataformas (nombre, precio_mensual) VALUES
+  ('Filmin', 7.99),
+  ('Rakuten', 6.99);
+
+-- Cambiar datos: SIEMPRE con WHERE
+UPDATE series SET nota = 9.0 WHERE id = 5;
+
+-- Borrar filas: SIEMPRE con WHERE
+DELETE FROM series WHERE id = 35;</code></pre>
+  <ul>
+    <li><b>Truco:</b> antes haz un <code>SELECT</code> con el mismo <code>WHERE</code> para ver qué filas vas a tocar. Si salen las que quieres, cambias <code>SELECT *</code> por el <code>UPDATE</code> o el <code>DELETE</code>.</li>
+    <li>No puedes borrar una plataforma que tenga series: la FK lo impide para no dejar series "huérfanas". Primero borras o cambias sus series.</li>
+  </ul>
+  <p class="warn"><b>Peligro:</b> un <code>UPDATE</code> o <code>DELETE</code> sin <code>WHERE</code> afecta a <b>todas</b> las filas de la tabla. Es el <code>rm -rf</code> de SQL.</p></div>
+
+  <div class="card span2"><h3>Errores típicos</h3>
+  <div class="tbl"><table>
+    <tr><th>Te sale…</th><th>Por qué</th><th>Solución</th></tr>
+    <tr><td><code>No database selected</code></td><td>No has dicho en qué base de datos trabajas</td><td><code>USE nombre_bd;</code> antes de la consulta (o doble clic en la base de datos en Workbench)</td></tr>
+    <tr><td>Error 1175 (<i>safe update mode</i>)</td><td>Workbench bloquea <code>UPDATE</code>/<code>DELETE</code> que no filtran por la clave</td><td>Usa <code>WHERE id = ...</code>, o <code>SET SQL_SAFE_UPDATES = 0;</code> y al acabar vuelve a ponerlo a <code>1</code></td></tr>
+    <tr><td><code>Unknown column 'Filmin'</code></td><td>Texto sin comillas: cree que es el nombre de una columna</td><td><code>VALUES ('Filmin')</code></td></tr>
+    <tr><td><code>Cannot delete or update a parent row</code></td><td>Intentas borrar algo a lo que apunta una FK</td><td>Borra o cambia antes las filas que dependen de ello</td></tr>
+    <tr><td><code>... isn't in GROUP BY</code></td><td>Hay una columna en el <code>SELECT</code> que no está en el <code>GROUP BY</code> ni dentro de una función</td><td>Añádela al <code>GROUP BY</code> o quítala del <code>SELECT</code></td></tr>
+    <tr><td>0 filas cuando esperabas resultados</td><td>Texto mal escrito, un espacio de más, o condiciones con <code>AND</code> que no se cumplen a la vez</td><td>Prueba el <code>WHERE</code> por partes, o usa <code>LIKE '%texto%'</code> para ver qué hay guardado</td></tr>
+  </table></div>
+  <p class="tip"><b>Matiz:</b> en MySQL, con la configuración normal, <code>'lucia'</code> encuentra también <code>'Lucía'</code>: no distingue mayúsculas ni tildes al comparar textos. En otras bases de datos (o en DB Fiddle con otro motor) sí puede distinguirlas.</p></div>
+
+  <div class="card"><h3>Entorno de práctica y lo que viene</h3>
+  <ul>
+    <li><b>DB Fiddle</b> (db-fiddle.com): a la izquierda (<i>Schema SQL</i>) se crean las tablas con <code>CREATE TABLE</code> y se meten datos con <code>INSERT INTO</code>. A la derecha (<i>Query SQL</i>) se escriben los <code>SELECT</code>.</li>
+    <li><b>Tablas de clase:</b> <code>clase</code> (nombre, edad, ciudad, serie y plataforma favoritas, horas de móvil, mascotas), <code>recetas_cocina</code> (plato, ingredientes, tiempo, dificultad, comensales, tipo), <code>pokemon</code> (ataque, defensa, velocidad, generación, legendario) / <code>tipos</code>, la base de series: <code>series</code>, <code>plataformas</code>, <code>usuarios</code> y <code>valoraciones</code>, y el proyecto <b>Ecoswap</b> (intercambio de productos entre usuarios, con categorías y favoritos).</li>
+    <li><b>MySQL Server</b> (instalado en el ordenador): funciona en el puerto <code>3306</code> con el usuario <code>root</code> y la contraseña que pusiste al instalarlo. Trae dos bases de práctica: <code>sakila</code> (un videoclub: películas, actores, alquileres) y <code>world</code> (países, ciudades e idiomas).</li>
+    <li><b>Desde VS Code:</b> con una extensión de MySQL te conectas con host <code>localhost</code> (o <code>127.0.0.1</code>), puerto <code>3306</code>, usuario <code>root</code> y tu contraseña.</li>
+    <li><b>MySQL Workbench</b> (MySQL instalado en el ordenador): <code>Ctrl+Intro</code> ejecuta la consulta donde está el cursor y <code>Ctrl+Mayús+Intro</code> todo el script. Si un atajo no va, el botón del <b>rayo</b> siempre funciona.</li>
+    <li><b>Siguiente:</b> MongoDB (base de datos NoSQL de documentos) en la nube con MongoDB Atlas.</li>
+  </ul>
+  <p class="tip"><b>Si la IA te da una consulta</b>, léela antes de ejecutarla: busca un <code>UPDATE</code> o <code>DELETE</code> sin <code>WHERE</code>, o un <code>OR 1 = 1</code> (hace que el <code>WHERE</code> se cumpla siempre y afecta a todo). En una base de datos <b>no hay Ctrl+Z</b>.</p>
+  <p class="tip"><b>Para que la IA no se invente columnas:</b> pásale el <code>CREATE TABLE</code> de tus tablas junto con la pregunta. Así sabe los nombres exactos y los tipos.</p>
+  <p class="tip"><b>Patito de goma:</b> si no ves el error, explica la consulta en voz alta línea a línea (a un patito, a quien sea). Suele saltar solo: una coma que falta, <code>temporada</code> en vez de <code>temporadas</code>…</p></div>
+</div>
+</section>
+
+<!-- ============ NODE ============ -->
+<section class="area" id="node" data-a="node">
+<h2>Node.js y API REST</h2>
+<p class="intro">Clase 10 (28/10). Empieza el módulo de Node con Juan: el backend que une lo de SQL con lo de JavaScript. El objetivo de estos días no es pintar una web, es <b>sacar los datos de la base de datos y devolverlos como un array de objetos</b>.</p>
+<div class="grid">
+  <div class="card span2"><h3>Por qué existe una API REST</h3>
+  <ul>
+    <li><b>Antes (hasta ~2010):</b> el backend (PHP, Java…) pedía los datos a la base de datos y él mismo montaba el HTML de la página.</li>
+    <li><b>Llegó el iPhone:</b> la misma tienda necesitaba web <b>y</b> app de móvil (iOS y Android) con la misma base de datos. Hacía falta un equipo para cada cosa: carísimo.</li>
+    <li><b>2010, nace Node.js:</b> saca JavaScript del navegador. Con Node, JS funciona en un servidor (o en un reloj, un dron…).</li>
+    <li><b>La solución, la API REST:</b> un "traductor" en medio, como los intérpretes del Parlamento. El backend ya no devuelve HTML, devuelve <b>datos en JSON</b>, y cualquiera los entiende: la web en React, la app del móvil, una Smart TV o un agente de IA.</li>
+  </ul>
+  <p class="tip"><b>Ejemplo real:</b> la web de la Dragon Ball API enseña a Goku con su foto; si entras en su dirección <code>/api/characters</code> ves los mismos datos pero en crudo, en JSON. Lo que haréis en Node es lo segundo: los datos, sin dibujo.</p></div>
+
+  <div class="card span2"><h3>Diagrama: React → API REST → base de datos</h3>
+<div class="diagram"><svg viewBox="0 0 700 360" role="img" aria-label="React, API REST y base de datos con GET POST PUT DELETE"><defs><marker id="ah10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fc-arrow"/></marker></defs><rect x="10" y="20" width="150" height="320" rx="10" class="fc-dec"/><text x="85.0" y="160.0" class="fc-t" style="font-weight:700">React</text><text x="85.0" y="180.0" class="fc-t">(frontend)</text><text x="85.0" y="200.0" class="fc-t">lo que ves</text><rect x="275" y="20" width="150" height="320" rx="10" class="fc-end"/><text x="350.0" y="160.0" class="fc-t" style="font-weight:700">API REST</text><text x="350.0" y="180.0" class="fc-t">Node + Express</text><text x="350.0" y="200.0" class="fc-t">(backend)</text><rect x="540" y="20" width="150" height="320" rx="10" class="fc-box"/><text x="615.0" y="170.0" class="fc-t" style="font-weight:700">Base de datos</text><text x="615.0" y="190.0" class="fc-t">MySQL / Mongo</text><path d="M160,50 L275,50" class="fc-line" marker-end="url(#ah10)"/><text x="217" y="38" class="fc-lab" text-anchor="middle">verbo + URL</text><path d="M425,50 L540,50" class="fc-line" marker-end="url(#ah10)"/><text x="482" y="38" class="fc-lab" text-anchor="middle">consulta SQL</text><text x="217" y="105" class="fc-t fc-m" style="fill:var(--c-js);font-weight:700">GET</text><text x="482" y="105" class="fc-t fc-m" style="fill:var(--c-js);font-weight:700">SELECT</text><text x="217" y="147" class="fc-t fc-m" style="fill:var(--c-term);font-weight:700">POST</text><text x="482" y="147" class="fc-t fc-m" style="fill:var(--c-term);font-weight:700">INSERT</text><text x="217" y="189" class="fc-t fc-m" style="fill:var(--c-git);font-weight:700">PUT</text><text x="482" y="189" class="fc-t fc-m" style="fill:var(--c-git);font-weight:700">UPDATE</text><text x="217" y="231" class="fc-t fc-m" style="fill:var(--c-sql);font-weight:700">DELETE</text><text x="482" y="231" class="fc-t fc-m" style="fill:var(--c-sql);font-weight:700">DELETE</text><path d="M540,300 L425,300" class="fc-line" marker-end="url(#ah10)"/><text x="482" y="288" class="fc-lab" text-anchor="middle">filas / id / error</text><path d="M275,300 L160,300" class="fc-line" marker-end="url(#ah10)"/><text x="217" y="288" class="fc-lab" text-anchor="middle">respuesta JSON</text></svg></div>
+  <div class="tbl"><table>
+    <tr><th>Verbo HTTP</th><th>En SQL</th><th>Para qué</th><th>Qué devuelve la base de datos</th></tr>
+    <tr><td><code>GET</code></td><td><code>SELECT</code></td><td>leer</td><td>un listado (array de objetos)</td></tr>
+    <tr><td><code>POST</code></td><td><code>INSERT</code></td><td>crear</td><td>el <b>id</b> que le ha dado al nuevo registro (es autoincremental: lo pone ella)</td></tr>
+    <tr><td><code>PUT</code></td><td><code>UPDATE</code></td><td>modificar</td><td>el registro ya actualizado</td></tr>
+    <tr><td><code>DELETE</code></td><td><code>DELETE</code></td><td>borrar</td><td>cuántas filas se han borrado (filas afectadas)</td></tr>
+  </table></div>
+  <p class="tip"><b>Regla de oro: siempre hay que responder algo.</b> Si pagas 4000 € en una tienda y la pantalla se queda en blanco, te da un infarto. Aunque no haya resultados o haya un error, al usuario se le dice algo.</p></div>
+
+  <div class="card"><h3>Petición = verbo + URL</h3>
+  <ul>
+    <li>El frontend pide los datos por <b>HTTPS</b> a una <b>URL</b> de la API, con un <b>verbo</b>: "<code>GET</code> a <code>/api/characters</code>" significa "dame los personajes".</li>
+    <li>La misma URL con otro verbo hace otra cosa: <code>POST</code> a <code>/api/characters</code> sería "crea un personaje".</li>
+  </ul>
+  <p class="tip"><b>APIs públicas y privadas:</b> la del tiempo o la de Dragon Ball las puede usar cualquiera. Las de Instagram o Spotify no: piden usuario, contraseña o un <i>token</i>, y el que hace la API decide qué verbos deja usar (por ejemplo, solo <code>GET</code> para leer).</p></div>
+
+  <div class="card"><h3>Protocolos (las normas para hablar por internet)</h3>
+  <div class="tbl"><table>
+    <tr><th>Protocolo</th><th>Para qué</th></tr>
+    <tr><td><code>HTTP</code> / <code>HTTPS</code></td><td>webs y APIs (HTTPS = cifrado, el candado)</td></tr>
+    <tr><td><code>FTP</code> / <code>SFTP</code></td><td>subir y bajar archivos a un servidor</td></tr>
+    <tr><td><code>SSH</code></td><td>conectarte a otro ordenador por terminal</td></tr>
+    <tr><td><code>DNS</code></td><td>traducir <code>marca.com</code> a una IP</td></tr>
+    <tr><td><code>SMTP</code> / <code>IMAP</code></td><td>enviar / recibir correo</td></tr>
+  </table></div>
+  <p class="tip"><b>Matiz:</b> en clase se dijo que Dropbox y Google Drive usan FTP y que Spotify usa un "protocolo de audio". Hoy en día los tres funcionan por <b>HTTPS</b>; FTP se usa sobre todo para subir archivos a un servidor web.</p></div>
+
+  <div class="card span2"><h3>Síncrono y asíncrono</h3>
+  <ul>
+    <li><b>Síncrono:</b> JS va línea a línea; hasta que no acaba una, no empieza la siguiente.</li>
+    <li><b>El problema:</b> pedir algo a una base de datos o a internet tarda (aunque sean milésimas). Si todo esperase en fila, la web se quedaría congelada: es lo que pasaba antes con las "precargas" de 0 a 100 %.</li>
+    <li><b>Asíncrono:</b> JS encarga la tarea lenta, sigue con lo demás y la recoge cuando llega. En la pestaña <i>Red</i> del navegador, simulando una red 3G, se ve cómo cada imagen carga a su ritmo.</li>
+  </ul>
+<pre><code>setTimeout(() =&gt; {
+    console.log('Hola')
+}, 3000)              // espera 3000 ms = 3 segundos
+
+console.log('Adiós')
+
+// Sale primero "Adiós" y a los 3 segundos "Hola":
+// JS no se queda esperando al setTimeout, sigue con lo siguiente</code></pre>
+  <p class="tip">A veces sí necesitas esperar: si la línea siguiente usa los datos que pediste, tienes que esperar a que lleguen. Para eso están las promesas.</p></div>
+
+  <div class="card span2"><h3>Promesas: resolve, reject, await y try/catch</h3>
+  <p>Una <b>promesa</b> es una tarea que <b>acabará más tarde</b>, bien o mal. Como cuando le encargas algo a alguien y te promete que lo hará.</p>
+<pre><code>function pedirNota(nota) {
+    return new Promise((resolve, reject) =&gt; {
+        if (nota &gt;= 0 &amp;&amp; nota &lt; 5) {
+            resolve('Suspenso')          // resultado esperado
+        } else if (nota &gt;= 5 &amp;&amp; nota &lt;= 10) {
+            resolve('Aprobado')          // resultado esperado
+        } else {
+            reject('Nota no válida')     // algo inesperado: 'Pepe', 100…
+        }
+    })
+}
+
+async function mostrar() {
+    try {
+        const resultado = await pedirNota(7)   // espera a que acabe
+        console.log(resultado)                 // Aprobado
+    } catch (error) {
+        console.log(error)                     // Nota no válida
+    }
+}
+mostrar()</code></pre>
+<div class="diagram"><svg viewBox="0 0 640 250" role="img" aria-label="Cómo acaba una promesa: resolve o reject"><defs><marker id="ah11" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fc-arrow"/></marker></defs><rect x="10" y="95" width="150" height="50" rx="8" class="fc-box"/><text x="85" y="113" class="fc-t fc-m">await pedirNota(7)</text><text x="85" y="132" class="fc-t">(dentro de try)</text><path d="M160,120 L205,120" class="fc-line" marker-end="url(#ah11)"/><polygon points="290,70 375,120 290,170 205,120" class="fc-dec"/><text x="290" y="112" class="fc-t">¿resultado</text><text x="290" y="130" class="fc-t">esperado?</text><path d="M290,70 L290,40 L420,40" class="fc-line" marker-end="url(#ah11)"/><text x="298" y="58" class="fc-lab" text-anchor="start">sí</text><rect x="420" y="15" width="210" height="50" rx="8" class="fc-end"/><text x="525" y="33" class="fc-t fc-m">resolve('Aprobado')</text><text x="525" y="52" class="fc-t">sigue en el try</text><path d="M290,170 L290,200 L420,200" class="fc-line" marker-end="url(#ah11)"/><text x="298" y="188" class="fc-lab" text-anchor="start">no</text><rect x="420" y="175" width="210" height="50" rx="8" class="fc-end"/><text x="525" y="193" class="fc-t fc-m">reject('Nota no válida')</text><text x="525" y="212" class="fc-t">salta al catch</text></svg></div>
+  <div class="tbl"><table>
+    <tr><th>Pieza</th><th>Qué es</th></tr>
+    <tr><td><code>new Promise((resolve, reject) =&gt; { … })</code></td><td>crea la promesa. La estructura es siempre esta.</td></tr>
+    <tr><td><code>resolve(valor)</code></td><td>acaba <b>bien</b>: un resultado <b>esperado</b></td></tr>
+    <tr><td><code>reject(error)</code></td><td>acaba <b>mal</b>: algo <b>inesperado</b></td></tr>
+    <tr><td><code>await</code></td><td>"espera a que la promesa acabe" antes de seguir. Va delante de la función que devuelve la promesa.</td></tr>
+    <tr><td><code>try { } catch { }</code></td><td>lo de <code>resolve</code> sigue por el <code>try</code>; lo de <code>reject</code> salta al <code>catch</code></td></tr>
+  </table></div>
+  <p class="tip"><b>¿Resolve o reject?</b> Un suspenso <b>no</b> es un error: es un resultado esperado (resolve). Si buscas alumnos con nota 5 y no hay ninguno, te llega un <b>array vacío</b>: también resolve. Es <b>reject</b> cuando algo falla: un error de SQL (columna que no existe) o un dato que no tiene sentido ("Pepe"). Quien decide qué es válido eres tú, el que programa.</p>
+  <p class="tip"><b>Ojo:</b> <code>await</code> solo funciona dentro de una función marcada con <code>async</code> (o en archivos que usan <code>import</code>, ver abajo). Si no, da error. Y al usuario no se le enseña el error técnico de MySQL: se le da un mensaje entendible ("Ha habido un problema, inténtalo más tarde").</p>
+  <p class="tip"><b>Otra forma de usarlas:</b> en vez de <code>await</code> + <code>try/catch</code>, también verás <code>pedirNota(7).then(resultado =&gt; console.log(resultado)).catch(error =&gt; console.log(error))</code>. Hace lo mismo: <code>.then</code> recibe lo del <code>resolve</code> y <code>.catch</code> lo del <code>reject</code>.</p>
+  <p class="tip">El profe avisó de que es el concepto más difícil del curso. Lo importante de momento no es <b>crear</b> promesas, sino saber <b>usarlas</b> con <code>await</code>, porque las consultas a la base de datos devuelven promesas.</p></div>
+
+  <div class="card"><h3>npm: proyectos y librerías</h3>
+<pre><code>node -v                 # versión de Node
+npm -v                  # versión de npm (viene con Node)
+
+npm init                # convierte la carpeta en proyecto: crea package.json
+npm install colors      # instala una librería
+npm install express     # el framework para la API (instala también ~65 paquetes que necesita)
+npm install             # reinstala todo lo que diga package.json</code></pre>
+  <ul>
+    <li><b><code>package.json</code>:</b> la ficha del proyecto: nombre, versión, descripción, archivo principal (<code>main</code>), autor y las <b>dependencias</b> (librerías que usa).</li>
+    <li><b><code>node_modules</code>:</b> la carpeta con el código de las librerías. Pesa muchísimo y <b>no se sube a Git</b>.</li>
+    <li><b><code>package-lock.json</code>:</b> apunta las versiones exactas de todo (también las sub-librerías que necesita cada una).</li>
+  </ul>
+  <p class="tip">Si borras <code>node_modules</code> no pasa nada: <code>npm install</code> lee el <code>package.json</code> y lo vuelve a instalar todo. Y si quitas una librería de la lista de <code>dependencies</code>, el siguiente <code>npm install</code> ya no la instala. Por eso a Git se suben <code>package.json</code> y <code>package-lock.json</code>, pero no <code>node_modules</code>. Si te equivocas en algo de <code>npm init</code> (por ejemplo, en <code>main</code>), se cambia a mano en el <code>package.json</code>.</p>
+  <p class="tip"><b>En Windows:</b> si <code>npm -v</code> no responde, seguramente la terminal está en PowerShell. Cámbiala a <b>Git Bash</b> (en Warp: ajustes → sesión → shell por defecto).</p></div>
+
+  <div class="card"><h3>Proyecto gimnasio: carpetas y módulos</h3>
+<pre><code>ejercicio_gimnasio/
+├── data/
+│   └── actividades.js    ← hace de base de datos (un array de objetos)
+├── src/
+│   ├── lib/
+│   │   └── funciones.js  ← funciones para filtrar o añadir
+│   └── rutina.js         ← el programa principal (main)
+└── package.json</code></pre>
+  <p><b>Arquitectura</b> = cómo repartes el proyecto en carpetas para que esté ordenado. Plan del profe: hoy arrays y promesas; mañana el primer servidor con rutas y controladores; después, una base de datos de verdad; al final, una API REST completa.</p>
+  <p>Para que un archivo use lo de otro, se <b>exporta</b> en uno y se <b>importa</b> en el otro (módulos):</p>
+<pre><code>// data/actividades.js
+export const actividades = [ … ]
+
+// src/rutina.js
+import { actividades } from '../data/actividades.js'</code></pre>
+  <p class="tip"><code>../</code> = "sube una carpeta" (de <code>src</code> a <code>ejercicio_gimnasio</code>), como <code>cd ..</code>.</p>
+  <p class="tip"><b>Ojo:</b> para usar <code>import</code> / <code>export</code>, en el <code>package.json</code> tiene que poner <code>"type": "module"</code>. Con <code>"commonjs"</code> (lo que sale por defecto en <code>npm init</code>) se usa la forma antigua, <code>require</code> / <code>module.exports</code>. Si te sale el error <code>Cannot use import statement outside a module</code>, es eso.</p></div>
+</div>
+</section>
+
+<p class="empty" id="empty">No hay nada con ese texto. Prueba con otra palabra.</p>
+</div>
+
+<script>
+// Resaltado sencillo de código JS
+document.querySelectorAll('pre code').forEach(el => {
+  const src = el.textContent;
+  const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const re = /(\/\/.*$|<!--.*?-->|-- .*$)|(`[^`]*`|"[^"\n]*"|'[^'\n]*')|\b(let|const|if|else|switch|case|break|default|function|return|for|of|while|do|SELECT|FROM|WHERE|AND|OR|NOT|IN|BETWEEN|LIKE|ORDER|BY|ASC|DESC|LIMIT|DISTINCT|GROUP|HAVING|AS|JOIN|ON|COUNT|SUM|AVG|MIN|MAX|ROUND|LENGTH|CHAR_LENGTH|UPPER|LOWER|CONCAT|TRIM|REVERSE|FLOAT|TEXT|ADD|COLUMN|async|await|try|catch|new|import|export|from|TRUE|FALSE|LEFT|IS|NULL|CREATE|DATABASE|TABLE|USE|INSERT|INTO|VALUES|UPDATE|SET|DELETE|PRIMARY|FOREIGN|KEY|REFERENCES|AUTO_INCREMENT|UNIQUE|DEFAULT|CHECK|INT|VARCHAR|DECIMAL|BOOLEAN|DATE|ALTER|DROP)\b|\b(\d+(?:\.\d+)?)\b/gm;
+  let out = '', last = 0, m;
+  while ((m = re.exec(src))) {
+    out += esc(src.slice(last, m.index));
+    const cls = m[1] ? 't-com' : m[2] ? 't-str' : m[3] ? 't-kw' : 't-num';
+    out += `<span class="${cls}">${esc(m[0])}</span>`;
+    last = re.lastIndex;
+  }
+  el.innerHTML = out + esc(src.slice(last));
+});
+
+// Buscador
+const q = document.getElementById('q');
+const cards = [...document.querySelectorAll('.card')];
+const areas = [...document.querySelectorAll('section.area')];
+const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+q.addEventListener('input', () => {
+  const t = norm(q.value.trim());
+  cards.forEach(c => c.hidden = t && !norm(c.textContent).includes(t));
+  areas.forEach(a => a.hidden = t && !a.querySelector('.card:not([hidden])'));
+  document.getElementById('empty').style.display = t && !areas.some(a => !a.hidden) ? 'block' : 'none';
+});
+</script>

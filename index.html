@@ -1466,7 +1466,7 @@ npm install             # reinstala todo lo que diga package.json</code></pre>
     <li><b><code>node_modules</code>:</b> la carpeta con el código de las librerías. Pesa muchísimo y <b>no se sube a Git</b>.</li>
     <li><b><code>package-lock.json</code>:</b> apunta las versiones exactas de todo (también las sub-librerías que necesita cada una).</li>
   </ul>
-  <p class="tip">Si borras <code>node_modules</code> no pasa nada: <code>npm install</code> lee el <code>package.json</code> y lo vuelve a instalar todo. Y si quitas una librería de la lista de <code>dependencies</code>, el siguiente <code>npm install</code> ya no la instala. Por eso a Git se suben <code>package.json</code> y <code>package-lock.json</code>, pero no <code>node_modules</code>. Si te equivocas en algo de <code>npm init</code> (por ejemplo, en <code>main</code>), se cambia a mano en el <code>package.json</code>.</p>
+  <p class="tip">Si borras <code>node_modules</code> no pasa nada: <code>npm install</code> lee el <code>package.json</code> y lo vuelve a instalar todo. Y si quitas una librería de la lista de <code>dependencies</code>, el siguiente <code>npm install</code> ya no la instala. Por eso a Git se suben <code>package.json</code> y <code>package-lock.json</code>, pero no <code>node_modules</code>: se crea un archivo <code>.gitignore</code> en la raíz del repo con una línea, <code>node_modules</code>, y Git la ignora (es lo que ha hecho el profe en su repo). Si te equivocas en algo de <code>npm init</code> (por ejemplo, en <code>main</code>), se cambia a mano en el <code>package.json</code>.</p>
   <p class="tip"><b>En Windows:</b> si <code>npm -v</code> no responde, seguramente la terminal está en PowerShell. Cámbiala a <b>Git Bash</b> (en Warp: ajustes → sesión → shell por defecto).</p></div>
 
   <div class="card"><h3>Proyecto gimnasio: carpetas y módulos</h3>
@@ -1480,13 +1480,18 @@ npm install             # reinstala todo lo que diga package.json</code></pre>
 └── package.json</code></pre>
   <p><b>Arquitectura</b> = cómo repartes el proyecto en carpetas para que esté ordenado. Plan del profe: hoy arrays y promesas; mañana el primer servidor con rutas y controladores; después, una base de datos de verdad; al final, una API REST completa.</p>
   <p>Para que un archivo use lo de otro, se <b>exporta</b> en uno y se <b>importa</b> en el otro (módulos):</p>
-<pre><code>// data/actividades.js
-export const actividades = [ … ]
+<pre><code>// data/actividades.js  (los datos del profe)
+export const actividades = [
+    { "id": 1, "nombre": "Spinning", "dia_semana": "lunes",  "hora": "19:00", "plazas": 20 },
+    { "id": 2, "nombre": "Yoga",     "dia_semana": "martes", "hora": "10:00", "plazas": 15 },
+    // … CrossFit, Pilates, Zumba y Boxeo (este solo con 3 plazas)
+]
 
 // src/rutina.js
 import { actividades } from '../data/actividades.js'</code></pre>
   <p class="tip"><code>../</code> = "sube una carpeta" (de <code>src</code> a <code>ejercicio_gimnasio</code>), como <code>cd ..</code>.</p>
-  <p class="tip"><b>Ojo:</b> para usar <code>import</code> / <code>export</code>, en el <code>package.json</code> tiene que poner <code>"type": "module"</code>. Con <code>"commonjs"</code> (lo que sale por defecto en <code>npm init</code>) se usa la forma antigua, <code>require</code> / <code>module.exports</code>. Si te sale el error <code>Cannot use import statement outside a module</code>, es eso.</p></div>
+  <p class="tip"><b>Ojo:</b> para usar <code>import</code> / <code>export</code>, en el <code>package.json</code> tiene que poner <code>"type": "module"</code>. Con <code>"commonjs"</code> (lo que sale por defecto en <code>npm init</code>) se usa la forma antigua, <code>require</code> / <code>module.exports</code>. Si te sale el error <code>Cannot use import statement outside a module</code>, es eso. (En el repo del profe ya está con <code>"module"</code>.)</p>
+  <p class="tip"><b>Dos fallos típicos con <code>import</code>:</b> que al archivo de datos le falte el <code>export</code> delante del <code>const</code> (si no lo exportas, no se puede importar), o que en la ruta falte el <code>.js</code> final. Con <code>"type": "module"</code> la extensión es obligatoria: <code>'../data/actividades.js'</code>, no <code>'../data/actividades'</code>.</p></div>
 </div>
 </section>
 

@@ -96,7 +96,7 @@ svg text{font-family:var(--f-body)}
 
 <div class="wrap">
 <header class="top">
-  <h1><small>202609FSDLIVE · Bootcamp Full Stack · Fundamentos y Lógica · Clases 1 a 10 · Bases de datos (SQL) · Node.js</small>Apuntes de clase</h1>
+  <h1><small>202609FSDLIVE · Bootcamp Full Stack · Fundamentos y Lógica · Clases 1 a 11 · Bases de datos (SQL) · Node.js</small>Apuntes de clase</h1>
   <div class="warn"><b>Regla de oro:</b> el repo del profe no se toca. Trabaja en tu copia.</div>
 </header>
 
@@ -1545,7 +1545,7 @@ DELETE FROM series WHERE id = 35;</code></pre>
 <!-- ============ NODE ============ -->
 <section class="area" id="node" data-a="node">
 <h2>Node.js y API REST</h2>
-<p class="intro">Clase 10 (28/10). Empieza el módulo de Node con Juan: el backend que une lo de SQL con lo de JavaScript. El objetivo de estos días no es pintar una web, es <b>sacar los datos de la base de datos y devolverlos como un array de objetos</b>.</p>
+<p class="intro">Clases 10 y 11 (28 y 29/10). Empieza el módulo de Node con Juan: el backend que une lo de SQL con lo de JavaScript. El objetivo de estos días no es pintar una web, es <b>sacar los datos de la base de datos y devolverlos como un array de objetos</b>. En la clase 11 ya se monta la primera API con Express.</p>
 <div class="grid">
   <div class="card span2 esencial"><h3>Lo esencial</h3>
   <ul>
@@ -1554,6 +1554,9 @@ DELETE FROM series WHERE id = 35;</code></pre>
     <li>Pedir datos tarda: es <b>asíncrono</b>. Una promesa acaba en <code>resolve</code> (esperado) o <code>reject</code> (error).</li>
     <li>Se usa con <code>await</code> dentro de una función <code>async</code>, y <code>try / catch</code> para el error.</li>
     <li>Cada proyecto: <code>npm init</code> (con <code>"type": "module"</code>) · librerías con <code>npm install</code> · <code>export</code> / <code>import</code> con <code>.js</code>.</li>
+    <li><code>find</code> devuelve <b>uno</b> (o <code>undefined</code>); <code>filter</code> devuelve <b>un array</b> (o <code>[]</code>). Para no devolver <code>undefined</code>: <code>resultado || 'No hay resultados'</code>.</li>
+    <li>Express: <code>app.get('/ruta', (req, res) =&gt; res.end('…'))</code> + <code>app.listen(3000)</code> → <code>localhost:3000/ruta</code>. Rutas dinámicas con <code>:param</code> y <code>req.params</code>.</li>
+    <li><code>npm run dev</code> (<code>node --watch</code>) se queda escuchando y recarga al guardar; se para con <b>Ctrl + C</b>.</li>
   </ul></div>
 
   <div class="card span2"><h3>Por qué existe una API REST</h3>
@@ -1686,6 +1689,169 @@ import { actividades } from '../data/actividades.js'</code></pre>
   <p class="tip"><code>../</code> = "sube una carpeta" (de <code>src</code> a <code>ejercicio_gimnasio</code>), como <code>cd ..</code>.</p>
   <p class="tip"><b>Ojo:</b> para usar <code>import</code> / <code>export</code>, en el <code>package.json</code> tiene que poner <code>"type": "module"</code>. Con <code>"commonjs"</code> (lo que sale por defecto en <code>npm init</code>) se usa la forma antigua, <code>require</code> / <code>module.exports</code>. Si te sale el error <code>Cannot use import statement outside a module</code>, es eso. (En el repo del profe ya está con <code>"module"</code>.)</p>
   <p class="tip"><b>Dos fallos típicos con <code>import</code>:</b> que al archivo de datos le falte el <code>export</code> delante del <code>const</code> (si no lo exportas, no se puede importar), o que en la ruta falte el <code>.js</code> final. Con <code>"type": "module"</code> la extensión es obligatoria: <code>'../data/actividades.js'</code>, no <code>'../data/actividades'</code>.</p></div>
+
+  <div class="card span2"><h3>Clase 11 (29/10): resumen</h3>
+  <p>Se termina el gimnasio (las 3 funciones) y se monta la <b>primera API con Express</b>. Lo importante del gimnasio, según Juan, no son las funciones en sí, sino <b>repartir el proyecto en archivos y conectarlos</b>: qué exporto y qué importo. Y el gimnasio todavía <b>no es una API</b>: todo sale por consola, nadie hace una petición HTTP desde el navegador.</p></div>
+
+  <div class="card"><h3>npm: más comandos</h3>
+<pre><code>npm init -y                    # crea package.json sin preguntar nada
+npm install multer             # instala la última versión
+npm install multer@2.0.0       # instala una versión concreta (con @)
+npm uninstall multer           # la quita (de node_modules y de package.json)</code></pre>
+  <ul>
+    <li>Las librerías se buscan en <b>npmjs.com</b>: ahí ves para qué sirve cada una, cómo se instala y sus versiones.</li>
+    <li>¿Por qué instalar una versión vieja? Por los <b>proyectos legacy</b>: proyectos antiguos que siguen con las versiones de su época porque si los actualizas dejan de funcionar. Ojo: npm te avisa si esa versión tiene <b>vulnerabilidades</b> (por eso se actualizó).</li>
+  </ul>
+  <p class="tip"><b>Scripts habituales del <code>package.json</code>:</b> <code>dev</code> (desarrollo), <code>start</code> / <code>build</code> (producción, compilar) y <code>test</code> (pruebas). De momento solo usamos <code>dev</code>.</p></div>
+
+  <div class="card"><h3>Framework y arquitectura</h3>
+  <ul>
+    <li><b>Librería</b> = código de otro que instalas para no hacerlo tú (colors, multer…).</li>
+    <li><b>Framework</b> = una librería grande que te da la estructura entera. <b>Express</b> es el framework de Node para hacer APIs: rutas, peticiones HTTP, conexión a base de datos…</li>
+    <li>Una API se suele repartir en tres partes:
+      <ul>
+        <li><b>Rutas:</b> la URL que se pide (<code>/productos</code>).</li>
+        <li><b>Controladores:</b> la función que decide qué responder.</li>
+        <li><b>Modelos:</b> lo que habla con la base de datos.</li>
+      </ul></li>
+  </ul>
+  <p class="tip">En el gimnasio, <code>funciones.js</code> hace un poco de controlador y <code>actividades.js</code> de base de datos. Lo iremos separando de verdad en las próximas clases.</p></div>
+
+  <div class="card span2"><h3>Gimnasio: cómo se diseña una función</h3>
+  <p>Antes de escribir código, Juan pide pensar dos cosas: <b>¿qué necesito que me den?</b> (los parámetros) y <b>¿qué tengo que devolver?</b> (el <code>return</code>). Si hay que devolver varios datos, se devuelve un <b>objeto</b>.</p>
+<pre><code>// src/lib/funciones.js  (código del profe)
+
+// 1. Dime el nombre de una actividad y te digo qué día y a qué hora es
+export function getDayHourByActivity(activityName, listActivities) {
+    const resultado = listActivities.find(activity =&gt; activity.nombre === activityName)
+    return { dia_semana: resultado.dia_semana, hora: resultado.hora }
+}
+
+// 2. Dime actividad, día y hora y te doy la clase (con sus plazas)
+export const obtenerPlazasPorActividad = (nombre, dia, hora, listaActividades) =&gt; {
+    const resultado = listaActividades.find(actividad =&gt;
+        actividad.nombre === nombre &amp;&amp; actividad.dia_semana === dia &amp;&amp; actividad.hora === hora)
+    return resultado || 'No hay resultados'
+}
+
+// 3. Dime día y hora y te digo qué clases hay
+export function obtenerClasesPorDiaHora(dia_semana, hora, listaActividades) {
+    return listaActividades.filter(actividad =&gt;
+        actividad.dia_semana === dia_semana &amp;&amp; actividad.hora === hora)
+}</code></pre>
+<pre><code>// src/rutina.js
+import { getDayHourByActivity, obtenerPlazasPorActividad, obtenerClasesPorDiaHora } from './lib/funciones.js'
+import { actividades } from '../data/actividades.js'
+
+console.log(getDayHourByActivity('Zumba', actividades))
+console.log(obtenerClasesPorDiaHora('martes', '19:00', actividades))
+console.log(obtenerPlazasPorActividad('Spinning', 'martes', '19:00', actividades))</code></pre>
+  <div class="tbl"><table>
+    <tr><th></th><th><code>find</code></th><th><code>filter</code></th></tr>
+    <tr><td>Devuelve</td><td><b>el primero</b> que cumple (un objeto)</td><td><b>todos</b> los que cumplen (un array)</td></tr>
+    <tr><td>Si no hay ninguno</td><td><code>undefined</code></td><td><code>[]</code> (array vacío)</td></tr>
+    <tr><td>Úsalo cuando…</td><td>solo puede haber uno (una clase concreta)</td><td>puede haber varios (las clases del martes a las 19:00)</td></tr>
+  </table></div>
+  <ul>
+    <li><b><code>resultado || 'No hay resultados'</code>:</b> el <code>||</code> (o) devuelve lo de la izquierda si tiene valor, y si es <code>undefined</code> o <code>null</code>, lo de la derecha. Recuerda la regla de oro: <b>no encontrar nada no es un error</b>, es un resultado no esperado, y al usuario se le dice algo en vez de soltarle un <code>undefined</code>.</li>
+    <li>En la 3 no hay <code>const resultado</code>: si lo único que vas a hacer es devolverlo, puedes poner el <code>return</code> directamente delante.</li>
+    <li><b>El modelo de datos manda:</b> solo puedes preguntar por lo que hay en los objetos. Si las actividades no tuvieran <code>hora</code>, la función 3 no se podría hacer.</li>
+    <li>Juan cambió los datos para que la 3 devuelva algo interesante: <b>Spinning y Yoga los dos el martes a las 19:00</b>. Si te sale <code>[]</code> es que en tu array no hay ninguna clase ese día a esa hora: <b>el resultado es correcto</b>, no está fallando.</li>
+  </ul>
+  <p class="tip"><b>Ojo, la 1 tiene un fallo escondido:</b> si la actividad no existe, <code>find</code> devuelve <code>undefined</code> y <code>resultado.dia_semana</code> revienta (<code>Cannot read properties of undefined</code>). Habría que comprobar antes <code>if (!resultado)</code> y devolver un mensaje, como en la 2.</p></div>
+
+  <div class="card"><h3>Dos formas de escribir una función</h3>
+<pre><code>// Declarativa (declaración de función)
+function sumar(a, b) { return a + b }
+
+// En una constante (expresión de función, aquí con flecha)
+const sumar = (a, b) =&gt; a + b</code></pre>
+  <ul>
+    <li>Las dos funcionan igual y se exportan igual (<code>export</code> delante).</li>
+    <li>Diferencia: la declarativa tiene <b>hoisting</b> ("elevación"): la puedes llamar <b>antes</b> de la línea donde está escrita. La de <code>const</code> no: si la llamas antes, da error.</li>
+  </ul>
+  <p class="tip">En clase se oyó "función expresiva" y "hosting": los nombres correctos son <b>expresión de función</b> y <b>hoisting</b>.</p></div>
+
+  <div class="card"><h3>Fallos que salieron en clase</h3>
+  <ul>
+    <li><b>Mayúsculas:</b> <code>'spinning'</code> ≠ <code>'Spinning'</code> y <code>'zumba'</code> ≠ <code>'Zumba'</code>. Escríbelo igual que en los datos (o compara con <code>.toLowerCase()</code> en los dos lados).</li>
+    <li><b>Propiedades que no existen:</b> <code>activity.time</code> cuando en los datos se llama <code>hora</code> → siempre <code>undefined</code>. Usa los nombres de <b>tu</b> modelo.</li>
+    <li><b><code>actividades</code> vs <code>actividad</code>:</b> dentro del <code>find</code>/<code>filter</code> se usa el elemento (singular), no el array entero.</li>
+    <li><code>rutina.js</code> metido dentro de <code>lib</code>, o el <code>"type"</code> sin cambiar a <code>"module"</code>.</li>
+    <li>Una ruta con un punto delante (<code>'.nombre'</code>) → <code>Cannot GET</code>. Es <code>'/nombre'</code>.</li>
+    <li><b>Visual Studio</b> (morado, para C# y Unity) no es <b>Visual Studio Code</b> (azul, el nuestro).</li>
+  </ul>
+  <p class="tip">Consejo de Juan: en clase pregúntale a él, pero cuando estés solo y te salga un error, pásaselo a la IA para que te <b>explique</b> qué falla.</p></div>
+
+  <div class="card span2"><h3>Primera API con Express</h3>
+<pre><code>mkdir mi_primer_apirest &amp;&amp; cd mi_primer_apirest
+npm init -y
+npm install express
+# en package.json: "type": "module" y el script "dev"
+# en la raíz: crear index.js</code></pre>
+<pre><code>// index.js
+import express from 'express'     // sin llaves: importo TODO Express
+const app = express()              // creo la aplicación
+
+app.get('/saludo', (req, res) =&gt; {
+    res.end('Hola como estan los maquinas')
+})
+
+app.get('/nombre', (req, res) =&gt; {
+    res.end('Juan Antonio')
+})
+
+app.listen(3000, () =&gt; {           // levanto el servidor en el puerto 3000
+    console.log('Servidor funcionando')
+})</code></pre>
+<div class="diagram"><svg viewBox="0 0 700 200" role="img" aria-label="Petición desde el navegador a una ruta de Express y su respuesta"><defs><marker id="ah12" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fc-arrow"/></marker></defs><rect x="10" y="40" width="170" height="120" rx="10" class="fc-dec"/><text x="95" y="90" class="fc-t" style="font-weight:700">Navegador</text><text x="95" y="112" class="fc-t fc-m">localhost:3000/saludo</text><rect x="265" y="40" width="170" height="120" rx="10" class="fc-end"/><text x="350" y="80" class="fc-t" style="font-weight:700">Express</text><text x="350" y="102" class="fc-t fc-m">app.listen(3000)</text><text x="350" y="124" class="fc-t">¿hay ruta /saludo?</text><rect x="520" y="40" width="170" height="120" rx="10" class="fc-box"/><text x="605" y="80" class="fc-t" style="font-weight:700">Función</text><text x="605" y="102" class="fc-t fc-m">(req, res) =&gt; …</text><text x="605" y="124" class="fc-t fc-m">res.end('Hola…')</text><path d="M180,70 L265,70" class="fc-line" marker-end="url(#ah12)"/><text x="222" y="60" class="fc-lab" text-anchor="middle">GET</text><path d="M435,70 L520,70" class="fc-line" marker-end="url(#ah12)"/><text x="477" y="60" class="fc-lab" text-anchor="middle">req</text><path d="M520,135 L435,135" class="fc-line" marker-end="url(#ah12)"/><path d="M265,135 L180,135" class="fc-line" marker-end="url(#ah12)"/><text x="350" y="190" class="fc-lab" text-anchor="middle">respuesta (res) → se ve en el navegador</text></svg></div>
+  <div class="tbl"><table>
+    <tr><th>Pieza</th><th>Qué es</th></tr>
+    <tr><td><code>app.get('/saludo', función)</code></td><td>una <b>ruta</b>: siempre <code>app.VERBO(ruta, función)</code>. Verbos: <code>get</code>, <code>post</code>, <code>put</code>, <code>delete</code>.</td></tr>
+    <tr><td><code>req</code> (request)</td><td>lo que llega <b>en la petición</b> (a veces nada)</td></tr>
+    <tr><td><code>res</code> (response)</td><td>la <b>respuesta</b>. <code>res.end('…')</code> responde y cierra.</td></tr>
+    <tr><td><code>app.listen(3000, …)</code></td><td>"levanta el servicio": se queda escuchando en el puerto 3000</td></tr>
+    <tr><td><code>http://localhost:3000/saludo</code></td><td>la URL en local: <code>localhost</code> + <code>:puerto</code> + ruta. Publicada sería <code>www.midominio.com/saludo</code>.</td></tr>
+  </table></div>
+  <p class="tip"><b>Siempre hay que responder.</b> Si la función solo hace un <code>console.log</code>, el navegador se queda cargando para siempre: la ruta funciona, pero no contesta. Y si pides una ruta que no existe (por ejemplo <code>/</code>), Express contesta <code>Cannot GET /</code>.</p></div>
+
+  <div class="card"><h3><code>--watch</code> y <code>npm run dev</code></h3>
+<pre><code>"scripts": {
+    "dev": "node --watch index.js"
+}</code></pre>
+<pre><code>npm run dev      # = node --watch index.js
+# Ctrl + C       → lo para (Mac y PC) y vuelves a la terminal</code></pre>
+  <ul>
+    <li><code>node index.js</code> ejecuta una vez y te devuelve la terminal.</li>
+    <li><code>node --watch index.js</code> <b>se queda escuchando</b>: cada vez que guardas el archivo, se vuelve a ejecutar solo. Es "levantar un servicio" (como el Live Server).</li>
+    <li>Mientras está levantado, esa terminal no sirve para otra cosa: para hacer <code>ls</code> o <code>git</code>, abre otra o páralo con <b>Ctrl + C</b>.</li>
+  </ul>
+  <p class="tip">El script de <code>test</code> que pone <code>npm init</code> se puede borrar y poner el de <code>dev</code> en su lugar (cuidado con las comas del JSON).</p></div>
+
+  <div class="card"><h3>Rutas estáticas y dinámicas</h3>
+<pre><code>// Estática: siempre la misma URL
+app.get('/nombre', (req, res) =&gt; res.end('Juan Antonio'))
+
+// Dinámica: con dos puntos, la parte cambia
+app.get('/producto/:nombre/:precio', (req, res) =&gt; {
+    console.log(req.params)   // { nombre: 'carne', precio: '100' }
+    res.end(`Mis parámetros son ${req.params.nombre} y ${req.params.precio}`)
+})</code></pre>
+  <ul>
+    <li><code>/producto/carne/100</code> → "Mis parámetros son carne y 100". <code>/producto/raton/69</code> → raton y 69.</li>
+    <li>Sin los <code>:</code>, <code>/producto/nombre/precio</code> sería una ruta estática que solo responde a esas palabras exactas.</li>
+    <li><code>req.params</code> es un <b>objeto</b> con las partes dinámicas. Se usa mucho en buscadores: en PC Componentes, <code>/smartphone-moviles/apple</code> y <code>/…/samsung</code> son la misma ruta con otro parámetro.</li>
+  </ul>
+  <p class="tip"><b>Ojo:</b> lo que llega por <code>req.params</code> son siempre <b>textos</b> (<code>'100'</code>, no <code>100</code>). Si vas a hacer cuentas, pásalo a número con <code>Number()</code>.</p></div>
+
+  <div class="card span2"><h3>Deberes para el finde (29/10)</h3>
+  <p>En el mismo <code>index.js</code>, dos rutas nuevas:</p>
+  <ol>
+    <li><b>Ruta estática</b> que devuelva la <b>fecha y hora actuales</b>: cada vez que la abras tiene que salir la de ese momento. Hay que investigar cómo sacar la fecha en JavaScript.</li>
+    <li><b>Ruta dinámica</b> <code>/pais/:nombre</code> que devuelva la <b>capital</b> de ese país, buscándola en un array de objetos del tipo <code>{ pais: 'España', capital: 'Madrid' }</code>.</li>
+  </ol>
+  <p class="tip"><b>Corrección al repo del profe:</b> ahí aparece <code>arrayPaises = [...]</code> sin <code>const</code>. Con <code>"type": "module"</code> eso da <code>ReferenceError: arrayPaises is not defined</code> y el servidor no arranca. Hay que declararlo: <code>const arrayPaises = [...]</code>. Y si el país no está, recuerda: algo hay que responder.</p>
+  <p class="tip">Además pidió repasar promesas y módulos: la semana que viene "se acelera". Sin clase el lunes 2/11 (puente de Todos los Santos) y, en principio, tampoco el 9/11.</p></div>
 </div>
 </section>
 

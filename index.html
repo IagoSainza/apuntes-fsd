@@ -96,7 +96,7 @@ svg text{font-family:var(--f-body)}
 
 <div class="wrap">
 <header class="top">
-  <h1><small>202609FSDLIVE · Bootcamp Full Stack · Fundamentos y Lógica · Clases 1 a 11 · Bases de datos (SQL) · Node.js</small>Apuntes de clase</h1>
+  <h1><small>202609FSDLIVE · Bootcamp Full Stack · Fundamentos y Lógica · Clases 1 a 12 · Bases de datos (SQL) · Node.js</small>Apuntes de clase</h1>
   <div class="warn"><b>Regla de oro:</b> el repo del profe no se toca. Trabaja en tu copia.</div>
 </header>
 
@@ -1545,7 +1545,7 @@ DELETE FROM series WHERE id = 35;</code></pre>
 <!-- ============ NODE ============ -->
 <section class="area" id="node" data-a="node">
 <h2>Node.js y API REST</h2>
-<p class="intro">Clases 10 y 11 (28 y 29/10). Empieza el módulo de Node con Juan: el backend que une lo de SQL con lo de JavaScript. El objetivo de estos días no es pintar una web, es <b>sacar los datos de la base de datos y devolverlos como un array de objetos</b>. En la clase 11 ya se monta la primera API con Express.</p>
+<p class="intro">Clases 10, 11 y 12 (28/10, 29/10 y 4/11). Empieza el módulo de Node con Juan: el backend que une lo de SQL con lo de JavaScript. El objetivo de estos días no es pintar una web, es <b>sacar los datos de la base de datos y devolverlos como un array de objetos</b>. En la clase 11 se monta la primera API con Express y en la 12 se completa el CRUD (GET, POST, PUT y DELETE).</p>
 <div class="grid">
   <div class="card span2 esencial"><h3>Lo esencial</h3>
   <ul>
@@ -1557,6 +1557,9 @@ DELETE FROM series WHERE id = 35;</code></pre>
     <li><code>find</code> devuelve <b>uno</b> (o <code>undefined</code>); <code>filter</code> devuelve <b>un array</b> (o <code>[]</code>). Para no devolver <code>undefined</code>: <code>resultado || 'No hay resultados'</code>.</li>
     <li>Express: <code>app.get('/ruta', (req, res) =&gt; res.end('…'))</code> + <code>app.listen(3000)</code> → <code>localhost:3000/ruta</code>. Rutas dinámicas con <code>:param</code> y <code>req.params</code>.</li>
     <li><code>npm run dev</code> (<code>node --watch</code>) se queda escuchando y recarga al guardar; se para con <b>Ctrl + C</b>.</li>
+    <li>CRUD: <code>GET</code> buscar · <code>POST</code> crear · <code>PUT</code> actualizar · <code>DELETE</code> borrar. Se prueban con un cliente de APIs (el navegador solo hace GET).</li>
+    <li>Datos por la URL → <code>req.params</code> (siempre texto: <code>Number()</code>). Datos por el cuerpo → <code>req.body</code>, que necesita <code>app.use(express.json())</code>.</li>
+    <li>La función de cada ruta es un <b>controlador</b>; se saca a <code>controllers/</code>, se exporta y se importa en <code>index.js</code>.</li>
   </ul></div>
 
   <div class="card span2"><h3>Por qué existe una API REST</h3>
@@ -1852,6 +1855,197 @@ app.get('/producto/:nombre/:precio', (req, res) =&gt; {
   </ol>
   <p class="tip"><b>Corrección al repo del profe:</b> ahí aparece <code>arrayPaises = [...]</code> sin <code>const</code>. Con <code>"type": "module"</code> eso da <code>ReferenceError: arrayPaises is not defined</code> y el servidor no arranca. Hay que declararlo: <code>const arrayPaises = [...]</code>. Y si el país no está, recuerda: algo hay que responder.</p>
   <p class="tip">Además pidió repasar promesas y módulos: la semana que viene "se acelera". Sin clase el lunes 2/11 (puente de Todos los Santos) y, en principio, tampoco el 9/11.</p></div>
+
+  <div class="card span2"><h3>Clase 12 (4/11): resumen</h3>
+  <p>Se corrigen los deberes y se completa el <b>CRUD</b> con el array de países: <b>GET</b> (buscar), <b>DELETE</b> (borrar), <b>POST</b> (crear) y <b>PUT</b> (actualizar). Aparecen tres cosas nuevas: probar la API con un <b>cliente de APIs</b>, recibir datos por el <b>body</b> y sacar una función a un <b>controlador</b> en otro archivo. La idea de fondo, según Juan: <b>un servidor es un conjunto de rutas, y cada ruta llama a una función (su controlador)</b>.</p>
+  <div class="tbl"><table>
+    <tr><th>Verbo</th><th>Para qué</th><th>En una web es…</th><th>Ruta de clase</th></tr>
+    <tr><td><code>GET</code></td><td>leer / buscar</td><td>buscar o filtrar</td><td><code>/pais/:pais</code></td></tr>
+    <tr><td><code>POST</code></td><td>crear</td><td>un formulario de registro</td><td><code>/new/pais</code></td></tr>
+    <tr><td><code>PUT</code></td><td>actualizar</td><td>un formulario de "editar"</td><td><code>/update/pais/:id</code></td></tr>
+    <tr><td><code>DELETE</code></td><td>borrar</td><td>el botón de borrar</td><td><code>/pais/:id</code></td></tr>
+  </table></div></div>
+
+  <div class="card"><h3>Probar la API: clientes de APIs</h3>
+  <ul>
+    <li>El navegador solo sirve para probar <code>GET</code>. Para <code>POST</code>, <code>PUT</code> y <code>DELETE</code> hace falta un <b>cliente de APIs</b>: eliges el verbo, escribes la URL y, si hace falta, el body.</li>
+    <li>En clase: <b>Fetch Client</b> (extensión de VS Code). Thunder Client ya pide cuenta y <b>Postman</b> es el más famoso, pero es un programa aparte y pesado. Kousha usa <b>EchoAPI</b> y Juan dijo que traería otra alternativa.</li>
+    <li><b>El servidor tiene que estar levantado</b> (<code>npm run dev</code>). Si no, el cliente se queda en "fetching" y acaba en <code>error connect</code>.</li>
+    <li>Si hay un error interno, el servidor se para aunque tengas <code>--watch</code>: <b>Ctrl + C</b> y <code>npm run dev</code> otra vez.</li>
+  </ul>
+  <p class="tip"><b>El fallo de Fetch Client con la ñ:</b> pintaba <code>EspaÃ±a</code>. No era culpa del código: <code>res.json</code> ya manda UTF-8; es el cliente el que lo lee mal. En el navegador sale bien.</p></div>
+
+  <div class="card"><h3><code>res.end</code>, <code>res.send</code> y <code>res.json</code></h3>
+  <div class="tbl"><table>
+    <tr><th></th><th>Qué envía</th></tr>
+    <tr><td><code>res.end('…')</code></td><td>solo texto, sin avisar de la codificación (las tildes pueden salir raras)</td></tr>
+    <tr><td><code>res.send(…)</code></td><td>texto, HTML, y también objetos y arrays; avisa de que va en UTF-8</td></tr>
+    <tr><td><code>res.json(…)</code></td><td><b>datos en JSON</b> (objetos, arrays de objetos). Es lo que usa una API REST</td></tr>
+  </table></div>
+  <p class="tip"><b>Matiz:</b> en un momento Juan dijo que <code>res.send</code> "solo devuelve texto". No es así: <code>res.send(objeto)</code> también funciona (lo convierte a JSON). El que solo acepta texto es <code>res.end</code>. Aun así, para datos usa <code>res.json</code>: deja claro que la respuesta es JSON.</p>
+  <p class="tip"><b>Scripts:</b> el nombre del script es el que va detrás de <code>npm run</code>. Si en <code>package.json</code> se llamara <code>"pepe"</code>, sería <code>npm run pepe</code>.</p></div>
+
+  <div class="card span2"><h3>Rutas: cuándo dos rutas son la misma</h3>
+  <ul>
+    <li>Un parámetro con <code>:</code> es una <b>cajita</b>: admite cualquier cosa. Así que <code>/pais/:nombre</code> y <code>/pais/:id</code> son <b>la misma ruta</b>, aunque se llamen distinto. Con el mismo verbo, Express usa <b>la primera</b> que esté escrita y la otra no se ejecuta nunca.</li>
+    <li>Por eso se pone una parte fija delante: <code>/nombre</code> y <code>/:cosita</code> chocarían, porque <code>nombre</code> cabe en la cajita.</li>
+    <li><b>Ruta = verbo + dirección.</b> Si cambia el verbo, ya es otra ruta: <code>GET /pais/:pais</code> y <code>DELETE /pais/:id</code> conviven sin problema.</li>
+    <li>Lo que llega por <code>req.params</code> es <b>siempre texto</b>. Compruébalo con <code>console.log(typeof id)</code> → <code>string</code>. Para comparar con ids numéricos: <code>Number(req.params.id)</code> (o <code>parseInt</code>).</li>
+  </ul></div>
+
+  <div class="card"><h3>Datos en otro archivo: <code>data.js</code></h3>
+<pre><code>// data.js
+export const arrayPaises = [
+    { id: 1, pais: 'España',   capital: 'Madrid' },
+    { id: 2, pais: 'Francia',  capital: 'Paris' },
+    { id: 3, pais: 'Alemania', capital: 'Berlin' },
+    { id: 4, pais: 'Rusia',    capital: 'Checoslovaquia' }  // mal a propósito: el PUT la cambia a Moscú
+]
+
+// index.js
+import express from 'express'                  // librería entera: sin llaves
+import { arrayPaises, sanitize } from './data.js'  // cosas sueltas de tu archivo: con llaves</code></pre>
+  <ul>
+    <li>Se añade un <b><code>id</code></b> a cada país, como en una tabla de MySQL, para poder borrar y actualizar por id.</li>
+    <li><b>No hay persistencia:</b> lo que añadas o cambies vive en memoria. Al reiniciar el servidor, el array vuelve a ser el de <code>data.js</code>. Guardar de verdad es cosa de la base de datos.</li>
+  </ul></div>
+
+  <div class="card"><h3>Tildes, ñ y la función <code>sanitize</code></h3>
+  <ul>
+    <li>En una URL, los espacios, las tildes y la ñ se <b>codifican</b> (un espacio pasa a ser <code>%20</code>). Por eso Juan insiste en no usarlos en nombres de archivos, carpetas y rutas: guion bajo o medio.</li>
+    <li>Para comparar sin que importen mayúsculas ni tildes, se "limpian" <b>los dos lados</b> antes de comparar:</li>
+  </ul>
+<pre><code>export function sanitize(palabra) {
+    let resultado = palabra.toLowerCase()           // 'Irán' → 'irán'
+    resultado = resultado.replaceAll('á', 'a')      // 'irán' → 'iran'
+    resultado = resultado.replaceAll('é', 'e')
+    resultado = resultado.replaceAll('í', 'i')
+    resultado = resultado.replaceAll('ó', 'o')
+    resultado = resultado.replaceAll('ú', 'u')
+    resultado = resultado.replaceAll('ñ', 'n')
+    return resultado
+}
+
+// en la ruta: se limpia lo que llega Y lo del array
+const data = arrayPaises.find(item => sanitize(item.pais) === sanitize(req.params.pais))</code></pre>
+  <p class="tip"><b>Ojo:</b> si solo limpias lo que llega, <code>'espana'</code> no coincide con <code>'España'</code> del array. El array no se modifica: solo se compara una copia limpia.</p>
+  <p class="tip"><b>Matiz:</b> en realidad la ñ sí se puede mandar en la URL: el navegador la codifica y Express la decodifica sola en <code>req.params</code>. Evitarla es buena costumbre, no una prohibición. La IA propuso otra versión con <code>normalize('NFD')</code>, una expresión regular y <code>trim()</code> (quita espacios al principio y al final); funciona, pero la de <code>replaceAll</code> se entiende mejor.</p></div>
+
+  <div class="card span2"><h3>GET: buscar un país (versión de Juan)</h3>
+<pre><code>app.get('/pais/:pais', (req, res) =&gt; {
+    const country = sanitize(req.params.pais)
+    const data = arrayPaises.find(item =&gt; sanitize(item.pais) === country)
+    if (data !== undefined) {
+        res.json(data)          // { id: 1, pais: 'España', capital: 'Madrid' }
+    } else {
+        res.end('este pais no esta en mi BBDD')
+    }
+})</code></pre>
+  <ul>
+    <li><b>Si <code>find</code> no encuentra nada devuelve <code>undefined</code></b>, y <code>undefined.capital</code> rompe el servidor. Por eso el <code>if</code>: es el "no hay resultados" de cualquier buscador.</li>
+    <li><b>Tres fallos que salieron en clase:</b> la constante se llamaba igual que el parámetro de la función (<code>pais =&gt; pais…</code>) y se liaba, por eso <code>item</code>; comparaba con <code>capital</code> en vez de con <code>pais</code>; y cambió <code>:nombre</code> por <code>:pais</code> en la ruta pero seguía leyendo <code>req.params.nombre</code> (<code>undefined</code>).</li>
+    <li>Con <code>toLowerCase()</code> en los dos lados da igual cómo se escriba. En MySQL no hace falta: por defecto no distingue mayúsculas.</li>
+  </ul></div>
+
+  <div class="card"><h3>DELETE: borrar por id</h3>
+<pre><code>app.delete('/pais/:id', (req, res) =&gt; {
+    const id = Number(req.params.id)
+    const resultado = arrayPaises.filter(pais =&gt; pais.id !== id)
+    res.json(resultado)
+})</code></pre>
+  <ul>
+    <li>Truco típico: <b>borrar = quedarte con todos menos ese</b>. <code>filter</code> devuelve los países cuyo id es distinto.</li>
+    <li><code>pop()</code> borra el último, <code>shift()</code> el primero y <code>splice(posición, 1)</code> uno en una posición, pero para usar <code>splice</code> necesitas saber la posición, no el id.</li>
+  </ul>
+  <p class="tip"><b>Matiz:</b> <code>filter</code> crea un array <b>nuevo</b>; <code>arrayPaises</code> sigue igual, así que si después haces un GET, España sigue ahí. Para borrarlo de verdad del array habría que usar <code>findIndex</code> + <code>splice</code>. Con base de datos se hará un <code>DELETE</code> y luego un <code>SELECT</code>.</p>
+  <p class="tip"><b>Borrado físico y lógico:</b> el físico es el <code>DELETE</code> (desaparece). El lógico es un campo tipo <code>activo</code> a 0 o 1: el usuario "se borra", pero los datos se quedan. Las tiendas, por ley, guardan las compras unos años (Hacienda).</p></div>
+
+  <div class="card"><h3>POST: crear con el body</h3>
+<pre><code>const app = express()
+app.use(express.json())    // configuración global: sin esto, req.body es undefined
+
+app.post('/new/pais', (req, res) =&gt; {
+    const nuevoPais = req.body
+    arrayPaises.push(nuevoPais)
+    res.json(arrayPaises)
+})</code></pre>
+  <ul>
+    <li>Hasta ahora los datos llegaban por la <b>ruta</b> (<code>req.params</code>). Para datos "complejos" (un objeto entero) se usa el <b>cuerpo de la petición</b>: <code>req.body</code>.</li>
+    <li>Es una ruta <b>estática</b>: no lleva <code>:</code>, todo va en el body.</li>
+    <li>En el cliente: verbo <code>POST</code>, pestaña <b>Body → raw/JSON</b>.</li>
+    <li>Así conectan front y back: en React capturarás un formulario (país y capital), montarás este objeto y lo mandarás por POST.</li>
+  </ul>
+<pre><code>{ "id": 5, "pais": "Finlandia", "capital": "Helsinki" }</code></pre>
+  <p class="tip"><b>JSON estricto</b> (el del body): claves y textos con <b>comillas dobles</b>, nada de simples, y <b>sin coma</b> después del último dato. El id aquí va a mano; en MySQL lo pondría solo (autoincremental).</p></div>
+
+  <div class="card span2"><h3>PUT: actualizar (params + body)</h3>
+<div class="diagram"><svg viewBox="0 0 700 230" role="img" aria-label="Una petición PUT lleva el id en la URL y los datos nuevos en el body"><defs><marker id="ah13" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fc-arrow"/></marker></defs><rect x="10" y="20" width="300" height="190" rx="10" class="fc-dec"/><text x="160" y="48" class="fc-t" style="font-weight:700">Petición (cliente de APIs)</text><text x="160" y="85" class="fc-t fc-m">PUT /update/pais/4</text><text x="160" y="105" class="fc-lab" text-anchor="middle">URL: qué país</text><text x="160" y="150" class="fc-t fc-m">{ "capital": "Moscú" }</text><text x="160" y="170" class="fc-lab" text-anchor="middle">Body: qué cambiar</text><rect x="420" y="40" width="270" height="60" rx="8" class="fc-end"/><text x="555" y="66" class="fc-t fc-m">req.params.id → '4'</text><text x="555" y="86" class="fc-t">texto: Number()</text><rect x="420" y="130" width="270" height="60" rx="8" class="fc-end"/><text x="555" y="156" class="fc-t fc-m">req.body.capital</text><text x="555" y="176" class="fc-t">→ 'Moscú'</text><path d="M310,85 L420,70" class="fc-line" marker-end="url(#ah13)"/><path d="M310,150 L420,160" class="fc-line" marker-end="url(#ah13)"/></svg></div>
+<pre><code>app.put('/update/pais/:id', (req, res) =&gt; {
+    const data = req.body                 // lo que quiero cambiar: { capital: 'Moscú' }
+    const id = Number(req.params.id)      // qué país: 4
+
+    const dataPais = arrayPaises.find(pais =&gt; pais.id === id)   // 1. buscarlo por id
+    dataPais.capital = data.capital                              // 2. cambiarle la capital
+    res.json(dataPais)                                           // 3. devolverlo actualizado
+})</code></pre>
+  <ul>
+    <li>Juan pidió los pasos <b>en castellano antes que en código</b>: buscar el país por id → cambiar su capital → responder con el país.</li>
+    <li>Para buscar <b>uno</b> por id: <code>find</code>. <code>filter</code> daría un array.</li>
+    <li>Aquí sí se modifica el array de verdad (mientras el servidor siga encendido), porque <code>find</code> devuelve el objeto original, no una copia.</li>
+  </ul>
+  <p class="tip"><b>Ojo:</b> si el id no existe, <code>dataPais</code> es <code>undefined</code> y <code>dataPais.capital = …</code> rompe el servidor (error 500, <code>Cannot read properties of undefined</code>). Igual que en el GET, habría que comprobar <code>if (dataPais)</code> antes.</p></div>
+
+  <div class="card span2"><h3>Controladores: la función de la ruta, en otro archivo</h3>
+  <p>La función <code>(req, res) =&gt; { … }</code> de cada ruta se llama <b>controlador</b>. Si todas están en <code>index.js</code>, el archivo se hace enorme. Se sacan a una carpeta <code>controllers</code>:</p>
+<pre><code>mi_primer_apirest/
+├── controllers/
+│   └── pais.controller.js
+├── data.js
+├── index.js
+└── package.json</code></pre>
+<pre><code>// controllers/pais.controller.js
+import { arrayPaises } from '../data.js'     // ../ porque data.js está una carpeta más arriba
+
+export const updateCountry = (req, res) =&gt; {
+    const data = req.body
+    const id = Number(req.params.id)
+    const dataPais = arrayPaises.find(pais =&gt; pais.id === id)
+    dataPais.capital = data.capital
+    res.json(dataPais)
+}
+
+// index.js
+import { updateCountry } from './controllers/pais.controller.js'
+
+app.put('/update/pais/:id', updateCountry)   // la ruta solo dice QUÉ función usar</code></pre>
+  <ol>
+    <li>Corta la función entera (de <code>(req, res)</code> hasta su <code>}</code>) y pégala en el controlador.</li>
+    <li>Como es flecha, métela en una <code>const</code> con nombre, y ponle <code>export</code>.</li>
+    <li>Importa en el controlador lo que use y no tenga, aquí <code>arrayPaises</code>, con su <code>.js</code>.</li>
+    <li>En <code>index.js</code>, pon el nombre de la función en la ruta. VS Code te escribe el <code>import</code> solo si eliges la sugerencia.</li>
+  </ol>
+  <p class="tip">Lo siguiente (desde la clase del 5/11): proyecto nuevo con base de datos y carpetas de <b>rutas, modelos y controladores</b>. Dentro de los controladores ya no habrá un array: habrá consultas a MySQL.</p></div>
+
+  <div class="card"><h3>Fallos que salieron en clase</h3>
+  <ul>
+    <li><b>Falta la <code>/</code></b> al principio de la ruta (<code>'new/pais'</code>).</li>
+    <li><b>Faltan los <code>:</code></b> en el parámetro (<code>/update/pais/id</code>).</li>
+    <li><b><code>(res, req)</code> al revés</b>: siempre <code>(req, res)</code>.</li>
+    <li><b>Falta <code>app.use(express.json())</code></b> → <code>req.body</code> es <code>undefined</code>.</li>
+    <li><b>Falta <code>Number()</code></b> → <code>'4' === 4</code> es falso y no encuentra nada.</li>
+    <li>El cliente con un <b>verbo o ruta que no coinciden</b> → <code>Cannot PUT /pais/4</code> (404).</li>
+    <li><b>JSON mal escrito</b> en el body (falta una coma, comillas simples) → <code>is not valid JSON</code>.</li>
+    <li><code>pus</code> o <code>puff</code> en vez de <code>push</code>, y <code>Jason</code> en vez de <code>json</code>.</li>
+    <li>Rutas o <code>app.listen</code> <b>repetidos</b> al copiar varias veces.</li>
+  </ul>
+  <p class="tip">Y la lección del día, que Juan subió como mensaje del commit: <b>si algo falla, avisa al profe</b>. No te quedes dos horas callado.</p></div>
+
+  <div class="card span2"><h3>Deberes para el 5/11</h3>
+  <ol>
+    <li><b>Pasar al controlador todas las funciones de país</b> (<code>pais.controller.js</code>), igual que <code>updateCountry</code>, y enlazarlas en <code>index.js</code>. Las rutas de país tienen que quedar en <b>cuatro líneas</b>, una por ruta. Las de saludo, nombre, producto y fecha se quedan donde están.</li>
+    <li><b>Pregunta para pensar:</b> ¿qué verbo y qué ruta usarías para <b>devolver todo el array de países</b> con sus datos? Hazla tú.</li>
+  </ol>
+  <p class="tip">Juan quiere que lo hagáis "de memoria", sin copiar.</p></div>
 </div>
 </section>
 

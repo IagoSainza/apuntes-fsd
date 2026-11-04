@@ -35,19 +35,66 @@ h1 small{display:block;font:500 13px/1.4 var(--f-body);color:var(--muted);letter
 .warn{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px;color:var(--muted)}
 .warn b{color:var(--bad)}
 
-nav.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-nav.bar a{font:600 13px var(--f-body);text-decoration:none;color:var(--fg);padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface);display:inline-flex;gap:6px;align-items:center}
-nav.bar a::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--dot)}
-nav.bar a:hover,nav.bar a:focus-visible{border-color:var(--dot);outline:none}
+.tools{position:sticky;top:0;z-index:6;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:flex;gap:8px;align-items:center}
+.btn{font:600 13px var(--f-body);padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer;white-space:nowrap}
+.btn:hover,.btn:focus-visible{border-color:var(--accent);outline:none}
 .search{flex:1 1 200px;min-width:0;display:flex}
 .search input{width:100%;font:inherit;padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg)}
 .search input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+main{min-width:0;max-width:880px}
+nav.toc{display:none;flex-direction:column;gap:2px;font-size:14px}
+nav.toc>a{font:600 14px var(--f-body);text-decoration:none;color:var(--fg);padding:6px 10px;border-radius:8px;display:flex;gap:8px;align-items:center}
+nav.toc>a::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--dot);flex:none}
+nav.toc>a:hover,nav.toc a:focus-visible{background:var(--surface);outline:none}
+nav.toc>a.here{background:var(--surface);box-shadow:inset 3px 0 0 var(--dot)}
+nav.toc .sub{display:flex;flex-direction:column;margin:0 0 6px 27px;border-left:1px solid var(--line)}
+nav.toc .sub a{font-size:13px;color:var(--muted);text-decoration:none;padding:3px 10px}
+nav.toc .sub a:hover{color:var(--fg)}
+nav.toc.show{display:flex;position:fixed;inset:58px 12px auto 12px;max-height:calc(100vh - 80px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px;z-index:7;box-shadow:0 12px 32px rgba(0,0,0,.18)}
+@media (min-width:1000px){
+  .layout{grid-template-columns:240px minmax(0,1fr)}
+  nav.toc,nav.toc.show{display:flex;position:sticky;inset:auto;top:68px;align-self:start;max-height:calc(100vh - 84px);overflow:auto;background:none;border:0;box-shadow:none;padding:6px 0 0}
+  #btnToc{display:none}
+}
+.card>h3{cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0;user-select:none}
+.card>h3::after{content:"";flex:none;width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg);transition:transform .15s}
+.card.open>h3{margin-bottom:10px}
+.card.open>h3::after{transform:rotate(45deg)}
+.card:not(.open){padding:12px 18px}
+.card:not(.open)>.cbody{display:none}
+.card>h3:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:4px}
+.codebox{position:relative}
+.copy{position:absolute;top:6px;right:6px;font:600 11.5px var(--f-body);padding:3px 8px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer;opacity:.85}
+.copy:hover{color:var(--fg);opacity:1}
+.codebox pre{padding-right:64px}
+.totop{position:fixed;right:16px;bottom:16px;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--fg);font-size:18px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.12);display:none;z-index:6}
+.totop.on{display:block}
+.grid>.grp{scroll-margin-top:70px}
+[data-a="rep"]{--dot:#d97706}
+.rp{max-width:680px;padding-bottom:64px}
+.rp-temas{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.rp-tema{font:600 13px var(--f-body);padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.rp-tema.on{background:var(--dot);border-color:var(--dot);color:#fff}
+.rp-prog{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);margin-bottom:10px}
+.rp-bar{flex:1;height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.rp-bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.rp-card{background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--dot);border-radius:14px;padding:22px 22px 24px;min-height:190px}
+.rp-tag{font:600 12px var(--f-body);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:10px}
+.rp-q{font:600 20px/1.35 var(--f-display)}
+.rp-a{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);font-size:16px}
+.rp-btns{display:flex;gap:10px;margin-top:12px}
+.rp-btns .btn{flex:1;padding:12px;font-size:15px;border-radius:10px}
+.rp-main{background:var(--dot);border-color:var(--dot);color:#fff}
+.rp-si{color:var(--ok)}.rp-no{color:var(--bad)}
+.rp-reset{margin-top:14px;background:none;border:0;color:var(--muted);font:500 13px var(--f-body);text-decoration:underline;cursor:pointer;padding:0}
+
 
 section.area{margin-top:34px;scroll-margin-top:70px}
 section.area>h2{font:800 24px/1.1 var(--f-display);margin:0 0 4px;display:flex;align-items:center;gap:10px}
 section.area>h2::before{content:"";width:14px;height:14px;border-radius:4px;background:var(--dot)}
 section.area>p.intro{margin:0 0 14px;color:var(--muted);max-width:70ch}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:14px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:0;border-top:3px solid var(--dot)}
 .card h3{font:600 17px/1.25 var(--f-display);margin:0 0 8px}
 .card p{margin:6px 0}
@@ -101,7 +148,13 @@ svg text{font-family:var(--f-body)}
   <div class="warn"><b>Regla de oro:</b> el repo del profe no se toca. Trabaja en tu copia.</div>
 </header>
 
-<nav class="bar" aria-label="Secciones">
+<div class="tools">
+  <button type="button" class="btn" id="btnToc" aria-controls="toc" aria-expanded="false">☰ Índice</button>
+  <label class="search"><input id="q" type="search" placeholder="Buscar: filter, WHERE, npm, await…" aria-label="Buscar en los apuntes"></label>
+  <button type="button" class="btn" id="btnAll">Abrir todo</button>
+</div>
+<div class="layout">
+<nav class="toc" id="toc" aria-label="Índice">
   <a href="#terminal" data-a="term">Terminal</a>
   <a href="#git" data-a="git">Git</a>
   <a href="#html" data-a="html">HTML + JS</a>
@@ -115,8 +168,9 @@ svg text{font-family:var(--f-body)}
   <a href="#ia" data-a="ia">Estudiar con IA</a>
   <a href="#sql" data-a="sql">SQL</a>
   <a href="#node" data-a="node">Node.js y API</a>
-  <label class="search"><input id="q" type="search" placeholder="Buscar: %, for…of, filter, WHERE, npm, await…" aria-label="Buscar en los apuntes"></label>
+  <a href="#repaso" data-a="rep">Repaso</a>
 </nav>
+<main>
 
 <!-- ============ TERMINAL ============ -->
 <section class="area" id="terminal" data-a="term">
@@ -765,6 +819,8 @@ console.log(filtrarPares(12, 5, 8, 19, 24))   // [12, 8, 24]</code></pre>
     <li>Por pasos: filter → guardas → map → guardas. Mejor que todo en una línea.</li>
   </ul></div>
 
+  <h3 class="grp">1 · Objetos</h3>
+
   <div class="card"><h3>Objetos: clave → valor</h3>
 <pre><code>const producto = {
     nombre: 'Leche desnatada',
@@ -805,6 +861,8 @@ for (let producto of productos) {
     <tr><td>array de objetos <code>[{…}, {…}]</code></td><td>la tabla</td></tr>
   </table></div>
   <p class="tip"><b>Adiós arrays paralelos:</b> en vez de <code>productos[i]</code>, <code>precios[i]</code> y <code>stock[i]</code>, un solo array y <code>productos[i].precio</code>. Con <code>for…of</code> ya no hace falta la <code>i</code>.</p></div>
+
+  <h3 class="grp">2 · Métodos de arrays</h3>
 
   <div class="card span2"><h3>Añadir y quitar: push, pop, unshift, shift</h3>
   <div class="tbl"><table>
@@ -929,6 +987,8 @@ console.log(alReves)    // ['Perro', 'Gato', 'Leon']</code></pre>
     <li><code>reverse()</code>: le da la vuelta <b>al original</b>.</li>
   </ul>
   <p class="tip"><code>toReversed()</code> es reciente: necesita Node 20 o más. Si te da error <code>is not a function</code>, mira tu versión con <code>node -v</code>.</p></div>
+
+  <h3 class="grp">3 · Ejercicios y retos</h3>
 
   <div class="card span2"><h3>Lo que hay que recordar de los ejercicios</h3>
   <ul>
@@ -1214,6 +1274,8 @@ UPDATE tabla SET col1 = 'nuevo' WHERE id = 5;
 DELETE FROM tabla WHERE id = 5;</code></pre>
   <p class="tip">Cambia <code>tabla</code>, <code>columna</code> y <code>condicion</code> por los tuyos. Si no sabes cuál usar, mira "Traducir el enunciado a SQL".</p></div>
 
+  <h3 class="grp">1 · Qué es una base de datos</h3>
+
   <div class="card"><h3>¿Para qué sirve una base de datos?</h3>
   <ul>
     <li><b>Persistencia:</b> los datos sobreviven a recargas, apagones y reinicios.</li>
@@ -1291,6 +1353,8 @@ DELETE FROM tabla WHERE id = 5;</code></pre>
   </ul>
 <pre><code>foto_url VARCHAR(255)   -- 'https://.../zapatillas.jpg'</code></pre>
   <p class="tip"><b>Contraseñas:</b> en los ejemplos de clase se ve <code>password VARCHAR(255)</code> con texto como <code>'1234pass'</code>. Eso vale para practicar, pero en una app de verdad <b>nunca</b> se guarda la contraseña tal cual: el backend guarda un <i>hash</i> (una versión cifrada que no se puede deshacer). Por eso la columna es tan larga.</p></div>
+
+  <h3 class="grp">2 · Consultar datos</h3>
 
   <div class="card"><h3>SELECT: pedir datos</h3>
 <pre><code>SELECT columna1, columna2 FROM nombre_tabla;
@@ -1429,6 +1493,8 @@ HAVING COUNT(*) &gt; 4
 ORDER BY total DESC;</code></pre>
   <p class="tip">Es lo mismo que hacías con los enunciados de JS: primero entender qué te piden y en qué orden, luego escribir.</p></div>
 
+  <h3 class="grp">3 · Varias tablas y subconsultas</h3>
+
   <div class="card span2"><h3>JOIN: juntar varias tablas</h3>
   <p>Se une por la columna que conecta las tablas: la <b>FK</b> de una con la <b>PK</b> de la otra. En la base de series:</p>
   <div class="flow"><span>series.plataforma_id → plataformas.id</span><span>valoraciones.usuario_id → usuarios.id</span><span>valoraciones.serie_id → series.id</span></div>
@@ -1459,6 +1525,48 @@ WHERE s.id IS NULL;</code></pre>
     <tr><td><code>LEFT JOIN</code></td><td><b>Todas</b> las filas de la tabla de la izquierda (la del <code>FROM</code>); si no tienen pareja, lo de la otra tabla sale como <code>NULL</code></td><td>Salen las tres. Filmin con la serie en <code>NULL</code>, y por eso <code>WHERE s.id IS NULL</code> encuentra justo las que no tienen.</td></tr>
   </table></div>
   <p class="tip">Es como los arrays paralelos pero al revés: allí la posición <code>i</code> unía los datos; aquí los une el <b>id</b>.</p></div>
+
+  <h3 class="grp">4 · Crear y modificar</h3>
+
+  <div class="card"><h3>Subconsultas, NOT IN y COUNT(DISTINCT)</h3>
+  <p>Una <b>subconsulta</b> es un <code>SELECT</code> dentro de otro, entre paréntesis. Se ejecuta <b>primero</b> y su resultado lo usa la consulta de fuera.</p>
+<pre><code>-- Devuelve UN valor: pokémon con más ataque que la media
+SELECT nombre, ataque
+FROM pokemon
+WHERE ataque &gt; (SELECT AVG(ataque) FROM pokemon);
+
+-- Devuelve UNA LISTA: plataformas que no tienen ninguna serie
+SELECT nombre
+FROM plataformas
+WHERE id NOT IN (SELECT plataforma_id FROM series);
+
+-- Contar sin repetir: cuántos usuarios distintos han valorado
+SELECT COUNT(DISTINCT usuario_id) AS usuarios
+FROM valoraciones;</code></pre>
+  <ul>
+    <li>Así la media la calcula la consulta: si cambian los datos, se recalcula sola. No escribas el número a mano.</li>
+    <li><b><code>NOT IN</code></b> = "que no esté en esta lista". Lo mismo se hace con <code>LEFT JOIN … WHERE … IS NULL</code>.</li>
+    <li><b><code>COUNT(DISTINCT col)</code></b> cuenta valores <b>distintos</b>. Tras un JOIN, <code>COUNT(*)</code> cuenta filas, y un mismo pedido o usuario puede salir varias veces.</li>
+  </ul>
+  <p class="tip"><b>Ojo con <code>NOT IN</code>:</b> si la subconsulta devuelve algún <code>NULL</code>, no sale nada. Con <code>LEFT JOIN … IS NULL</code> no pasa.</p></div>
+
+  <div class="card"><h3>Subconsulta correlacionada y fechas</h3>
+<pre><code>-- Pokémon con más ataque que la media DE SU generación
+SELECT p.nombre, p.ataque, p.generacion
+FROM pokemon p
+WHERE p.ataque &gt; (SELECT AVG(p2.ataque)
+                  FROM pokemon p2
+                  WHERE p2.generacion = p.generacion);
+
+-- Agrupar por mes: DATE_FORMAT convierte la fecha en '2026-01'
+SELECT DATE_FORMAT(fecha, '%Y-%m') AS mes, COUNT(*) AS total
+FROM pedidos
+GROUP BY mes
+ORDER BY mes;</code></pre>
+  <ul>
+    <li><b>Correlacionada:</b> la subconsulta usa una columna de la de fuera (<code>p.generacion</code>), así que se calcula otra vez para cada fila. Hacen falta dos alias de la misma tabla (<code>p</code> y <code>p2</code>).</li>
+    <li><b><code>DATE_FORMAT(fecha, formato)</code>:</b> <code>%Y</code> año, <code>%m</code> mes, <code>%d</code> día.</li>
+  </ul></div>
 
   <div class="card"><h3>Crear la base de datos y las tablas</h3>
   <p>Crear y cambiar la <b>estructura</b> se llama <b>DDL</b> (<code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>). Meter y cambiar <b>datos</b> es <b>DML</b> (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>) y <b>consultar</b> es <b>DQL</b> (<code>SELECT</code>).</p>
@@ -1515,6 +1623,8 @@ DELETE FROM series WHERE id = 35;</code></pre>
     <li>No puedes borrar una plataforma que tenga series: la FK lo impide para no dejar series "huérfanas". Primero borras o cambias sus series.</li>
   </ul>
   <p class="warn"><b>Peligro:</b> un <code>UPDATE</code> o <code>DELETE</code> sin <code>WHERE</code> afecta a <b>todas</b> las filas de la tabla. Es el <code>rm -rf</code> de SQL.</p></div>
+
+  <h3 class="grp">5 · Errores y herramientas</h3>
 
   <div class="card span2"><h3>Errores típicos</h3>
   <div class="tbl"><table>
@@ -1992,7 +2102,37 @@ app.put('/update/pais/:id', updateCountry)   // la ruta solo dice qué función 
 </div>
 </section>
 
+<section class="area" id="repaso" data-a="rep">
+<h2>Repaso</h2>
+<p class="intro">Tarjetas de pregunta y respuesta. Piensa la respuesta, dale la vuelta y sé sincero: las que marques para repasar te saldrán más a menudo. Tu progreso se guarda en este navegador.</p>
+<div class="rp">
+  <div class="rp-temas" role="group" aria-label="Tema">
+    <button type="button" class="rp-tema on" data-t="all">Todo</button>
+    <button type="button" class="rp-tema" data-t="git">Terminal y Git</button>
+    <button type="button" class="rp-tema" data-t="js">JavaScript</button>
+    <button type="button" class="rp-tema" data-t="arr">Arrays y objetos</button>
+    <button type="button" class="rp-tema" data-t="sql">SQL</button>
+    <button type="button" class="rp-tema" data-t="node">Node y API</button>
+  </div>
+  <div class="rp-prog"><div class="rp-bar"><i id="rpBar"></i></div><span id="rpCount"></span></div>
+  <div class="rp-card" id="rpCard">
+    <div class="rp-tag" id="rpTag"></div>
+    <div class="rp-q" id="rpQ"></div>
+    <div class="rp-a" id="rpA" hidden></div>
+  </div>
+  <div class="rp-btns">
+    <button type="button" class="btn rp-main" id="rpShow">Ver respuesta</button>
+    <button type="button" class="btn rp-no" id="rpNo" hidden>↺ Repasar</button>
+    <button type="button" class="btn rp-si" id="rpSi" hidden>✓ Me la sé</button>
+  </div>
+  <button type="button" class="rp-reset" id="rpReset">Empezar de cero</button>
+</div>
+</section>
+
 <p class="empty" id="empty">No hay nada con ese texto. Prueba con otra palabra.</p>
+</main>
+</div>
+<button type="button" class="totop" id="totop" aria-label="Volver arriba">↑</button>
 </div>
 
 <script>
@@ -2011,16 +2151,139 @@ document.querySelectorAll('pre code').forEach(el => {
   el.innerHTML = out + esc(src.slice(last));
 });
 
-// Buscador
-const q = document.getElementById('q');
+// Tarjetas desplegables: el título abre y cierra
 const cards = [...document.querySelectorAll('.card')];
 const areas = [...document.querySelectorAll('section.area')];
-const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+cards.forEach(c => {
+  const h = c.querySelector(':scope > h3');
+  if (!h) return;
+  const body = document.createElement('div');
+  body.className = 'cbody';
+  while (h.nextSibling) body.appendChild(h.nextSibling);
+  c.appendChild(body);
+  h.tabIndex = 0;
+  h.setAttribute('role', 'button');
+  const set = open => { c.classList.toggle('open', open); h.setAttribute('aria-expanded', open); };
+  set(c.classList.contains('esencial'));
+  c._set = set;
+  h.addEventListener('click', () => set(!c.classList.contains('open')));
+  h.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); h.click(); } });
+});
+
+// Abrir / cerrar todo
+const btnAll = document.getElementById('btnAll');
+btnAll.addEventListener('click', () => {
+  const open = btnAll.textContent === 'Abrir todo';
+  cards.forEach(c => c._set && c._set(open || c.classList.contains('esencial')));
+  btnAll.textContent = open ? 'Cerrar todo' : 'Abrir todo';
+});
+
+// Botón de copiar en cada bloque de código
+document.querySelectorAll('pre').forEach(pre => {
+  const box = document.createElement('div');
+  box.className = 'codebox';
+  pre.parentNode.insertBefore(box, pre);
+  box.appendChild(pre);
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'copy'; b.textContent = 'Copiar';
+  b.addEventListener('click', async () => {
+    const txt = pre.innerText;
+    try { await navigator.clipboard.writeText(txt); }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(pre); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); document.execCommand('copy'); sel.removeAllRanges(); }
+    b.textContent = '¡Copiado!';
+    setTimeout(() => b.textContent = 'Copiar', 1400);
+  });
+  box.appendChild(b);
+});
+
+// Índice: subapartados de cada sección y sección activa
+const toc = document.getElementById('toc');
+toc.querySelectorAll(':scope > a').forEach(a => {
+  const sec = document.querySelector(a.getAttribute('href'));
+  const grps = sec ? [...sec.querySelectorAll('.grp')] : [];
+  if (!grps.length) return;
+  const sub = document.createElement('div');
+  sub.className = 'sub';
+  grps.forEach((g, i) => {
+    g.id = g.id || sec.id + '-' + (i + 1);
+    const l = document.createElement('a');
+    l.href = '#' + g.id;
+    l.textContent = g.textContent.replace(/^\d+\s*·\s*/, '');
+    sub.appendChild(l);
+  });
+  a.after(sub);
+});
+const btnToc = document.getElementById('btnToc');
+btnToc.addEventListener('click', () => {
+  const on = toc.classList.toggle('show');
+  btnToc.setAttribute('aria-expanded', on);
+});
+toc.addEventListener('click', e => { if (e.target.closest('a')) { toc.classList.remove('show'); btnToc.setAttribute('aria-expanded', false); } });
+const links = new Map([...toc.querySelectorAll(':scope > a')].map(a => [a.getAttribute('href').slice(1), a]));
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { links.forEach(l => l.classList.remove('here')); links.get(e.target.id)?.classList.add('here'); }
+}), { rootMargin: '-30% 0px -65% 0px' });
+areas.forEach(a => io.observe(a));
+
+// Volver arriba
+const totop = document.getElementById('totop');
+addEventListener('scroll', () => totop.classList.toggle('on', scrollY > 900), { passive: true });
+totop.addEventListener('click', () => scrollTo({ top: 0 }));
+
+// Buscador: enseña y abre solo las tarjetas que tienen la palabra
+const q = document.getElementById('q');
+const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+let saved = null;
 q.addEventListener('input', () => {
   const t = norm(q.value.trim());
-  cards.forEach(c => c.hidden = t && !norm(c.textContent).includes(t));
+  if (t && !saved) saved = cards.map(c => c.classList.contains('open'));
+  if (!t && saved) { cards.forEach((c, i) => c._set && c._set(saved[i])); saved = null; }
+  cards.forEach(c => {
+    const hit = !t || norm(c.textContent).includes(t);
+    c.hidden = !hit;
+    if (t && hit && c._set) c._set(true);
+  });
   document.querySelectorAll('.grp').forEach(g => g.hidden = !!t);
   areas.forEach(a => a.hidden = t && !a.querySelector('.card:not([hidden])'));
   document.getElementById('empty').style.display = t && !areas.some(a => !a.hidden) ? 'block' : 'none';
 });
+
+// Repaso: tarjetas de pregunta y respuesta
+(() => {
+  const P = [{"t": "git", "q": "¿Qué hace <code>cd ..</code>?", "a": "Sube una carpeta (a la carpeta de arriba)."}, {"t": "git", "q": "¿Cómo creas una carpeta y cómo ves qué hay en la carpeta actual?", "a": "<code>mkdir nombre</code> crea la carpeta. <code>ls</code> lista lo que hay."}, {"t": "git", "q": "¿Qué hace <code>code .</code>?", "a": "Abre en VS Code la carpeta en la que estás (el punto = esta carpeta)."}, {"t": "git", "q": "¿Cuál es el ciclo de Git que harás siempre?", "a": "<code>git add .</code> → <code>git commit -m \"mensaje\"</code> → <code>git push</code>."}, {"t": "git", "q": "¿Qué diferencia hay entre <code>commit</code> y <code>push</code>?", "a": "<code>commit</code> guarda una foto de los cambios <b>en tu ordenador</b>. <code>push</code> la sube a GitHub."}, {"t": "git", "q": "¿Para qué sirve <code>git pull</code>?", "a": "Para traerte a tu ordenador los cambios que hay en GitHub (por ejemplo, lo nuevo del repo del profe)."}, {"t": "git", "q": "¿Qué hace <code>git clone URL</code>?", "a": "Descarga un repositorio de GitHub en una carpeta nueva, ya conectada con GitHub."}, {"t": "git", "q": "¿Cómo creas una rama nueva y te cambias a ella?", "a": "<code>git checkout -b nombre</code> (o <code>git switch -c nombre</code>)."}, {"t": "git", "q": "¿Para qué sirve <code>git status</code>?", "a": "Para ver qué archivos han cambiado y cuáles están preparados para el commit."}, {"t": "git", "q": "¿Qué va en el archivo <code>.gitignore</code>?", "a": "Lo que Git debe ignorar y no subir, por ejemplo <code>node_modules</code> o el <code>.env</code> con contraseñas."}, {"t": "js", "q": "¿Qué diferencia hay entre <code>let</code> y <code>const</code>?", "a": "<code>let</code> se puede cambiar después. <code>const</code> no se puede reasignar."}, {"t": "js", "q": "¿Qué diferencia hay entre <code>=</code>, <code>==</code> y <code>===</code>?", "a": "<code>=</code> asigna. <code>==</code> compara sin mirar el tipo. <code>===</code> compara valor <b>y</b> tipo (el que se usa siempre)."}, {"t": "js", "q": "¿Qué devuelve <code>7 % 2</code> y para qué se usa?", "a": "Devuelve <b>1</b>, el resto de dividir. Se usa para saber si un número es par (<code>n % 2 === 0</code>)."}, {"t": "js", "q": "¿Qué significan <code>&amp;&amp;</code>, <code>||</code> y <code>!</code>?", "a": "<code>&amp;&amp;</code> = y (las dos). <code>||</code> = o (alguna). <code>!</code> = no (le da la vuelta)."}, {"t": "js", "q": "¿Cómo metes una variable dentro de un texto?", "a": "Con comillas invertidas y <code>${}</code>: <code>`Hola ${nombre}`</code>."}, {"t": "js", "q": "¿Importa el orden de los <code>else if</code>?", "a": "Sí. Se ejecuta el <b>primero</b> que se cumple y los demás ya no se miran. Ve de lo más concreto a lo más general."}, {"t": "js", "q": "¿Cómo se escribe un <code>if/else</code> en una línea?", "a": "Con el ternario: <code>condicion ? siQueSi : siQueNo</code>."}, {"t": "js", "q": "¿Cuándo usas <code>for</code> y cuándo <code>while</code>?", "a": "<code>for</code> cuando sabes cuántas vueltas. <code>while</code> cuando repites <b>mientras</b> se cumpla algo y no sabes cuántas."}, {"t": "js", "q": "En un bucle de búsqueda, ¿por qué la posición empieza en <code>-1</code>?", "a": "Porque ningún índice puede ser -1: si al final sigue valiendo -1, significa <b>no encontrado</b> (valor centinela)."}, {"t": "js", "q": "¿Qué diferencia hay entre <code>console.log</code> y <code>return</code>?", "a": "<code>console.log</code> muestra en la terminal. <code>return</code> devuelve el valor a quien llamó a la función, para guardarlo o usarlo."}, {"t": "js", "q": "¿Qué devuelve una función que no tiene <code>return</code>?", "a": "<code>undefined</code>."}, {"t": "js", "q": "¿Qué es un parámetro y qué es un argumento?", "a": "Parámetro: el hueco de la definición (<code>function doble(numero)</code>). Argumento: el valor que mandas al llamarla (<code>doble(5)</code>)."}, {"t": "js", "q": "Si llamas <code>restar(10, 3)</code> a <code>function restar(a, b)</code>, ¿qué vale <code>a</code>?", "a": "<b>10</b>. Los argumentos entran en los parámetros <b>por orden</b>."}, {"t": "js", "q": "¿Qué es el hoisting?", "a": "Poder llamar a una función declarada con <code>function</code> antes de la línea donde está escrita. Las de <code>const</code> no lo permiten."}, {"t": "js", "q": "Convierte <code>function doble(n) { return n * 2 }</code> en flecha.", "a": "<code>const doble = n =&gt; n * 2</code>"}, {"t": "arr", "q": "¿Cuál es el índice del primer elemento de un array?", "a": "El <b>0</b>. El último es <code>array.length - 1</code>."}, {"t": "arr", "q": "¿Cómo añades al final de un array y cómo quitas el último?", "a": "<code>push(elemento)</code> añade al final. <code>pop()</code> quita el último."}, {"t": "arr", "q": "¿Qué hacen <code>shift()</code> y <code>unshift()</code>?", "a": "<code>shift()</code> quita el primero. <code>unshift(x)</code> añade al principio."}, {"t": "arr", "q": "¿Qué devuelve <code>find</code> y qué devuelve si no encuentra nada?", "a": "El <b>primer</b> elemento que cumple la condición. Si no hay ninguno, <code>undefined</code>."}, {"t": "arr", "q": "¿Qué devuelve <code>filter</code> y qué devuelve si no encuentra nada?", "a": "Un <b>array</b> con todos los que cumplen. Si no hay ninguno, <code>[]</code>."}, {"t": "arr", "q": "¿Para qué sirve <code>map</code>?", "a": "Para transformar cada elemento y obtener un array nuevo del mismo tamaño (por ejemplo, solo los nombres)."}, {"t": "arr", "q": "¿Cómo lees la propiedad <code>capital</code> de un objeto <code>pais</code>?", "a": "<code>pais.capital</code> (o <code>pais['capital']</code>)."}, {"t": "arr", "q": "¿Cómo borras de un array el elemento con <code>id</code> 2 usando <code>filter</code>?", "a": "<code>lista.filter(e =&gt; e.id !== 2)</code>: te quedas con todos menos ese."}, {"t": "arr", "q": "¿Qué hace <code>resultado || 'No hay resultados'</code>?", "a": "Si <code>resultado</code> tiene valor, lo devuelve. Si es <code>undefined</code> o <code>null</code>, devuelve el texto."}, {"t": "arr", "q": "¿Por qué <code>'spinning' === 'Spinning'</code> es falso y cómo lo arreglas?", "a": "Porque distingue mayúsculas. Pasa los dos lados a minúsculas: <code>a.toLowerCase() === b.toLowerCase()</code>."}, {"t": "arr", "q": "¿Para qué sirve <code>reduce</code>?", "a": "Para juntar todo el array en <b>un solo valor</b>, por ejemplo la suma de todos los precios."}, {"t": "sql", "q": "¿Qué es una clave primaria (PK)?", "a": "La columna que identifica cada fila sin repetirse, normalmente <code>id</code> autoincremental."}, {"t": "sql", "q": "¿Qué es una clave ajena (FK)?", "a": "Una columna que apunta a la PK de otra tabla, por ejemplo <code>productos.categoria_id → categorias.id</code>."}, {"t": "sql", "q": "¿Cuál es el orden de las partes de un SELECT?", "a": "<code>SELECT</code> → <code>FROM</code> → <code>JOIN</code> → <code>WHERE</code> → <code>GROUP BY</code> → <code>HAVING</code> → <code>ORDER BY</code> → <code>LIMIT</code>."}, {"t": "sql", "q": "¿Qué diferencia hay entre <code>WHERE</code> y <code>HAVING</code>?", "a": "<code>WHERE</code> filtra <b>filas</b> antes de agrupar. <code>HAVING</code> filtra <b>grupos</b> después del <code>GROUP BY</code> (ahí sí puedes usar <code>COUNT</code>, <code>AVG</code>…)."}, {"t": "sql", "q": "¿Qué hace <code>BETWEEN 20 AND 100</code>?", "a": "Entre 20 y 100, <b>los dos incluidos</b>. Es lo mismo que <code>&gt;= 20 AND &lt;= 100</code>."}, {"t": "sql", "q": "¿Qué hace <code>IN ('pendiente', 'enviado')</code>?", "a": "Que el valor sea <b>alguno</b> de la lista. Es como varios <code>OR</code>."}, {"t": "sql", "q": "¿Qué buscan <code>LIKE 'A%'</code> y <code>LIKE '%a%'</code>?", "a": "<code>'A%'</code>: que empiece por A. <code>'%a%'</code>: que contenga una a en cualquier sitio."}, {"t": "sql", "q": "¿Para qué sirve <code>AS</code>?", "a": "Para poner un alias: renombrar una columna (<code>c.nombre AS categoria</code>) o una tabla (<code>productos p</code>)."}, {"t": "sql", "q": "¿Qué diferencia hay entre <code>JOIN</code> y <code>LEFT JOIN</code>?", "a": "<code>JOIN</code> solo deja las filas con pareja en las dos tablas. <code>LEFT JOIN</code> deja todas las de la izquierda; las que no tienen pareja salen con <code>NULL</code>."}, {"t": "sql", "q": "¿Cómo encuentras lo que <b>no</b> tiene pareja en otra tabla?", "a": "<code>LEFT JOIN … WHERE otra.id IS NULL</code>, o <code>WHERE id NOT IN (SELECT …)</code>."}, {"t": "sql", "q": "¿Por qué se escribe <code>IS NULL</code> y no <code>= NULL</code>?", "a": "Porque <code>NULL</code> es \"sin valor\" y no se puede comparar con <code>=</code>: nunca da verdadero."}, {"t": "sql", "q": "¿Qué es una subconsulta?", "a": "Un <code>SELECT</code> dentro de otro, entre paréntesis. Se ejecuta primero, por ejemplo <code>WHERE precio &gt; (SELECT AVG(precio) FROM productos)</code>."}, {"t": "sql", "q": "¿Qué diferencia hay entre <code>COUNT(*)</code> y <code>COUNT(DISTINCT col)</code>?", "a": "<code>COUNT(*)</code> cuenta filas. <code>COUNT(DISTINCT col)</code> cuenta valores distintos, sin repetir."}, {"t": "sql", "q": "Con <code>GROUP BY</code>, ¿qué columnas pueden ir en el SELECT?", "a": "Las del <code>GROUP BY</code> y las que van dentro de <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MIN</code> o <code>MAX</code>."}, {"t": "sql", "q": "¿Qué es peligroso de un <code>UPDATE</code> o <code>DELETE</code> sin <code>WHERE</code>?", "a": "Que cambia o borra <b>todas</b> las filas de la tabla."}, {"t": "sql", "q": "¿Qué es un borrado lógico?", "a": "No borrar la fila, sino marcarla con un campo (por ejemplo <code>activo = 0</code>). Los datos se quedan guardados."}, {"t": "node", "q": "¿Qué es una API REST?", "a": "Un servidor que recibe peticiones (verbo + URL) y devuelve <b>datos en JSON</b>, no páginas."}, {"t": "node", "q": "¿Qué verbo HTTP corresponde a cada parte del CRUD?", "a": "<code>GET</code> leer · <code>POST</code> crear · <code>PUT</code> actualizar · <code>DELETE</code> borrar."}, {"t": "node", "q": "¿Qué diferencia hay entre <code>resolve</code> y <code>reject</code> en una promesa?", "a": "<code>resolve</code>: acaba bien, resultado esperado (sigue en el <code>try</code>). <code>reject</code>: algo inesperado (salta al <code>catch</code>)."}, {"t": "node", "q": "¿Dónde se puede usar <code>await</code>?", "a": "Dentro de una función <code>async</code> (o en un archivo con módulos)."}, {"t": "node", "q": "¿Qué hay que poner en <code>package.json</code> para usar <code>import</code>?", "a": "<code>\"type\": \"module\"</code>."}, {"t": "node", "q": "¿Por qué no se sube <code>node_modules</code> a GitHub y cómo se recupera?", "a": "Porque pesa muchísimo. Con <code>npm install</code> se vuelve a crear a partir del <code>package.json</code>."}, {"t": "node", "q": "¿Qué hace <code>npm run dev</code>?", "a": "Ejecuta el script <code>\"dev\"</code> del <code>package.json</code>, por ejemplo <code>node --watch index.js</code>."}, {"t": "node", "q": "¿Qué hace <code>--watch</code> y cómo paras el servidor?", "a": "Se queda escuchando y se recarga cada vez que guardas. Se para con <b>Ctrl + C</b>."}, {"t": "node", "q": "¿Cuándo se ponen llaves en un <code>import</code>?", "a": "Con llaves para cosas sueltas de un archivo tuyo: <code>import { arrayPaises } from './data.js'</code>. Sin llaves para una librería entera: <code>import express from 'express'</code>."}, {"t": "node", "q": "¿Qué significan <code>./</code> y <code>../</code> en un import?", "a": "<code>./</code> = esta carpeta. <code>../</code> = sube una carpeta."}, {"t": "node", "q": "¿Cómo es siempre una ruta de Express?", "a": "<code>app.verbo('/ruta', (req, res) =&gt; { … })</code>."}, {"t": "node", "q": "¿Qué son <code>req</code> y <code>res</code>?", "a": "<code>req</code>: lo que llega en la petición. <code>res</code>: la respuesta que envías. Siempre en ese orden."}, {"t": "node", "q": "¿Cómo se hace una ruta dinámica y dónde llega el valor?", "a": "Con dos puntos: <code>/pais/:nombre</code>. El valor llega en <code>req.params.nombre</code>."}, {"t": "node", "q": "¿De qué tipo es siempre lo que llega por <code>req.params</code>?", "a": "<b>Texto</b>. Para compararlo con un id numérico: <code>Number(req.params.id)</code>."}, {"t": "node", "q": "¿Qué diferencia hay entre <code>res.end</code>, <code>res.send</code> y <code>res.json</code>?", "a": "<code>end</code>: solo texto. <code>send</code>: texto, HTML u objetos. <code>json</code>: datos en JSON (lo de una API)."}, {"t": "node", "q": "¿Qué pasa si una ruta no responde nada?", "a": "La petición se queda cargando (\"fetching\") para siempre. Siempre hay que responder."}, {"t": "node", "q": "¿Qué hace falta para leer <code>req.body</code>?", "a": "<code>app.use(express.json())</code> después de <code>const app = express()</code>. Sin eso, <code>req.body</code> es <code>undefined</code>."}, {"t": "node", "q": "¿Qué llega por la URL y qué por el body en un PUT?", "a": "Por la URL (<code>req.params</code>), el <b>id</b> de lo que cambias. Por el body (<code>req.body</code>), los <b>datos nuevos</b>."}, {"t": "node", "q": "¿Cómo es un JSON estricto?", "a": "Claves y textos con <b>comillas dobles</b> y sin coma después del último dato: <code>{ \"pais\": \"Perú\", \"capital\": \"Lima\" }</code>."}, {"t": "node", "q": "¿Son la misma ruta <code>GET /pais/:nombre</code> y <code>DELETE /pais/:id</code>?", "a": "No: cambia el verbo. Una ruta es verbo + dirección. Con el mismo verbo sí chocarían, porque <code>:algo</code> admite cualquier cosa."}, {"t": "node", "q": "¿Qué es un controlador?", "a": "La función <code>(req, res) =&gt; { … }</code> de una ruta. Se saca a <code>controllers/</code>, se exporta y se importa en <code>index.js</code>."}, {"t": "node", "q": "¿Para qué sirve un cliente de APIs como Fetch Client o Postman?", "a": "Para probar <code>POST</code>, <code>PUT</code> y <code>DELETE</code>: el navegador solo hace <code>GET</code>."}];
+  const nombres = { git: 'Terminal y Git', js: 'JavaScript', arr: 'Arrays y objetos', sql: 'SQL', node: 'Node y API' };
+  const KEY = 'repaso-fsd';
+  let nivel = {};
+  try { nivel = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
+  const guardar = () => { try { localStorage.setItem(KEY, JSON.stringify(nivel)); } catch (e) {} };
+  const id = p => p.q;
+  let tema = 'all', actual = null;
+  const $ = x => document.getElementById(x);
+  const lista = () => P.filter(p => tema === 'all' || p.t === tema);
+  const peso = p => { const n = nivel[id(p)] ?? -1; return n < 0 ? 3 : n === 0 ? 4 : n === 1 ? 1.2 : 0.3; };
+  function siguiente() {
+    const l = lista().filter(p => p !== actual);
+    let r = Math.random() * l.reduce((s, p) => s + peso(p), 0);
+    actual = l.find(p => (r -= peso(p)) <= 0) || l[0];
+    $('rpTag').textContent = nombres[actual.t];
+    $('rpQ').innerHTML = actual.q;
+    $('rpA').innerHTML = actual.a;
+    $('rpA').hidden = true; $('rpShow').hidden = false; $('rpSi').hidden = true; $('rpNo').hidden = true;
+    progreso();
+  }
+  function progreso() {
+    const l = lista(), ok = l.filter(p => (nivel[id(p)] ?? -1) >= 2).length;
+    $('rpCount').textContent = `Dominadas: ${ok} de ${l.length}`;
+    $('rpBar').style.width = (100 * ok / l.length) + '%';
+  }
+  $('rpShow').addEventListener('click', () => { $('rpA').hidden = false; $('rpShow').hidden = true; $('rpSi').hidden = false; $('rpNo').hidden = false; });
+  $('rpSi').addEventListener('click', () => { nivel[id(actual)] = Math.max(0, nivel[id(actual)] ?? 0) + 1; guardar(); siguiente(); });
+  $('rpNo').addEventListener('click', () => { nivel[id(actual)] = 0; guardar(); siguiente(); });
+  $('rpReset').addEventListener('click', () => { nivel = {}; guardar(); siguiente(); });
+  document.querySelectorAll('.rp-tema').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.rp-tema').forEach(x => x.classList.toggle('on', x === b));
+    tema = b.dataset.t; actual = null; siguiente();
+  }));
+  siguiente();
+})();
 </script>

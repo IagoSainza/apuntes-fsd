@@ -154,6 +154,9 @@ svg text{font-family:var(--f-body)}
 
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 [data-a="term"]{--dot:var(--c-term)}[data-a="git"]{--dot:var(--c-git)}[data-a="html"]{--dot:var(--c-html)}[data-a="js"]{--dot:var(--c-js)}[data-a="cond"]{--dot:var(--c-cond)}[data-a="ej"]{--dot:var(--accent)}[data-a="loop"]{--dot:var(--c-loop)}[data-a="fn"]{--dot:var(--c-fn)}[data-a="arr"]{--dot:var(--c-arr)}[data-a="ia"]{--dot:var(--c-ia)}[data-a="sql"]{--dot:var(--c-sql)}[data-a="obj"]{--dot:var(--c-obj)}[data-a="node"]{--dot:var(--c-node)}[data-a="hc"]{--dot:var(--c-hc)}
+.demo{margin:10px 0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+.demo-lbl{display:block;font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);background:var(--code-bg);padding:5px 10px;border-bottom:1px solid var(--line)}
+.demo iframe{display:block;width:100%;border:0;background:#fff}
 </style>
 
 <div class="wrap">
@@ -2667,6 +2670,7 @@ const updatePetById = async (idMascota, { id_dueno, nombre, especie }) =&gt; {
 &lt;h2&gt;Sección&lt;/h2&gt;
 &lt;p&gt;Un párrafo. Al acabar, salta de línea solo.&lt;/p&gt;
 &lt;p&gt;Tienes &lt;span&gt;5&lt;/span&gt; productos en el carrito&lt;/p&gt;</code></pre>
+  <div class="demo" data-h="470"><span class="demo-lbl">Así se ve en el navegador</span><template><h1>Título h1</h1><h2>Título h2</h2><h3>Título h3</h3><h4>Título h4</h4><h5>Título h5</h5><h6>Título h6</h6><p>Un párrafo. Al acabar, salta de línea solo.</p><p>Tienes <span style="color:#2545c4;font-weight:bold;font-size:1.3em">5</span> productos en el carrito <small>(el 5 es un span con CSS)</small></p></template></div>
   <ul>
     <li><b><code>h1</code> a <code>h6</code></b>: títulos por niveles, como en Word (sección 1, 1.1, 1.1.1…). Que se vean más grandes o más pequeños lo decide el navegador con sus estilos por defecto; el tamaño de verdad se pone con CSS.</li>
     <li><b><code>p</code></b>: párrafo. Siempre termina con un salto de línea.</li>
@@ -2692,6 +2696,7 @@ const updatePetById = async (idMascota, { id_dueno, nombre, especie }) =&gt; {
     &lt;li&gt;Pan&lt;/li&gt;
     &lt;li&gt;Leche&lt;/li&gt;
 &lt;/ul&gt;</code></pre>
+  <div class="demo" data-h="210"><span class="demo-lbl">Así se ve en el navegador</span><template><ol><li>Primero</li><li>Segundo</li></ol><ul><li>Pan</li><li>Leche</li></ul></template></div>
   <ul>
     <li><b><code>ol</code></b> = <i>ordered list</i>; <b><code>ul</code></b> = <i>unordered list</i>; <b><code>li</code></b> = cada elemento, siempre dentro de una de las dos.</li>
     <li>Los números y los puntos los pone el navegador, y se pueden cambiar con CSS.</li>
@@ -2776,6 +2781,8 @@ const updatePetById = async (idMascota, { id_dueno, nombre, especie }) =&gt; {
         &lt;/tr&gt;
     &lt;/tbody&gt;
 &lt;/table&gt;</code></pre>
+  <div class="demo" data-h="150"><span class="demo-lbl">Así se ve en el navegador</span><template><p>Sin CSS (sin bordes):</p><table><thead><tr><th>Nombre</th><th>Apellidos</th><th>Edad</th></tr></thead><tbody><tr><td>Paco</td><td>Pérez</td><td>30</td></tr><tr><td colspan="2">Luisa Gómez</td><td>10</td></tr></tbody></table></template></div>
+  <div class="demo" data-h="130"><span class="demo-lbl">Así se ve en el navegador</span><template><p>Con <code>border="1"</code>:</p><table border="1"><thead><tr><th>Nombre</th><th>Apellidos</th><th>Edad</th></tr></thead><tbody><tr><td>Paco</td><td>Pérez</td><td>30</td></tr><tr><td colspan="2">Luisa Gómez (colspan=2)</td><td>10</td></tr></tbody></table></template></div>
   <ul>
     <li>Una tabla es una lista de <b>filas</b> (<code>tr</code>), y cada fila tiene <b>celdas</b> (<code>td</code>).</li>
     <li>La cabecera usa <b><code>th</code></b> en vez de <code>td</code>. El navegador la pone en negrita, pero lo importante es la semántica.</li>
@@ -2817,7 +2824,8 @@ const updatePetById = async (idMascota, { id_dueno, nombre, especie }) =&gt; {
     &lt;/select&gt;
 
     &lt;button type="submit"&gt;Enviar&lt;/button&gt;
-&lt;/form&gt;</code></pre></div>
+&lt;/form&gt;</code></pre>
+  <div class="demo" data-h="380"><span class="demo-lbl">Así se ve en el navegador</span><template><form onsubmit="return false"><p><label for="n">Nombre</label> <input type="text" id="n" placeholder="Ej.: Paco" maxlength="5"></p><p><label for="a">Edad</label> <input type="number" id="a" min="0" max="90"></p><p><label for="b">Cumpleaños</label> <input type="date" id="b"></p><p>Color: <input type="radio" id="r1" name="c" checked><label for="r1">Rojo</label> <input type="radio" id="r2" name="c"><label for="r2">Verde</label></p><p>Animales: <input type="checkbox" id="k1" name="an[]"><label for="k1">Gato</label> <input type="checkbox" id="k2" name="an[]"><label for="k2">Perro</label></p><p><label for="s">País</label> <select id="s"><option>España</option><option>Japón</option></select></p><button type="submit">Enviar</button><p style="font-size:13px;color:#666">Pruébalo: haz clic en los textos (label), escribe más de 5 letras en Nombre, marca radios y checkboxes.</p></form></template></div></div>
 
   <div class="card"><h3>Los atributos de un campo</h3>
   <ul>
@@ -2873,6 +2881,7 @@ const updatePetById = async (idMascota, { id_dueno, nombre, especie }) =&gt; {
 h3 {
     color: blue;
 }</code></pre>
+  <div class="demo" data-h="200"><span class="demo-lbl">Así se ve en el navegador</span><template><style>h2{color:green}h3{color:blue}</style><h1 style="color:red">h1 rojo (inline)</h1><h2>h2 verde (etiqueta style)</h2><h3>h3 azul (styles.css)</h3></template></div>
   <ul>
     <li>Un archivo CSS no hace nada solo por existir: hay que <b>cargarlo</b> en el HTML con <code>&lt;link&gt;</code>, igual que una imagen se carga con <code>src</code>.</li>
     <li><code>rel="stylesheet"</code> dice que es una hoja de estilos. Sin él, no se aplica.</li>
@@ -3119,4 +3128,12 @@ q.addEventListener('input', () => {
   }));
   siguiente();
 })();
+</script>
+<script>
+document.querySelectorAll('.demo').forEach(d => {
+  const t = d.querySelector('template'); const f = document.createElement('iframe');
+  f.title = 'Ejemplo'; f.loading = 'lazy'; f.style.height = (d.dataset.h || 160) + 'px';
+  f.srcdoc = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"></head><body style="margin:12px">' + t.innerHTML + '</body></html>';
+  d.appendChild(f);
+});
 </script>

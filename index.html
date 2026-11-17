@@ -10,7 +10,7 @@
 :root{
   --bg:#f3f5f9; --surface:#ffffff; --fg:#17202e; --muted:#5b6678; --line:#dbe1ea;
   --accent:#2545c4; --accent-soft:#e4e9fb; --mark:#fff1a8; --code-bg:#f0f2f7;
-  --c-term:#0f7a5a; --c-git:#c2410c; --c-html:#7c3aed; --c-js:#2545c4; --c-cond:#b4237a; --c-loop:#0e7490; --c-fn:#a16207; --c-arr:#4d7c0f; --c-ia:#6b5b95; --c-sql:#9f1239; --c-obj:#a21caf; --c-node:#15803d;
+  --c-term:#0f7a5a; --c-git:#c2410c; --c-html:#7c3aed; --c-js:#2545c4; --c-cond:#b4237a; --c-loop:#0e7490; --c-fn:#a16207; --c-arr:#4d7c0f; --c-ia:#6b5b95; --c-sql:#9f1239; --c-obj:#a21caf; --c-node:#15803d; --c-hc:#be185d;
   --ok:#0f7a5a; --bad:#b42318;
   --tok-com:#6b7686; --tok-str:#0f7a5a; --tok-kw:#9f1f9f; --tok-num:#b45309;
   --f-display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
@@ -20,13 +20,13 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0f141c; --surface:#171e2a; --fg:#e6ebf3; --muted:#9aa5b8; --line:#2a3445;
   --accent:#8ea4ff; --accent-soft:#1f2a4a; --mark:#5a4b0d; --code-bg:#111823;
-  --c-term:#4fd1a5; --c-git:#fb923c; --c-html:#b79cff; --c-js:#8ea4ff; --c-cond:#f472b6; --c-loop:#22d3ee; --c-fn:#facc15; --c-arr:#a3e635; --c-ia:#c4b5fd; --c-sql:#fb7185; --c-obj:#e879f9; --c-node:#86efac;
+  --c-term:#4fd1a5; --c-git:#fb923c; --c-html:#b79cff; --c-js:#8ea4ff; --c-cond:#f472b6; --c-loop:#22d3ee; --c-fn:#facc15; --c-arr:#a3e635; --c-ia:#c4b5fd; --c-sql:#fb7185; --c-obj:#e879f9; --c-node:#86efac; --c-hc:#f9a8d4;
   --ok:#4fd1a5; --bad:#f87171;
   --tok-com:#7d889b; --tok-str:#6ee7b7; --tok-kw:#f0abfc; --tok-num:#fdba74; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0f141c; --surface:#171e2a; --fg:#e6ebf3; --muted:#9aa5b8; --line:#2a3445;
   --accent:#8ea4ff; --accent-soft:#1f2a4a; --mark:#5a4b0d; --code-bg:#111823;
-  --c-term:#4fd1a5; --c-git:#fb923c; --c-html:#b79cff; --c-js:#8ea4ff; --c-cond:#f472b6; --c-loop:#22d3ee; --c-fn:#facc15; --c-arr:#a3e635; --c-ia:#c4b5fd; --c-sql:#fb7185; --c-obj:#e879f9; --c-node:#86efac;
+  --c-term:#4fd1a5; --c-git:#fb923c; --c-html:#b79cff; --c-js:#8ea4ff; --c-cond:#f472b6; --c-loop:#22d3ee; --c-fn:#facc15; --c-arr:#a3e635; --c-ia:#c4b5fd; --c-sql:#fb7185; --c-obj:#e879f9; --c-node:#86efac; --c-hc:#f9a8d4;
   --ok:#4fd1a5; --bad:#f87171;
   --tok-com:#7d889b; --tok-str:#6ee7b7; --tok-kw:#f0abfc; --tok-num:#fdba74; color-scheme:dark}
 
@@ -153,12 +153,12 @@ svg text{font-family:var(--f-body)}
 .fc-dot2{fill:var(--c-git)}
 
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
-[data-a="term"]{--dot:var(--c-term)}[data-a="git"]{--dot:var(--c-git)}[data-a="html"]{--dot:var(--c-html)}[data-a="js"]{--dot:var(--c-js)}[data-a="cond"]{--dot:var(--c-cond)}[data-a="ej"]{--dot:var(--accent)}[data-a="loop"]{--dot:var(--c-loop)}[data-a="fn"]{--dot:var(--c-fn)}[data-a="arr"]{--dot:var(--c-arr)}[data-a="ia"]{--dot:var(--c-ia)}[data-a="sql"]{--dot:var(--c-sql)}[data-a="obj"]{--dot:var(--c-obj)}[data-a="node"]{--dot:var(--c-node)}
+[data-a="term"]{--dot:var(--c-term)}[data-a="git"]{--dot:var(--c-git)}[data-a="html"]{--dot:var(--c-html)}[data-a="js"]{--dot:var(--c-js)}[data-a="cond"]{--dot:var(--c-cond)}[data-a="ej"]{--dot:var(--accent)}[data-a="loop"]{--dot:var(--c-loop)}[data-a="fn"]{--dot:var(--c-fn)}[data-a="arr"]{--dot:var(--c-arr)}[data-a="ia"]{--dot:var(--c-ia)}[data-a="sql"]{--dot:var(--c-sql)}[data-a="obj"]{--dot:var(--c-obj)}[data-a="node"]{--dot:var(--c-node)}[data-a="hc"]{--dot:var(--c-hc)}
 </style>
 
 <div class="wrap">
 <header class="top">
-  <h1><small>202609FSDLIVE · Bootcamp Full Stack · Fundamentos y Lógica · Clases 1 a 15 · Bases de datos (SQL) · Node.js</small>Apuntes de clase</h1>
+  <h1><small>202609FSDLIVE · Bootcamp Full Stack · Fundamentos y Lógica · Clases 1 a 16 · Bases de datos (SQL) · Node.js</small>Apuntes de clase</h1>
   <div class="warn"><b>Regla de oro:</b> el repo del profe no se toca. Trabaja en tu copia.</div>
 </header>
 
@@ -182,6 +182,7 @@ svg text{font-family:var(--f-body)}
   <a href="#ia" data-a="ia">Estudiar con IA</a>
   <a href="#sql" data-a="sql">SQL</a>
   <a href="#node" data-a="node">Node.js y API</a>
+  <a href="#htmlcss" data-a="hc">HTML y CSS</a>
   <a href="#repaso" data-a="rep">Repaso</a>
 </nav>
 <main>
@@ -2605,6 +2606,307 @@ const updatePetById = async (idMascota, { id_dueno, nombre, especie }) =&gt; {
 </div>
 </section>
 
+<!-- ============ HTML Y CSS ============ -->
+<section class="area" id="htmlcss" data-a="hc">
+<h2>HTML y CSS</h2>
+<p class="intro">Clase 16, con Héctor. HTML da la <b>estructura</b> de la página (qué hay) y CSS el <b>aspecto</b> (cómo se ve). Primero se aprende que las cosas existen; luego, cuando hacen falta, se buscan.</p>
+<div class="grid">
+  <div class="card span2 esencial"><h3>Lo esencial</h3>
+  <ul>
+    <li>HTML <b>no es un lenguaje de programación</b>: es un lenguaje de <b>marcas</b>. Todo va envuelto en etiquetas, y es estático (no hace cosas por sí solo).</li>
+    <li>Casi todas las etiquetas se abren y se cierran: <code>&lt;p&gt;…&lt;/p&gt;</code>. Algunas son <b>autocontenidas</b> y no se cierran: <code>&lt;br&gt;</code>, <code>&lt;img&gt;</code>, <code>&lt;input&gt;</code>.</li>
+    <li>Estructura: <code>&lt;html&gt;</code> → <code>&lt;head&gt;</code> (información de la página) + <code>&lt;body&gt;</code> (el contenido que se ve).</li>
+    <li>Los <b>atributos</b> dan información a una etiqueta: <code>nombre="valor"</code>, con comillas dobles. Ej.: <code>&lt;img src="gatos.jpg"&gt;</code>.</li>
+    <li>Rutas: <b>relativas</b> (desde el archivo: <code>img/gato.jpg</code>, <code>../img/gato.jpg</code>) o <b>absolutas</b> (desde la raíz del proyecto: <code>/img/gato.jpg</code>).</li>
+    <li>Formularios: cada campo es un <code>&lt;input&gt;</code> con <code>type</code>, <code>id</code> y <code>name</code>, y su <code>&lt;label for="id"&gt;</code>.</li>
+    <li>CSS se carga de 3 formas; la buena es un archivo aparte: <code>&lt;link rel="stylesheet" href="styles.css"&gt;</code>.</li>
+    <li>Ábrelo siempre con <b>Live Server</b>, no con doble clic.</li>
+  </ul></div>
+
+  <h3 class="grp">1 · La base: estructura y cómo abrirlo</h3>
+
+  <div class="card span2"><h3>La estructura de una página</h3>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;                 &lt;!-- tildes, eñes y emojis bien --&gt;
+    &lt;title&gt;Mi primerita página&lt;/title&gt;   &lt;!-- el texto de la pestaña --&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hola mundo&lt;/h1&gt;                  &lt;!-- todo lo que se ve va aquí --&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  <ul>
+    <li><b><code>head</code></b> = información <b>sobre</b> la página: título de la pestaña, idioma, qué CSS carga, el <code>charset</code>… No se ve en la página.</li>
+    <li><b><code>body</code></b> = el contenido que se ve.</li>
+    <li>No confundas <code>head</code> (la cabecera del documento) con <code>header</code> (la parte de arriba de la web, que va <b>dentro</b> del <code>body</code>).</li>
+    <li>Casi todo es opcional: el navegador intenta adivinar lo que quieres y pinta algo igualmente. Pero la estructura completa es la forma limpia.</li>
+  </ul>
+  <p class="tip"><b>Atajos de VS Code (Emmet):</b> <code>!</code> + Tab escribe toda la estructura. <code>lorem</code> + Tab escribe texto de relleno (<code>lorem20</code> = 20 palabras). Si Tab no va, prueba Enter en la sugerencia o <b>Ctrl + Espacio</b>.</p></div>
+
+  <div class="card"><h3>Live Server</h3>
+  <ul>
+    <li>Es una extensión de VS Code que monta un <b>servidor web pequeñito</b>. Se abre con clic derecho en el HTML → <b>Open with Live Server</b> (o el botón <b>Go Live</b> de abajo).</li>
+    <li>Diferencia con el doble clic: con Live Server, la <b>raíz</b> es la carpeta del proyecto, y las rutas absolutas (<code>/img/…</code>) funcionan. Con doble clic, la raíz es el disco duro (<code>C:</code>).</li>
+    <li>Así ya trabajas como en la web real: un cliente (navegador) pide cosas a un servidor.</li>
+  </ul></div>
+
+  <div class="card"><h3>Comentarios y saltos de línea</h3>
+<pre><code>&lt;!-- esto es un comentario en HTML --&gt;</code></pre>
+  <ul>
+    <li>Los <b>Intro</b> y los espacios del código no se ven en la página: son solo para que tú lo leas mejor.</li>
+    <li>Para un salto de línea de verdad: <code>&lt;br&gt;</code> (o <code>&lt;br /&gt;</code>, las dos valen).</li>
+    <li>Úsalo poco: para separar textos, mejor un <code>&lt;p&gt;</code> para cada párrafo.</li>
+  </ul></div>
+
+  <h3 class="grp">2 · Etiquetas de contenido</h3>
+
+  <div class="card span2"><h3>Títulos, párrafos y agrupaciones</h3>
+<pre><code>&lt;h1&gt;Título principal&lt;/h1&gt;     &lt;!-- de h1 (el más importante) a h6. No hay h7 --&gt;
+&lt;h2&gt;Sección&lt;/h2&gt;
+&lt;p&gt;Un párrafo. Al acabar, salta de línea solo.&lt;/p&gt;
+&lt;p&gt;Tienes &lt;span&gt;5&lt;/span&gt; productos en el carrito&lt;/p&gt;</code></pre>
+  <ul>
+    <li><b><code>h1</code> a <code>h6</code></b>: títulos por niveles, como en Word (sección 1, 1.1, 1.1.1…). Que se vean más grandes o más pequeños lo decide el navegador con sus estilos por defecto; el tamaño de verdad se pone con CSS.</li>
+    <li><b><code>p</code></b>: párrafo. Siempre termina con un salto de línea.</li>
+    <li><b><code>span</code></b>: agrupa un trozo pequeño de texto para darle estilo (el "5" en azul y negrita). Sin CSS no se nota nada.</li>
+    <li><b><code>div</code></b>: una caja para agrupar. En HTML todo son cajas.</li>
+  </ul></div>
+
+  <div class="card"><h3>Etiquetas semánticas (SEO)</h3>
+  <ul>
+    <li><code>header</code> (cabecera de la web), <code>nav</code> (menú), <code>section</code>, <code>article</code>, <code>footer</code> (pie).</li>
+    <li>Visualmente son como un <code>div</code>: no hacen nada.</li>
+    <li>Sirven para el <b>posicionamiento (SEO)</b>: así Google entiende qué es cada parte y te puede poner más arriba en las búsquedas.</li>
+    <li>Regla: si existe una etiqueta para lo que haces, úsala. No hagas "ñapas".</li>
+  </ul></div>
+
+  <div class="card"><h3>Listas</h3>
+<pre><code>&lt;ol&gt;              &lt;!-- ordenada: 1, 2, 3… --&gt;
+    &lt;li&gt;Primero&lt;/li&gt;
+    &lt;li&gt;Segundo&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;              &lt;!-- sin ordenar: puntos --&gt;
+    &lt;li&gt;Pan&lt;/li&gt;
+    &lt;li&gt;Leche&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  <ul>
+    <li><b><code>ol</code></b> = <i>ordered list</i>; <b><code>ul</code></b> = <i>unordered list</i>; <b><code>li</code></b> = cada elemento, siempre dentro de una de las dos.</li>
+    <li>Los números y los puntos los pone el navegador, y se pueden cambiar con CSS.</li>
+  </ul></div>
+
+  <h3 class="grp">3 · Imágenes, atributos y rutas</h3>
+
+  <div class="card span2"><h3>La imagen y sus atributos</h3>
+<pre><code>&lt;img src="gatos.jpg" alt="Seis gatos" width="200" height="100"&gt;</code></pre>
+  <ul>
+    <li><code>img</code> es autocontenida: todo va en <b>atributos</b>.</li>
+    <li><b><code>src</code></b> (<i>source</i>): de dónde sale la imagen.</li>
+    <li><code>width</code> (ancho) y <code>height</code> (alto) existen, pero no se recomiendan: deforman la imagen si no respetas la proporción, y para eso está CSS.</li>
+    <li>Puedes poner atributos inventados y el navegador los ignora, pero es mala práctica. Hay atributos <b>reservados</b>, como <code>src</code>, que sí hacen algo.</li>
+    <li>El peso de la imagen importa (carga más lenta con mala conexión), aunque menos que antes. El formato <b>WebP</b> está muy comprimido y se usa mucho en web.</li>
+  </ul>
+  <p class="tip"><b>Imágenes de internet:</b> <code>src</code> puede ser un enlace externo, pero si ese servidor la cambia o la borra, tu página se rompe. Lo normal es <b>descargarla</b> en tu proyecto, y en el trabajo usar bancos de imágenes sin copyright.</p></div>
+
+  <div class="card span2"><h3>Rutas relativas y absolutas</h3>
+<pre><code>proyecto/                ← la raíz (con Live Server)
+├── img/
+│   └── gatos.jpg
+└── 5_html_css/
+    ├── index.html       ← el archivo que estás editando
+    ├── gatos.jpg
+    └── pepe/
+        └── gatos.jpg</code></pre>
+  <div class="tbl"><table>
+    <tr><th>Desde <code>index.html</code></th><th>Ruta</th><th>Tipo</th></tr>
+    <tr><td>al lado</td><td><code>gatos.jpg</code> o <code>./gatos.jpg</code></td><td>relativa (<code>.</code> = esta carpeta)</td></tr>
+    <tr><td>dentro de <code>pepe</code></td><td><code>pepe/gatos.jpg</code></td><td>relativa</td></tr>
+    <tr><td>en <code>img</code>, una carpeta más arriba</td><td><code>../img/gatos.jpg</code></td><td>relativa (<code>..</code> = sube una)</td></tr>
+    <tr><td>en <code>img</code>, desde la raíz</td><td><code>/img/gatos.jpg</code></td><td>absoluta</td></tr>
+  </table></div>
+  <ul>
+    <li><b>Relativa</b>: depende de dónde está tu archivo. Si mueves el HTML, se rompe.</li>
+    <li><b>Absoluta</b>: empieza por <code>/</code>, la raíz del proyecto. Funciona aunque muevas el HTML. En el trabajo es lo más habitual; en clase se usan más las relativas porque son más fáciles de construir.</li>
+    <li>En la web, la raíz es la carpeta del servidor: por seguridad, no se puede salir de ella.</li>
+    <li>La barra es <code>/</code>, no <code>\</code> (la de Windows).</li>
+    <li>En VS Code, <b>Ctrl + Espacio</b> mientras escribes una ruta te sugiere carpetas y archivos.</li>
+  </ul>
+  <p class="tip">Las rutas no son solo de HTML: son las mismas que en la terminal (<code>cd ..</code>) y en los <code>import</code> de Node (<code>../config/db.js</code>).</p></div>
+
+  <h3 class="grp">4 · Enlaces y anclas</h3>
+
+  <div class="card span2"><h3>La etiqueta <code>a</code></h3>
+<pre><code>&lt;a href="https://www.google.com" target="_blank"&gt;Ir a Google&lt;/a&gt;   &lt;!-- externo, en pestaña nueva --&gt;
+&lt;a href="gatos.html"&gt;Ver gatos&lt;/a&gt;                                  &lt;!-- interno: otra página tuya --&gt;
+
+&lt;a href="#mi-parrafo"&gt;Ir al párrafo&lt;/a&gt;                            &lt;!-- ancla: a una parte de esta página --&gt;
+…
+&lt;p id="mi-parrafo"&gt;Un párrafo muy abajo&lt;/p&gt;</code></pre>
+  <ul>
+    <li><b><code>href</code></b>: a dónde lleva (en imágenes es <code>src</code>; en enlaces, <code>href</code>). Lo de dentro de la etiqueta es el texto que se ve.</li>
+    <li><b><code>target="_blank"</code></b>: lo abre en una pestaña nueva.</li>
+    <li><b>Enlace interno</b>: a otra página de tu proyecto, con rutas relativas o absolutas, igual que las imágenes.</li>
+    <li><b>Ancla</b>: <code>#</code> + el <code>id</code> de un elemento. Te lleva a esa parte de la misma página (como la flechita de "volver arriba").</li>
+    <li>El <b><code>id</code></b> es único: no puede haber dos elementos con el mismo. Sin espacios.</li>
+  </ul>
+  <p class="tip">Cada vez que cambias el HTML, <b>recarga</b> la página para ver el cambio (Live Server suele hacerlo solo).</p></div>
+
+  <h3 class="grp">5 · Tablas</h3>
+
+  <div class="card span2"><h3>Filas y columnas</h3>
+<pre><code>&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;                         &lt;!-- tr = fila (table row) --&gt;
+            &lt;th&gt;Nombre&lt;/th&gt;          &lt;!-- th = celda de cabecera --&gt;
+            &lt;th&gt;Apellidos&lt;/th&gt;
+            &lt;th&gt;Edad&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Paco&lt;/td&gt;            &lt;!-- td = celda normal --&gt;
+            &lt;td&gt;Pérez&lt;/td&gt;
+            &lt;td&gt;30&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td colspan="2"&gt;Luisa Gómez&lt;/td&gt;   &lt;!-- ocupa 2 columnas --&gt;
+            &lt;td&gt;10&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+  <ul>
+    <li>Una tabla es una lista de <b>filas</b> (<code>tr</code>), y cada fila tiene <b>celdas</b> (<code>td</code>).</li>
+    <li>La cabecera usa <b><code>th</code></b> en vez de <code>td</code>. El navegador la pone en negrita, pero lo importante es la semántica.</li>
+    <li><code>thead</code> y <code>tbody</code> no son obligatorios, pero se recomiendan en el HTML moderno.</li>
+    <li><b><code>colspan</code></b> une columnas; <b><code>rowspan</code></b>, filas. Existen, pero son un lío de mantener.</li>
+    <li>Sin CSS la tabla no tiene bordes. El atributo <code>border="1"</code> existe, pero VS Code lo marca porque los bordes son cosa de CSS.</li>
+  </ul></div>
+
+  <h3 class="grp">6 · Formularios</h3>
+
+  <div class="card span2"><h3>Campos de un formulario</h3>
+<pre><code>&lt;form action="" method="get"&gt;
+    &lt;label for="name-input"&gt;Nombre&lt;/label&gt;
+    &lt;input type="text" id="name-input" name="first-name" placeholder="Ej.: Paco" maxlength="5"&gt;
+
+    &lt;label for="age-input"&gt;Edad&lt;/label&gt;
+    &lt;input type="number" id="age-input" name="age" min="0" max="90"&gt;
+
+    &lt;label for="birth-input"&gt;Cumpleaños&lt;/label&gt;
+    &lt;input type="date" id="birth-input" name="birth"&gt;
+
+    &lt;!-- radio: solo se puede marcar UNO (mismo name) --&gt;
+    &lt;input type="radio" id="color-red" name="favorite-color" value="rojo" checked&gt;
+    &lt;label for="color-red"&gt;Rojo&lt;/label&gt;
+    &lt;input type="radio" id="color-green" name="favorite-color" value="verde"&gt;
+    &lt;label for="color-green"&gt;Verde&lt;/label&gt;
+
+    &lt;!-- checkbox: se pueden marcar VARIOS (name con [] porque es un array) --&gt;
+    &lt;input type="checkbox" id="animal-cat" name="favorite-animal[]" value="gato"&gt;
+    &lt;label for="animal-cat"&gt;Gato&lt;/label&gt;
+    &lt;input type="checkbox" id="animal-dog" name="favorite-animal[]" value="perro"&gt;
+    &lt;label for="animal-dog"&gt;Perro&lt;/label&gt;
+
+    &lt;!-- desplegable --&gt;
+    &lt;label for="country-select"&gt;País&lt;/label&gt;
+    &lt;select id="country-select" name="country"&gt;
+        &lt;option value="es"&gt;España&lt;/option&gt;
+        &lt;option value="jp"&gt;Japón&lt;/option&gt;
+    &lt;/select&gt;
+
+    &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;</code></pre></div>
+
+  <div class="card"><h3>Los atributos de un campo</h3>
+  <ul>
+    <li><b><code>type</code></b>: qué tipo de campo es. Si no lo pones, es <code>text</code>.</li>
+    <li><b><code>id</code></b>: para que el <code>label</code> lo encuentre. Pon nombres con sentido (<code>age-input</code>, no <code>manzana</code>).</li>
+    <li><b><code>name</code></b>: el nombre con el que se <b>envía</b> el dato. En los <code>radio</code> y <code>checkbox</code>, el mismo <code>name</code> los agrupa.</li>
+    <li><b><code>&lt;label for="id"&gt;</code></b>: el texto del campo. Si haces clic en él, el campo coge el <b>foco</b> (como si hicieras clic en la caja).</li>
+    <li><b><code>value</code></b>: el valor que ya viene <b>escrito</b>. En un radio o checkbox, lo que se envía.</li>
+    <li><b><code>placeholder</code></b>: un texto de ejemplo en gris que desaparece al escribir. No es un valor.</li>
+    <li><b><code>checked</code></b>: radio o checkbox marcado por defecto. <b><code>multiple</code></b>: permite elegir varios en un <code>select</code> (con Ctrl).</li>
+  </ul></div>
+
+  <div class="card"><h3>Tipos de <code>input</code></h3>
+  <div class="tbl"><table>
+    <tr><th>type</th><th>Qué hace</th></tr>
+    <tr><td><code>text</code></td><td>texto libre</td></tr>
+    <tr><td><code>number</code></td><td>solo números, con flechitas. Ojo: deja escribir la <b>e</b> (de 1e10)</td></tr>
+    <tr><td><code>date</code></td><td>un calendario para elegir fecha</td></tr>
+    <tr><td><code>radio</code></td><td>elegir <b>uno</b> de varios</td></tr>
+    <tr><td><code>checkbox</code></td><td>marcar <b>varios</b></td></tr>
+  </table></div>
+  <p class="tip">Un <code>button</code> dentro de un formulario <b>envía</b> el formulario por defecto (<code>type="submit"</code>). Si no quieres que lo envíe: <code>type="button"</code>.</p></div>
+
+  <div class="card"><h3>Validar en el navegador no es seguridad</h3>
+  <ul>
+    <li><code>maxlength</code>, <code>min</code>, <code>max</code>… son <b>validación en cliente</b>: ayudan al usuario (usabilidad, UX).</li>
+    <li>Pero cualquiera puede quitarlos con las herramientas del navegador (F12). <b>Nada del navegador es seguro</b>.</li>
+    <li>La validación de verdad se hace en el <b>servidor</b> (en la API de Node), antes de guardar en la base de datos.</li>
+  </ul></div>
+
+  <div class="card"><h3>A dónde va el formulario: GET o POST</h3>
+  <ul>
+    <li><b><code>action</code></b>: la URL a la que se envía, por ejemplo una ruta de tu API que da de alta usuarios. Vacío = a la misma página.</li>
+    <li><b><code>method="get"</code></b> (por defecto): los datos van <b>en la URL</b>, después de un <code>?</code>: <code>index.html?first-name=Paco&amp;age=13</code>. Es la <i>query string</i>. Útil para búsquedas y filtros (Google lo hace así).</li>
+    <li><b><code>method="post"</code></b>: los datos van <b>por dentro</b>, sin verse en la URL. Para contraseñas y datos privados. Se ven en F12 → <b>Network</b> → <i>Form Data</i>.</li>
+  </ul>
+  <p class="tip">Es lo mismo que en la API de la veterinaria: el <code>POST</code> lleva los datos en el <code>req.body</code>.</p></div>
+
+  <h3 class="grp">7 · CSS: cómo cargar estilos</h3>
+
+  <div class="card span2"><h3>Las 3 formas de poner CSS</h3>
+<pre><code>&lt;!-- 1. inline: en el atributo style de una etiqueta --&gt;
+&lt;h1 style="color: red"&gt;Rojo&lt;/h1&gt;
+
+&lt;!-- 2. etiqueta &lt;style&gt; en el head --&gt;
+&lt;style&gt;
+    h2 { color: green; }       /* todos los h2, verdes */
+&lt;/style&gt;
+
+&lt;!-- 3. archivo aparte (la recomendada), en el head --&gt;
+&lt;link rel="stylesheet" href="styles.css"&gt;</code></pre>
+<pre><code>/* styles.css */
+h3 {
+    color: blue;
+}</code></pre>
+  <ul>
+    <li>Un archivo CSS no hace nada solo por existir: hay que <b>cargarlo</b> en el HTML con <code>&lt;link&gt;</code>, igual que una imagen se carga con <code>src</code>.</li>
+    <li><code>rel="stylesheet"</code> dice que es una hoja de estilos. Sin él, no se aplica.</li>
+    <li><code>href</code> es la ruta al archivo, relativa o absoluta.</li>
+    <li>Los comentarios de CSS son como los de JS multilínea: <code>/* … */</code>.</li>
+  </ul>
+  <p class="tip">Muchos atributos de HTML para dar estilo (<code>width</code>, <code>height</code>, <code>border</code>) existen porque HTML se inventó antes que CSS. Hoy el aspecto se pone siempre con CSS.</p></div>
+
+  <h3 class="grp">8 · Cómo estudiar HTML y CSS</h3>
+
+  <div class="card"><h3>Consejos de Héctor</h3>
+  <ul>
+    <li>Hay cientos de etiquetas y estilos. No hace falta saberlos todos: lo importante es saber que <b>existen</b> y buscarlos cuando te hagan falta.</li>
+    <li>La mejor referencia: <b>W3Schools</b>, la escuela del W3C (los que deciden cómo funciona la web).</li>
+    <li>Cada navegador aplica <b>estilos por defecto</b> a su manera; por eso la misma página puede verse un poco distinta en Chrome y en Firefox.</li>
+    <li>Edge, Brave y Opera usan Chromium (la base de Chrome) por dentro. Firefox y Safari no.</li>
+  </ul></div>
+
+  <div class="card"><h3>La IA, como copiloto</h3>
+  <ul>
+    <li>No copies código que no entiendas, ni de internet ni de la IA.</li>
+    <li>Úsala para que te <b>explique</b> ("explícamelo como si no supiera nada") o para pedir una <b>pista</b> ("no me lo resuelvas").</li>
+    <li>Siempre tiene que haber una validación humana: la tuya.</li>
+  </ul></div>
+
+  <div class="card"><h3>Para practicar</h3>
+  <ul>
+    <li>Haz tu <b>currículum</b> en HTML: un <code>h1</code> con tu nombre, un <code>h2</code> por sección (Estudios, Experiencia…), listas, una foto y un enlace.</li>
+    <li>Añádele una tabla y un formulario de contacto.</li>
+    <li>No importa que quede feo: el aspecto llega con CSS.</li>
+  </ul></div>
+</div>
+</section>
+
 <section class="area" id="repaso" data-a="rep">
 <h2>Repaso</h2>
 <p class="intro">Tarjetas de pregunta y respuesta. Piensa la respuesta, dale la vuelta y sé sincero: las que marques para repasar te saldrán más a menudo. Tu progreso se guarda en este navegador.</p>
@@ -2616,6 +2918,7 @@ const updatePetById = async (idMascota, { id_dueno, nombre, especie }) =&gt; {
     <button type="button" class="rp-tema" data-t="arr">Arrays y objetos</button>
     <button type="button" class="rp-tema" data-t="sql">SQL</button>
     <button type="button" class="rp-tema" data-t="node">Node y API</button>
+    <button type="button" class="rp-tema" data-t="hc">HTML y CSS</button>
   </div>
   <div class="rp-prog"><div class="rp-bar"><i id="rpBar"></i></div><span id="rpCount"></span></div>
   <div class="rp-card" id="rpCard">
@@ -2780,8 +3083,8 @@ q.addEventListener('input', () => {
 
 // Repaso: tarjetas de pregunta y respuesta
 (() => {
-  const P = [{"t": "git", "q": "¿Qué hace <code>cd ..</code>?", "a": "Sube una carpeta (a la carpeta de arriba)."}, {"t": "git", "q": "¿Cómo creas una carpeta y cómo ves qué hay en la carpeta actual?", "a": "<code>mkdir nombre</code> crea la carpeta. <code>ls</code> lista lo que hay."}, {"t": "git", "q": "¿Qué hace <code>code .</code>?", "a": "Abre en VS Code la carpeta en la que estás (el punto = esta carpeta)."}, {"t": "git", "q": "¿Cuál es el ciclo de Git que harás siempre?", "a": "<code>git add .</code> → <code>git commit -m \"mensaje\"</code> → <code>git push</code>."}, {"t": "git", "q": "¿Qué diferencia hay entre <code>commit</code> y <code>push</code>?", "a": "<code>commit</code> guarda una foto de los cambios <b>en tu ordenador</b>. <code>push</code> la sube a GitHub."}, {"t": "git", "q": "¿Para qué sirve <code>git pull</code>?", "a": "Para traerte a tu ordenador los cambios que hay en GitHub (por ejemplo, lo nuevo del repo del profe)."}, {"t": "git", "q": "¿Qué hace <code>git clone URL</code>?", "a": "Descarga un repositorio de GitHub en una carpeta nueva, ya conectada con GitHub."}, {"t": "git", "q": "¿Cómo creas una rama nueva y te cambias a ella?", "a": "<code>git checkout -b nombre</code> (o <code>git switch -c nombre</code>)."}, {"t": "git", "q": "¿Para qué sirve <code>git status</code>?", "a": "Para ver qué archivos han cambiado y cuáles están preparados para el commit."}, {"t": "git", "q": "¿Qué va en el archivo <code>.gitignore</code>?", "a": "Lo que Git debe ignorar y no subir, por ejemplo <code>node_modules</code> o el <code>.env</code> con contraseñas."}, {"t": "js", "q": "¿Qué diferencia hay entre <code>let</code> y <code>const</code>?", "a": "<code>let</code> se puede cambiar después. <code>const</code> no se puede reasignar."}, {"t": "js", "q": "¿Qué diferencia hay entre <code>=</code>, <code>==</code> y <code>===</code>?", "a": "<code>=</code> asigna. <code>==</code> compara sin mirar el tipo. <code>===</code> compara valor <b>y</b> tipo (el que se usa siempre)."}, {"t": "js", "q": "¿Qué devuelve <code>7 % 2</code> y para qué se usa?", "a": "Devuelve <b>1</b>, el resto de dividir. Se usa para saber si un número es par (<code>n % 2 === 0</code>)."}, {"t": "js", "q": "¿Qué significan <code>&amp;&amp;</code>, <code>||</code> y <code>!</code>?", "a": "<code>&amp;&amp;</code> = y (las dos). <code>||</code> = o (alguna). <code>!</code> = no (le da la vuelta)."}, {"t": "js", "q": "¿Cómo metes una variable dentro de un texto?", "a": "Con comillas invertidas y <code>${}</code>: <code>`Hola ${nombre}`</code>."}, {"t": "js", "q": "¿Importa el orden de los <code>else if</code>?", "a": "Sí. Se ejecuta el <b>primero</b> que se cumple y los demás ya no se miran. Ve de lo más concreto a lo más general."}, {"t": "js", "q": "¿Cómo se escribe un <code>if/else</code> en una línea?", "a": "Con el ternario: <code>condicion ? siQueSi : siQueNo</code>."}, {"t": "js", "q": "¿Cuándo usas <code>for</code> y cuándo <code>while</code>?", "a": "<code>for</code> cuando sabes cuántas vueltas. <code>while</code> cuando repites <b>mientras</b> se cumpla algo y no sabes cuántas."}, {"t": "js", "q": "En un bucle de búsqueda, ¿por qué la posición empieza en <code>-1</code>?", "a": "Porque ningún índice puede ser -1: si al final sigue valiendo -1, significa <b>no encontrado</b> (valor centinela)."}, {"t": "js", "q": "¿Qué diferencia hay entre <code>console.log</code> y <code>return</code>?", "a": "<code>console.log</code> muestra en la terminal. <code>return</code> devuelve el valor a quien llamó a la función, para guardarlo o usarlo."}, {"t": "js", "q": "¿Qué devuelve una función que no tiene <code>return</code>?", "a": "<code>undefined</code>."}, {"t": "js", "q": "¿Qué es un parámetro y qué es un argumento?", "a": "Parámetro: el hueco de la definición (<code>function doble(numero)</code>). Argumento: el valor que mandas al llamarla (<code>doble(5)</code>)."}, {"t": "js", "q": "Si llamas <code>restar(10, 3)</code> a <code>function restar(a, b)</code>, ¿qué vale <code>a</code>?", "a": "<b>10</b>. Los argumentos entran en los parámetros <b>por orden</b>."}, {"t": "js", "q": "¿Qué es el hoisting?", "a": "Poder llamar a una función declarada con <code>function</code> antes de la línea donde está escrita. Las de <code>const</code> no lo permiten."}, {"t": "js", "q": "Convierte <code>function doble(n) { return n * 2 }</code> en flecha.", "a": "<code>const doble = n =&gt; n * 2</code>"}, {"t": "arr", "q": "¿Cuál es el índice del primer elemento de un array?", "a": "El <b>0</b>. El último es <code>array.length - 1</code>."}, {"t": "arr", "q": "¿Cómo añades al final de un array y cómo quitas el último?", "a": "<code>push(elemento)</code> añade al final. <code>pop()</code> quita el último."}, {"t": "arr", "q": "¿Qué hacen <code>shift()</code> y <code>unshift()</code>?", "a": "<code>shift()</code> quita el primero. <code>unshift(x)</code> añade al principio."}, {"t": "arr", "q": "¿Qué devuelve <code>find</code> y qué devuelve si no encuentra nada?", "a": "El <b>primer</b> elemento que cumple la condición. Si no hay ninguno, <code>undefined</code>."}, {"t": "arr", "q": "¿Qué devuelve <code>filter</code> y qué devuelve si no encuentra nada?", "a": "Un <b>array</b> con todos los que cumplen. Si no hay ninguno, <code>[]</code>."}, {"t": "arr", "q": "¿Para qué sirve <code>map</code>?", "a": "Para transformar cada elemento y obtener un array nuevo del mismo tamaño (por ejemplo, solo los nombres)."}, {"t": "arr", "q": "¿Cómo lees la propiedad <code>capital</code> de un objeto <code>pais</code>?", "a": "<code>pais.capital</code> (o <code>pais['capital']</code>)."}, {"t": "arr", "q": "¿Cómo borras de un array el elemento con <code>id</code> 2 usando <code>filter</code>?", "a": "<code>lista.filter(e =&gt; e.id !== 2)</code>: te quedas con todos menos ese."}, {"t": "arr", "q": "¿Qué hace <code>resultado || 'No hay resultados'</code>?", "a": "Si <code>resultado</code> tiene valor, lo devuelve. Si es <code>undefined</code> o <code>null</code>, devuelve el texto."}, {"t": "arr", "q": "¿Por qué <code>'spinning' === 'Spinning'</code> es falso y cómo lo arreglas?", "a": "Porque distingue mayúsculas. Pasa los dos lados a minúsculas: <code>a.toLowerCase() === b.toLowerCase()</code>."}, {"t": "arr", "q": "¿Para qué sirve <code>reduce</code>?", "a": "Para juntar todo el array en <b>un solo valor</b>, por ejemplo la suma de todos los precios."}, {"t": "sql", "q": "¿Qué es una clave primaria (PK)?", "a": "La columna que identifica cada fila sin repetirse, normalmente <code>id</code> autoincremental."}, {"t": "sql", "q": "¿Qué es una clave ajena (FK)?", "a": "Una columna que apunta a la PK de otra tabla, por ejemplo <code>productos.categoria_id → categorias.id</code>."}, {"t": "sql", "q": "¿Cuál es el orden de las partes de un SELECT?", "a": "<code>SELECT</code> → <code>FROM</code> → <code>JOIN</code> → <code>WHERE</code> → <code>GROUP BY</code> → <code>HAVING</code> → <code>ORDER BY</code> → <code>LIMIT</code>."}, {"t": "sql", "q": "¿Qué diferencia hay entre <code>WHERE</code> y <code>HAVING</code>?", "a": "<code>WHERE</code> filtra <b>filas</b> antes de agrupar. <code>HAVING</code> filtra <b>grupos</b> después del <code>GROUP BY</code> (ahí sí puedes usar <code>COUNT</code>, <code>AVG</code>…)."}, {"t": "sql", "q": "¿Qué hace <code>BETWEEN 20 AND 100</code>?", "a": "Entre 20 y 100, <b>los dos incluidos</b>. Es lo mismo que <code>&gt;= 20 AND &lt;= 100</code>."}, {"t": "sql", "q": "¿Qué hace <code>IN ('pendiente', 'enviado')</code>?", "a": "Que el valor sea <b>alguno</b> de la lista. Es como varios <code>OR</code>."}, {"t": "sql", "q": "¿Qué buscan <code>LIKE 'A%'</code> y <code>LIKE '%a%'</code>?", "a": "<code>'A%'</code>: que empiece por A. <code>'%a%'</code>: que contenga una a en cualquier sitio."}, {"t": "sql", "q": "¿Para qué sirve <code>AS</code>?", "a": "Para poner un alias: renombrar una columna (<code>c.nombre AS categoria</code>) o una tabla (<code>productos p</code>)."}, {"t": "sql", "q": "¿Qué diferencia hay entre <code>JOIN</code> y <code>LEFT JOIN</code>?", "a": "<code>JOIN</code> solo deja las filas con pareja en las dos tablas. <code>LEFT JOIN</code> deja todas las de la izquierda; las que no tienen pareja salen con <code>NULL</code>."}, {"t": "sql", "q": "¿Cómo encuentras lo que <b>no</b> tiene pareja en otra tabla?", "a": "<code>LEFT JOIN … WHERE otra.id IS NULL</code>, o <code>WHERE id NOT IN (SELECT …)</code>."}, {"t": "sql", "q": "¿Por qué se escribe <code>IS NULL</code> y no <code>= NULL</code>?", "a": "Porque <code>NULL</code> es \"sin valor\" y no se puede comparar con <code>=</code>: nunca da verdadero."}, {"t": "sql", "q": "¿Qué es una subconsulta?", "a": "Un <code>SELECT</code> dentro de otro, entre paréntesis. Se ejecuta primero, por ejemplo <code>WHERE precio &gt; (SELECT AVG(precio) FROM productos)</code>."}, {"t": "sql", "q": "¿Qué diferencia hay entre <code>COUNT(*)</code> y <code>COUNT(DISTINCT col)</code>?", "a": "<code>COUNT(*)</code> cuenta filas. <code>COUNT(DISTINCT col)</code> cuenta valores distintos, sin repetir."}, {"t": "sql", "q": "Con <code>GROUP BY</code>, ¿qué columnas pueden ir en el SELECT?", "a": "Las del <code>GROUP BY</code> y las que van dentro de <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MIN</code> o <code>MAX</code>."}, {"t": "sql", "q": "¿Qué es peligroso de un <code>UPDATE</code> o <code>DELETE</code> sin <code>WHERE</code>?", "a": "Que cambia o borra <b>todas</b> las filas de la tabla."}, {"t": "sql", "q": "¿Qué es un borrado lógico?", "a": "No borrar la fila, sino marcarla con un campo (por ejemplo <code>activo = 0</code>). Los datos se quedan guardados."}, {"t": "node", "q": "¿Qué es una API REST?", "a": "Un servidor que recibe peticiones (verbo + URL) y devuelve <b>datos en JSON</b>, no páginas."}, {"t": "node", "q": "¿Qué verbo HTTP corresponde a cada parte del CRUD?", "a": "<code>GET</code> leer · <code>POST</code> crear · <code>PUT</code> actualizar · <code>DELETE</code> borrar."}, {"t": "node", "q": "¿Qué diferencia hay entre <code>resolve</code> y <code>reject</code> en una promesa?", "a": "<code>resolve</code>: acaba bien, resultado esperado (sigue en el <code>try</code>). <code>reject</code>: algo inesperado (salta al <code>catch</code>)."}, {"t": "node", "q": "¿Dónde se puede usar <code>await</code>?", "a": "Dentro de una función <code>async</code> (o en un archivo con módulos)."}, {"t": "node", "q": "¿Qué hay que poner en <code>package.json</code> para usar <code>import</code>?", "a": "<code>\"type\": \"module\"</code>."}, {"t": "node", "q": "¿Por qué no se sube <code>node_modules</code> a GitHub y cómo se recupera?", "a": "Porque pesa muchísimo. Con <code>npm install</code> se vuelve a crear a partir del <code>package.json</code>."}, {"t": "node", "q": "¿Qué hace <code>npm run dev</code>?", "a": "Ejecuta el script <code>\"dev\"</code> del <code>package.json</code>, por ejemplo <code>node --watch index.js</code>."}, {"t": "node", "q": "¿Qué hace <code>--watch</code> y cómo paras el servidor?", "a": "Se queda escuchando y se recarga cada vez que guardas. Se para con <b>Ctrl + C</b>."}, {"t": "node", "q": "¿Cuándo se ponen llaves en un <code>import</code>?", "a": "Con llaves para cosas sueltas de un archivo tuyo: <code>import { arrayPaises } from './data.js'</code>. Sin llaves para una librería entera: <code>import express from 'express'</code>."}, {"t": "node", "q": "¿Qué significan <code>./</code> y <code>../</code> en un import?", "a": "<code>./</code> = esta carpeta. <code>../</code> = sube una carpeta."}, {"t": "node", "q": "¿Cómo es siempre una ruta de Express?", "a": "<code>app.verbo('/ruta', (req, res) =&gt; { … })</code>."}, {"t": "node", "q": "¿Qué son <code>req</code> y <code>res</code>?", "a": "<code>req</code>: lo que llega en la petición. <code>res</code>: la respuesta que envías. Siempre en ese orden."}, {"t": "node", "q": "¿Cómo se hace una ruta dinámica y dónde llega el valor?", "a": "Con dos puntos: <code>/pais/:nombre</code>. El valor llega en <code>req.params.nombre</code>."}, {"t": "node", "q": "¿De qué tipo es siempre lo que llega por <code>req.params</code>?", "a": "<b>Texto</b>. Para compararlo con un id numérico: <code>Number(req.params.id)</code>."}, {"t": "node", "q": "¿Qué diferencia hay entre <code>res.end</code>, <code>res.send</code> y <code>res.json</code>?", "a": "<code>end</code>: solo texto. <code>send</code>: texto, HTML u objetos. <code>json</code>: datos en JSON (lo de una API)."}, {"t": "node", "q": "¿Qué pasa si una ruta no responde nada?", "a": "La petición se queda cargando (\"fetching\") para siempre. Siempre hay que responder."}, {"t": "node", "q": "¿Qué hace falta para leer <code>req.body</code>?", "a": "<code>app.use(express.json())</code> después de <code>const app = express()</code>. Sin eso, <code>req.body</code> es <code>undefined</code>."}, {"t": "node", "q": "¿Qué llega por la URL y qué por el body en un PUT?", "a": "Por la URL (<code>req.params</code>), el <b>id</b> de lo que cambias. Por el body (<code>req.body</code>), los <b>datos nuevos</b>."}, {"t": "node", "q": "¿Cómo es un JSON estricto?", "a": "Claves y textos con <b>comillas dobles</b> y sin coma después del último dato: <code>{ \"pais\": \"Perú\", \"capital\": \"Lima\" }</code>."}, {"t": "node", "q": "¿Son la misma ruta <code>GET /pais/:nombre</code> y <code>DELETE /pais/:id</code>?", "a": "No: cambia el verbo. Una ruta es verbo + dirección. Con el mismo verbo sí chocarían, porque <code>:algo</code> admite cualquier cosa."}, {"t": "node", "q": "¿Qué es un controlador?", "a": "La función <code>(req, res) =&gt; { … }</code> de una ruta. Se saca a <code>controllers/</code>, se exporta y se importa en <code>index.js</code>."}, {"t": "node", "q": "¿Para qué sirve un cliente de APIs como Fetch Client o Postman?", "a": "Para probar <code>POST</code>, <code>PUT</code> y <code>DELETE</code>: el navegador solo hace <code>GET</code>."}, {"t": "node", "q": "¿En qué orden pasa una petición por las capas de la API?", "a": "<code>index.js</code> → <code>app.js</code> → <code>routes</code> → <code>middlewares</code> → <code>controllers</code> → <code>models</code> → MySQL, y vuelta."}, {"t": "node", "q": "¿Qué es un endpoint?", "a": "El conjunto <b>verbo + ruta</b>, por ejemplo <code>GET /api/mascotas</code>."}, {"t": "node", "q": "¿Para qué sirven los middlewares?", "a": "Son los \"porteros\": comprueban si alguien puede entrar (login, permisos) antes de llegar al controlador."}, {"t": "node", "q": "¿Qué hace cada capa: routes, controllers y models?", "a": "<b>routes</b>: los endpoints. <b>controllers</b>: la función que responde. <b>models</b>: las consultas SQL."}, {"t": "node", "q": "¿Qué va en <code>.env</code> y por qué no se sube a GitHub?", "a": "Las variables secretas, como el usuario y la contraseña de la base de datos. Si se sube, cualquiera puede entrar a tus datos."}, {"t": "node", "q": "¿Para qué sirve <code>.env.example</code>?", "a": "Tiene los mismos nombres que <code>.env</code> pero con datos falsos. Se sube para que quien descargue el proyecto sepa qué rellenar."}, {"t": "node", "q": "¿Qué se pone en <code>.gitignore</code> en una API?", "a": "<code>.env</code>, <code>node_modules</code> y carpetas pesadas como <code>images</code>."}, {"t": "node", "q": "¿Qué diferencia hay entre <code>app.js</code> e <code>index.js</code>?", "a": "<code>app.js</code> configura Express (JSON, CORS, rutas). <code>index.js</code> crea el servidor HTTP con esa app y lo arranca."}, {"t": "node", "q": "¿Cómo se llaman los eventos para saber si el servidor arrancó o falló?", "a": "<code>server.on('listening', …)</code> y <code>server.on('error', …)</code>, en inglés y en minúscula."}, {"t": "node", "q": "Si <code>app.js</code> hace <code>export const app</code>, ¿cómo se importa?", "a": "Con llaves: <code>import { app } from './src/app.js'</code>. Sin llaves solo con <code>export default</code>."}, {"t": "sql", "q": "En dueños y mascotas (1:N), ¿en qué tabla va la clave foránea?", "a": "En la del <b>hijo</b>, la de \"muchos\": <code>mascota.id_dueno</code> apunta a <code>dueno.id</code>."}, {"t": "sql", "q": "¿Cuándo hace falta una tabla intermedia?", "a": "En una relación <b>N:M</b>, por ejemplo clientes y productos: la tabla intermedia es <code>pedido</code>."}, {"t": "sql", "q": "¿Por qué el código postal se guarda como <code>CHAR(5)</code> y no como número?", "a": "Porque no se opera con él, y como número perdería el 0 inicial (<code>08008</code> → <code>8008</code>)."}, {"t": "node", "q": "¿Cómo lee el código las variables del <code>.env</code>?", "a": "Con <code>process.env.NOMBRE</code>, por ejemplo <code>process.env.DB_PASSWORD</code>. Para que Node cargue el .env, el script lleva <code>--env-file-if-exists=.env</code>."}, {"t": "node", "q": "¿Qué significa <code>process.env.PORT || process.env.SERV_PORT</code>?", "a": "Usa el puerto que dé el servidor de producción y, si no hay ninguno (en tu ordenador), el de tu .env."}, {"t": "node", "q": "¿Qué hace <code>app.use('/api', apiRoutes)</code>?", "a": "Manda todas las peticiones que empiezan por /api al archivo de rutas. Así se separan los datos (la API) de una posible web."}, {"t": "node", "q": "¿Para qué sirve <code>next</code> en un middleware?", "a": "Para dejar pasar la petición a la siguiente función, como un portero que te deja entrar. Si no llamas a next ni respondes, la petición se queda colgada."}, {"t": "node", "q": "¿Qué código de estado devuelve una API cuando la ruta no existe, y cuál cuando hay un error del servidor?", "a": "404 cuando no existe y 500 cuando hay un error del servidor. Y siempre con un JSON, por ejemplo <code>{ message: 'Not found' }</code>."}, {"t": "node", "q": "¿Qué se importa en un archivo de rutas y qué en app.js?", "a": "En las rutas, solo <code>{ Router }</code> de express (<code>const router = Router()</code>). En app.js, express entero."}, {"t": "node", "q": "¿Por qué las funciones del controlador y del modelo son <code>async</code>?", "a": "Porque consultar la base de datos tarda y devuelve promesas: hay que esperar con <code>await</code>."}, {"t": "node", "q": "¿Qué hace el controlador y qué hace el modelo?", "a": "El modelo hace la consulta SQL y la devuelve con return. El controlador llama al modelo y responde con <code>res.json(…)</code>."}, {"t": "node", "q": "¿Para qué sirve <code>createPool</code> de <code>mysql2/promise</code>?", "a": "Crea la conexión (un \"pool\") con MySQL usando los datos del .env. Se exporta por defecto y la usan los modelos."}, {"t": "node", "q": "¿Cuándo se usa <code>export default</code> y cuándo <code>export { … }</code>?", "a": "Default para lo principal y único de un archivo (app, router, pool); se importa sin llaves. La lista con llaves cuando hay varias funciones."}, {"t": "node", "q": "¿Qué significa <code>Address already in use</code>?", "a": "Que el puerto ya está ocupado, normalmente por un servidor que se quedó abierto. Ciérralo o usa otro puerto."}, {"t": "node", "q": "¿Por qué no se mete una variable en la consulta con <code>${}</code>?", "a": "Por la <b>inyección SQL</b>: alguien podría colar SQL en la URL. Se pone <code>?</code> y los valores en un array: <code>execute('… where id = ?', [id])</code>."}, {"t": "node", "q": "Si una consulta tiene 3 <code>?</code>, ¿qué lleva el array?", "a": "3 valores, en el mismo orden que las interrogaciones."}, {"t": "node", "q": "¿Cuándo devuelves <code>result</code> y cuándo <code>result[0]</code>?", "a": "<code>result</code> cuando quieres muchas filas (todas, por especie). <code>result[0]</code> cuando quieres una (por id)."}, {"t": "node", "q": "¿Qué tipo de dato son los id en MySQL?", "a": "Números enteros. Por eso lo que llega por <code>req.params</code> (texto) se pasa por <code>Number()</code>."}, {"t": "node", "q": "¿Hay que pasar por <code>Number()</code> la especie de <code>/especie/all/:especie</code>?", "a": "No: \"perro\" es texto y en la base de datos también es texto."}, {"t": "node", "q": "¿Qué mira un <code>delete</code> o un <code>update</code> para saber si ha funcionado?", "a": "<code>result.affectedRows</code>: si es 1, ha cambiado la fila; si es 0, no existía."}, {"t": "node", "q": "¿Qué devuelve un <code>insert</code> y cómo devuelves la mascota completa?", "a": "Solo el id nuevo, en <code>result.insertId</code>. Con ese id llamas a <code>selectById</code> y devuelves la mascota entera."}, {"t": "node", "q": "¿Qué recibe un POST y qué recibe un PUT?", "a": "POST: solo <code>req.body</code>. PUT: <code>req.body</code> (datos nuevos) y <code>req.params</code> (el id de cuál cambiar)."}, {"t": "node", "q": "En un <code>update … where id = ?</code>, ¿dónde va el id en el array?", "a": "El <b>último</b>, porque el <code>?</code> del <code>where</code> es el último de la consulta."}, {"t": "node", "q": "¿Puede llamarse igual la función del controlador y la del modelo?", "a": "No: el controlador importa la del modelo, y tendría dos con el mismo nombre en el mismo archivo. En archivos distintos (dos <code>router</code>, dos <code>getAll</code>) sí se puede."}, {"t": "node", "q": "¿Qué importa y qué exporta cada archivo: rutas, controlador y modelo?", "a": "Rutas: importan el controlador, exportan el router. Controlador: importa el modelo, exporta sus funciones. Modelo: importa <code>db</code>, exporta sus funciones."}];
-  const nombres = { git: 'Terminal y Git', js: 'JavaScript', arr: 'Arrays y objetos', sql: 'SQL', node: 'Node y API' };
+  const P = [{"t": "git", "q": "¿Qué hace <code>cd ..</code>?", "a": "Sube una carpeta (a la carpeta de arriba)."}, {"t": "git", "q": "¿Cómo creas una carpeta y cómo ves qué hay en la carpeta actual?", "a": "<code>mkdir nombre</code> crea la carpeta. <code>ls</code> lista lo que hay."}, {"t": "git", "q": "¿Qué hace <code>code .</code>?", "a": "Abre en VS Code la carpeta en la que estás (el punto = esta carpeta)."}, {"t": "git", "q": "¿Cuál es el ciclo de Git que harás siempre?", "a": "<code>git add .</code> → <code>git commit -m \"mensaje\"</code> → <code>git push</code>."}, {"t": "git", "q": "¿Qué diferencia hay entre <code>commit</code> y <code>push</code>?", "a": "<code>commit</code> guarda una foto de los cambios <b>en tu ordenador</b>. <code>push</code> la sube a GitHub."}, {"t": "git", "q": "¿Para qué sirve <code>git pull</code>?", "a": "Para traerte a tu ordenador los cambios que hay en GitHub (por ejemplo, lo nuevo del repo del profe)."}, {"t": "git", "q": "¿Qué hace <code>git clone URL</code>?", "a": "Descarga un repositorio de GitHub en una carpeta nueva, ya conectada con GitHub."}, {"t": "git", "q": "¿Cómo creas una rama nueva y te cambias a ella?", "a": "<code>git checkout -b nombre</code> (o <code>git switch -c nombre</code>)."}, {"t": "git", "q": "¿Para qué sirve <code>git status</code>?", "a": "Para ver qué archivos han cambiado y cuáles están preparados para el commit."}, {"t": "git", "q": "¿Qué va en el archivo <code>.gitignore</code>?", "a": "Lo que Git debe ignorar y no subir, por ejemplo <code>node_modules</code> o el <code>.env</code> con contraseñas."}, {"t": "js", "q": "¿Qué diferencia hay entre <code>let</code> y <code>const</code>?", "a": "<code>let</code> se puede cambiar después. <code>const</code> no se puede reasignar."}, {"t": "js", "q": "¿Qué diferencia hay entre <code>=</code>, <code>==</code> y <code>===</code>?", "a": "<code>=</code> asigna. <code>==</code> compara sin mirar el tipo. <code>===</code> compara valor <b>y</b> tipo (el que se usa siempre)."}, {"t": "js", "q": "¿Qué devuelve <code>7 % 2</code> y para qué se usa?", "a": "Devuelve <b>1</b>, el resto de dividir. Se usa para saber si un número es par (<code>n % 2 === 0</code>)."}, {"t": "js", "q": "¿Qué significan <code>&amp;&amp;</code>, <code>||</code> y <code>!</code>?", "a": "<code>&amp;&amp;</code> = y (las dos). <code>||</code> = o (alguna). <code>!</code> = no (le da la vuelta)."}, {"t": "js", "q": "¿Cómo metes una variable dentro de un texto?", "a": "Con comillas invertidas y <code>${}</code>: <code>`Hola ${nombre}`</code>."}, {"t": "js", "q": "¿Importa el orden de los <code>else if</code>?", "a": "Sí. Se ejecuta el <b>primero</b> que se cumple y los demás ya no se miran. Ve de lo más concreto a lo más general."}, {"t": "js", "q": "¿Cómo se escribe un <code>if/else</code> en una línea?", "a": "Con el ternario: <code>condicion ? siQueSi : siQueNo</code>."}, {"t": "js", "q": "¿Cuándo usas <code>for</code> y cuándo <code>while</code>?", "a": "<code>for</code> cuando sabes cuántas vueltas. <code>while</code> cuando repites <b>mientras</b> se cumpla algo y no sabes cuántas."}, {"t": "js", "q": "En un bucle de búsqueda, ¿por qué la posición empieza en <code>-1</code>?", "a": "Porque ningún índice puede ser -1: si al final sigue valiendo -1, significa <b>no encontrado</b> (valor centinela)."}, {"t": "js", "q": "¿Qué diferencia hay entre <code>console.log</code> y <code>return</code>?", "a": "<code>console.log</code> muestra en la terminal. <code>return</code> devuelve el valor a quien llamó a la función, para guardarlo o usarlo."}, {"t": "js", "q": "¿Qué devuelve una función que no tiene <code>return</code>?", "a": "<code>undefined</code>."}, {"t": "js", "q": "¿Qué es un parámetro y qué es un argumento?", "a": "Parámetro: el hueco de la definición (<code>function doble(numero)</code>). Argumento: el valor que mandas al llamarla (<code>doble(5)</code>)."}, {"t": "js", "q": "Si llamas <code>restar(10, 3)</code> a <code>function restar(a, b)</code>, ¿qué vale <code>a</code>?", "a": "<b>10</b>. Los argumentos entran en los parámetros <b>por orden</b>."}, {"t": "js", "q": "¿Qué es el hoisting?", "a": "Poder llamar a una función declarada con <code>function</code> antes de la línea donde está escrita. Las de <code>const</code> no lo permiten."}, {"t": "js", "q": "Convierte <code>function doble(n) { return n * 2 }</code> en flecha.", "a": "<code>const doble = n =&gt; n * 2</code>"}, {"t": "arr", "q": "¿Cuál es el índice del primer elemento de un array?", "a": "El <b>0</b>. El último es <code>array.length - 1</code>."}, {"t": "arr", "q": "¿Cómo añades al final de un array y cómo quitas el último?", "a": "<code>push(elemento)</code> añade al final. <code>pop()</code> quita el último."}, {"t": "arr", "q": "¿Qué hacen <code>shift()</code> y <code>unshift()</code>?", "a": "<code>shift()</code> quita el primero. <code>unshift(x)</code> añade al principio."}, {"t": "arr", "q": "¿Qué devuelve <code>find</code> y qué devuelve si no encuentra nada?", "a": "El <b>primer</b> elemento que cumple la condición. Si no hay ninguno, <code>undefined</code>."}, {"t": "arr", "q": "¿Qué devuelve <code>filter</code> y qué devuelve si no encuentra nada?", "a": "Un <b>array</b> con todos los que cumplen. Si no hay ninguno, <code>[]</code>."}, {"t": "arr", "q": "¿Para qué sirve <code>map</code>?", "a": "Para transformar cada elemento y obtener un array nuevo del mismo tamaño (por ejemplo, solo los nombres)."}, {"t": "arr", "q": "¿Cómo lees la propiedad <code>capital</code> de un objeto <code>pais</code>?", "a": "<code>pais.capital</code> (o <code>pais['capital']</code>)."}, {"t": "arr", "q": "¿Cómo borras de un array el elemento con <code>id</code> 2 usando <code>filter</code>?", "a": "<code>lista.filter(e =&gt; e.id !== 2)</code>: te quedas con todos menos ese."}, {"t": "arr", "q": "¿Qué hace <code>resultado || 'No hay resultados'</code>?", "a": "Si <code>resultado</code> tiene valor, lo devuelve. Si es <code>undefined</code> o <code>null</code>, devuelve el texto."}, {"t": "arr", "q": "¿Por qué <code>'spinning' === 'Spinning'</code> es falso y cómo lo arreglas?", "a": "Porque distingue mayúsculas. Pasa los dos lados a minúsculas: <code>a.toLowerCase() === b.toLowerCase()</code>."}, {"t": "arr", "q": "¿Para qué sirve <code>reduce</code>?", "a": "Para juntar todo el array en <b>un solo valor</b>, por ejemplo la suma de todos los precios."}, {"t": "sql", "q": "¿Qué es una clave primaria (PK)?", "a": "La columna que identifica cada fila sin repetirse, normalmente <code>id</code> autoincremental."}, {"t": "sql", "q": "¿Qué es una clave ajena (FK)?", "a": "Una columna que apunta a la PK de otra tabla, por ejemplo <code>productos.categoria_id → categorias.id</code>."}, {"t": "sql", "q": "¿Cuál es el orden de las partes de un SELECT?", "a": "<code>SELECT</code> → <code>FROM</code> → <code>JOIN</code> → <code>WHERE</code> → <code>GROUP BY</code> → <code>HAVING</code> → <code>ORDER BY</code> → <code>LIMIT</code>."}, {"t": "sql", "q": "¿Qué diferencia hay entre <code>WHERE</code> y <code>HAVING</code>?", "a": "<code>WHERE</code> filtra <b>filas</b> antes de agrupar. <code>HAVING</code> filtra <b>grupos</b> después del <code>GROUP BY</code> (ahí sí puedes usar <code>COUNT</code>, <code>AVG</code>…)."}, {"t": "sql", "q": "¿Qué hace <code>BETWEEN 20 AND 100</code>?", "a": "Entre 20 y 100, <b>los dos incluidos</b>. Es lo mismo que <code>&gt;= 20 AND &lt;= 100</code>."}, {"t": "sql", "q": "¿Qué hace <code>IN ('pendiente', 'enviado')</code>?", "a": "Que el valor sea <b>alguno</b> de la lista. Es como varios <code>OR</code>."}, {"t": "sql", "q": "¿Qué buscan <code>LIKE 'A%'</code> y <code>LIKE '%a%'</code>?", "a": "<code>'A%'</code>: que empiece por A. <code>'%a%'</code>: que contenga una a en cualquier sitio."}, {"t": "sql", "q": "¿Para qué sirve <code>AS</code>?", "a": "Para poner un alias: renombrar una columna (<code>c.nombre AS categoria</code>) o una tabla (<code>productos p</code>)."}, {"t": "sql", "q": "¿Qué diferencia hay entre <code>JOIN</code> y <code>LEFT JOIN</code>?", "a": "<code>JOIN</code> solo deja las filas con pareja en las dos tablas. <code>LEFT JOIN</code> deja todas las de la izquierda; las que no tienen pareja salen con <code>NULL</code>."}, {"t": "sql", "q": "¿Cómo encuentras lo que <b>no</b> tiene pareja en otra tabla?", "a": "<code>LEFT JOIN … WHERE otra.id IS NULL</code>, o <code>WHERE id NOT IN (SELECT …)</code>."}, {"t": "sql", "q": "¿Por qué se escribe <code>IS NULL</code> y no <code>= NULL</code>?", "a": "Porque <code>NULL</code> es \"sin valor\" y no se puede comparar con <code>=</code>: nunca da verdadero."}, {"t": "sql", "q": "¿Qué es una subconsulta?", "a": "Un <code>SELECT</code> dentro de otro, entre paréntesis. Se ejecuta primero, por ejemplo <code>WHERE precio &gt; (SELECT AVG(precio) FROM productos)</code>."}, {"t": "sql", "q": "¿Qué diferencia hay entre <code>COUNT(*)</code> y <code>COUNT(DISTINCT col)</code>?", "a": "<code>COUNT(*)</code> cuenta filas. <code>COUNT(DISTINCT col)</code> cuenta valores distintos, sin repetir."}, {"t": "sql", "q": "Con <code>GROUP BY</code>, ¿qué columnas pueden ir en el SELECT?", "a": "Las del <code>GROUP BY</code> y las que van dentro de <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MIN</code> o <code>MAX</code>."}, {"t": "sql", "q": "¿Qué es peligroso de un <code>UPDATE</code> o <code>DELETE</code> sin <code>WHERE</code>?", "a": "Que cambia o borra <b>todas</b> las filas de la tabla."}, {"t": "sql", "q": "¿Qué es un borrado lógico?", "a": "No borrar la fila, sino marcarla con un campo (por ejemplo <code>activo = 0</code>). Los datos se quedan guardados."}, {"t": "node", "q": "¿Qué es una API REST?", "a": "Un servidor que recibe peticiones (verbo + URL) y devuelve <b>datos en JSON</b>, no páginas."}, {"t": "node", "q": "¿Qué verbo HTTP corresponde a cada parte del CRUD?", "a": "<code>GET</code> leer · <code>POST</code> crear · <code>PUT</code> actualizar · <code>DELETE</code> borrar."}, {"t": "node", "q": "¿Qué diferencia hay entre <code>resolve</code> y <code>reject</code> en una promesa?", "a": "<code>resolve</code>: acaba bien, resultado esperado (sigue en el <code>try</code>). <code>reject</code>: algo inesperado (salta al <code>catch</code>)."}, {"t": "node", "q": "¿Dónde se puede usar <code>await</code>?", "a": "Dentro de una función <code>async</code> (o en un archivo con módulos)."}, {"t": "node", "q": "¿Qué hay que poner en <code>package.json</code> para usar <code>import</code>?", "a": "<code>\"type\": \"module\"</code>."}, {"t": "node", "q": "¿Por qué no se sube <code>node_modules</code> a GitHub y cómo se recupera?", "a": "Porque pesa muchísimo. Con <code>npm install</code> se vuelve a crear a partir del <code>package.json</code>."}, {"t": "node", "q": "¿Qué hace <code>npm run dev</code>?", "a": "Ejecuta el script <code>\"dev\"</code> del <code>package.json</code>, por ejemplo <code>node --watch index.js</code>."}, {"t": "node", "q": "¿Qué hace <code>--watch</code> y cómo paras el servidor?", "a": "Se queda escuchando y se recarga cada vez que guardas. Se para con <b>Ctrl + C</b>."}, {"t": "node", "q": "¿Cuándo se ponen llaves en un <code>import</code>?", "a": "Con llaves para cosas sueltas de un archivo tuyo: <code>import { arrayPaises } from './data.js'</code>. Sin llaves para una librería entera: <code>import express from 'express'</code>."}, {"t": "node", "q": "¿Qué significan <code>./</code> y <code>../</code> en un import?", "a": "<code>./</code> = esta carpeta. <code>../</code> = sube una carpeta."}, {"t": "node", "q": "¿Cómo es siempre una ruta de Express?", "a": "<code>app.verbo('/ruta', (req, res) =&gt; { … })</code>."}, {"t": "node", "q": "¿Qué son <code>req</code> y <code>res</code>?", "a": "<code>req</code>: lo que llega en la petición. <code>res</code>: la respuesta que envías. Siempre en ese orden."}, {"t": "node", "q": "¿Cómo se hace una ruta dinámica y dónde llega el valor?", "a": "Con dos puntos: <code>/pais/:nombre</code>. El valor llega en <code>req.params.nombre</code>."}, {"t": "node", "q": "¿De qué tipo es siempre lo que llega por <code>req.params</code>?", "a": "<b>Texto</b>. Para compararlo con un id numérico: <code>Number(req.params.id)</code>."}, {"t": "node", "q": "¿Qué diferencia hay entre <code>res.end</code>, <code>res.send</code> y <code>res.json</code>?", "a": "<code>end</code>: solo texto. <code>send</code>: texto, HTML u objetos. <code>json</code>: datos en JSON (lo de una API)."}, {"t": "node", "q": "¿Qué pasa si una ruta no responde nada?", "a": "La petición se queda cargando (\"fetching\") para siempre. Siempre hay que responder."}, {"t": "node", "q": "¿Qué hace falta para leer <code>req.body</code>?", "a": "<code>app.use(express.json())</code> después de <code>const app = express()</code>. Sin eso, <code>req.body</code> es <code>undefined</code>."}, {"t": "node", "q": "¿Qué llega por la URL y qué por el body en un PUT?", "a": "Por la URL (<code>req.params</code>), el <b>id</b> de lo que cambias. Por el body (<code>req.body</code>), los <b>datos nuevos</b>."}, {"t": "node", "q": "¿Cómo es un JSON estricto?", "a": "Claves y textos con <b>comillas dobles</b> y sin coma después del último dato: <code>{ \"pais\": \"Perú\", \"capital\": \"Lima\" }</code>."}, {"t": "node", "q": "¿Son la misma ruta <code>GET /pais/:nombre</code> y <code>DELETE /pais/:id</code>?", "a": "No: cambia el verbo. Una ruta es verbo + dirección. Con el mismo verbo sí chocarían, porque <code>:algo</code> admite cualquier cosa."}, {"t": "node", "q": "¿Qué es un controlador?", "a": "La función <code>(req, res) =&gt; { … }</code> de una ruta. Se saca a <code>controllers/</code>, se exporta y se importa en <code>index.js</code>."}, {"t": "node", "q": "¿Para qué sirve un cliente de APIs como Fetch Client o Postman?", "a": "Para probar <code>POST</code>, <code>PUT</code> y <code>DELETE</code>: el navegador solo hace <code>GET</code>."}, {"t": "node", "q": "¿En qué orden pasa una petición por las capas de la API?", "a": "<code>index.js</code> → <code>app.js</code> → <code>routes</code> → <code>middlewares</code> → <code>controllers</code> → <code>models</code> → MySQL, y vuelta."}, {"t": "node", "q": "¿Qué es un endpoint?", "a": "El conjunto <b>verbo + ruta</b>, por ejemplo <code>GET /api/mascotas</code>."}, {"t": "node", "q": "¿Para qué sirven los middlewares?", "a": "Son los \"porteros\": comprueban si alguien puede entrar (login, permisos) antes de llegar al controlador."}, {"t": "node", "q": "¿Qué hace cada capa: routes, controllers y models?", "a": "<b>routes</b>: los endpoints. <b>controllers</b>: la función que responde. <b>models</b>: las consultas SQL."}, {"t": "node", "q": "¿Qué va en <code>.env</code> y por qué no se sube a GitHub?", "a": "Las variables secretas, como el usuario y la contraseña de la base de datos. Si se sube, cualquiera puede entrar a tus datos."}, {"t": "node", "q": "¿Para qué sirve <code>.env.example</code>?", "a": "Tiene los mismos nombres que <code>.env</code> pero con datos falsos. Se sube para que quien descargue el proyecto sepa qué rellenar."}, {"t": "node", "q": "¿Qué se pone en <code>.gitignore</code> en una API?", "a": "<code>.env</code>, <code>node_modules</code> y carpetas pesadas como <code>images</code>."}, {"t": "node", "q": "¿Qué diferencia hay entre <code>app.js</code> e <code>index.js</code>?", "a": "<code>app.js</code> configura Express (JSON, CORS, rutas). <code>index.js</code> crea el servidor HTTP con esa app y lo arranca."}, {"t": "node", "q": "¿Cómo se llaman los eventos para saber si el servidor arrancó o falló?", "a": "<code>server.on('listening', …)</code> y <code>server.on('error', …)</code>, en inglés y en minúscula."}, {"t": "node", "q": "Si <code>app.js</code> hace <code>export const app</code>, ¿cómo se importa?", "a": "Con llaves: <code>import { app } from './src/app.js'</code>. Sin llaves solo con <code>export default</code>."}, {"t": "sql", "q": "En dueños y mascotas (1:N), ¿en qué tabla va la clave foránea?", "a": "En la del <b>hijo</b>, la de \"muchos\": <code>mascota.id_dueno</code> apunta a <code>dueno.id</code>."}, {"t": "sql", "q": "¿Cuándo hace falta una tabla intermedia?", "a": "En una relación <b>N:M</b>, por ejemplo clientes y productos: la tabla intermedia es <code>pedido</code>."}, {"t": "sql", "q": "¿Por qué el código postal se guarda como <code>CHAR(5)</code> y no como número?", "a": "Porque no se opera con él, y como número perdería el 0 inicial (<code>08008</code> → <code>8008</code>)."}, {"t": "node", "q": "¿Cómo lee el código las variables del <code>.env</code>?", "a": "Con <code>process.env.NOMBRE</code>, por ejemplo <code>process.env.DB_PASSWORD</code>. Para que Node cargue el .env, el script lleva <code>--env-file-if-exists=.env</code>."}, {"t": "node", "q": "¿Qué significa <code>process.env.PORT || process.env.SERV_PORT</code>?", "a": "Usa el puerto que dé el servidor de producción y, si no hay ninguno (en tu ordenador), el de tu .env."}, {"t": "node", "q": "¿Qué hace <code>app.use('/api', apiRoutes)</code>?", "a": "Manda todas las peticiones que empiezan por /api al archivo de rutas. Así se separan los datos (la API) de una posible web."}, {"t": "node", "q": "¿Para qué sirve <code>next</code> en un middleware?", "a": "Para dejar pasar la petición a la siguiente función, como un portero que te deja entrar. Si no llamas a next ni respondes, la petición se queda colgada."}, {"t": "node", "q": "¿Qué código de estado devuelve una API cuando la ruta no existe, y cuál cuando hay un error del servidor?", "a": "404 cuando no existe y 500 cuando hay un error del servidor. Y siempre con un JSON, por ejemplo <code>{ message: 'Not found' }</code>."}, {"t": "node", "q": "¿Qué se importa en un archivo de rutas y qué en app.js?", "a": "En las rutas, solo <code>{ Router }</code> de express (<code>const router = Router()</code>). En app.js, express entero."}, {"t": "node", "q": "¿Por qué las funciones del controlador y del modelo son <code>async</code>?", "a": "Porque consultar la base de datos tarda y devuelve promesas: hay que esperar con <code>await</code>."}, {"t": "node", "q": "¿Qué hace el controlador y qué hace el modelo?", "a": "El modelo hace la consulta SQL y la devuelve con return. El controlador llama al modelo y responde con <code>res.json(…)</code>."}, {"t": "node", "q": "¿Para qué sirve <code>createPool</code> de <code>mysql2/promise</code>?", "a": "Crea la conexión (un \"pool\") con MySQL usando los datos del .env. Se exporta por defecto y la usan los modelos."}, {"t": "node", "q": "¿Cuándo se usa <code>export default</code> y cuándo <code>export { … }</code>?", "a": "Default para lo principal y único de un archivo (app, router, pool); se importa sin llaves. La lista con llaves cuando hay varias funciones."}, {"t": "node", "q": "¿Qué significa <code>Address already in use</code>?", "a": "Que el puerto ya está ocupado, normalmente por un servidor que se quedó abierto. Ciérralo o usa otro puerto."}, {"t": "node", "q": "¿Por qué no se mete una variable en la consulta con <code>${}</code>?", "a": "Por la <b>inyección SQL</b>: alguien podría colar SQL en la URL. Se pone <code>?</code> y los valores en un array: <code>execute('… where id = ?', [id])</code>."}, {"t": "node", "q": "Si una consulta tiene 3 <code>?</code>, ¿qué lleva el array?", "a": "3 valores, en el mismo orden que las interrogaciones."}, {"t": "node", "q": "¿Cuándo devuelves <code>result</code> y cuándo <code>result[0]</code>?", "a": "<code>result</code> cuando quieres muchas filas (todas, por especie). <code>result[0]</code> cuando quieres una (por id)."}, {"t": "node", "q": "¿Qué tipo de dato son los id en MySQL?", "a": "Números enteros. Por eso lo que llega por <code>req.params</code> (texto) se pasa por <code>Number()</code>."}, {"t": "node", "q": "¿Hay que pasar por <code>Number()</code> la especie de <code>/especie/all/:especie</code>?", "a": "No: \"perro\" es texto y en la base de datos también es texto."}, {"t": "node", "q": "¿Qué mira un <code>delete</code> o un <code>update</code> para saber si ha funcionado?", "a": "<code>result.affectedRows</code>: si es 1, ha cambiado la fila; si es 0, no existía."}, {"t": "node", "q": "¿Qué devuelve un <code>insert</code> y cómo devuelves la mascota completa?", "a": "Solo el id nuevo, en <code>result.insertId</code>. Con ese id llamas a <code>selectById</code> y devuelves la mascota entera."}, {"t": "node", "q": "¿Qué recibe un POST y qué recibe un PUT?", "a": "POST: solo <code>req.body</code>. PUT: <code>req.body</code> (datos nuevos) y <code>req.params</code> (el id de cuál cambiar)."}, {"t": "node", "q": "En un <code>update … where id = ?</code>, ¿dónde va el id en el array?", "a": "El <b>último</b>, porque el <code>?</code> del <code>where</code> es el último de la consulta."}, {"t": "node", "q": "¿Puede llamarse igual la función del controlador y la del modelo?", "a": "No: el controlador importa la del modelo, y tendría dos con el mismo nombre en el mismo archivo. En archivos distintos (dos <code>router</code>, dos <code>getAll</code>) sí se puede."}, {"t": "node", "q": "¿Qué importa y qué exporta cada archivo: rutas, controlador y modelo?", "a": "Rutas: importan el controlador, exportan el router. Controlador: importa el modelo, exporta sus funciones. Modelo: importa <code>db</code>, exporta sus funciones."}, {"t": "hc", "q": "¿HTML es un lenguaje de programación?", "a": "No. Es un lenguaje de <b>marcas</b>: envuelve el contenido en etiquetas y es estático."}, {"t": "hc", "q": "¿Qué va en el <code>head</code> y qué en el <code>body</code>?", "a": "<code>head</code>: información sobre la página (título de la pestaña, charset, CSS). <code>body</code>: el contenido que se ve."}, {"t": "hc", "q": "¿Qué diferencia hay entre <code>head</code> y <code>header</code>?", "a": "<code>head</code> es la cabecera del documento (no se ve). <code>header</code> es la parte de arriba de la web y va dentro del <code>body</code>."}, {"t": "hc", "q": "¿Qué es una etiqueta autocontenida? Di tres.", "a": "Una que no se cierra porque no tiene contenido dentro: <code>&lt;br&gt;</code>, <code>&lt;img&gt;</code>, <code>&lt;input&gt;</code>."}, {"t": "hc", "q": "¿Para qué sirven <code>header</code>, <code>nav</code>, <code>article</code> o <code>footer</code> si se ven como un <code>div</code>?", "a": "Para el <b>SEO</b>: Google entiende qué es cada parte de la página."}, {"t": "hc", "q": "¿Qué diferencia hay entre <code>ol</code> y <code>ul</code>?", "a": "<code>ol</code>: lista ordenada (1, 2, 3). <code>ul</code>: sin ordenar (puntos). Los elementos van en <code>li</code>."}, {"t": "hc", "q": "¿Qué significan <code>../img/gato.jpg</code> y <code>/img/gato.jpg</code>?", "a": "<code>../</code>: sube una carpeta y entra en img (relativa). <code>/</code>: empieza en la raíz del proyecto (absoluta)."}, {"t": "hc", "q": "¿Por qué conviene abrir el HTML con Live Server y no con doble clic?", "a": "Porque con Live Server la raíz es la carpeta del proyecto y las rutas absolutas funcionan. Con doble clic, la raíz es el disco duro."}, {"t": "hc", "q": "¿Qué atributo usa una imagen y cuál un enlace para decir a dónde apuntan?", "a": "Imagen: <code>src</code>. Enlace: <code>href</code>."}, {"t": "hc", "q": "¿Cómo haces que un enlace se abra en una pestaña nueva?", "a": "Con <code>target=\"_blank\"</code>."}, {"t": "hc", "q": "¿Cómo haces un enlace que te lleve a otra parte de la misma página?", "a": "Le pones un <code>id</code> al elemento y en el enlace <code>href=\"#ese-id\"</code>. Es un ancla."}, {"t": "hc", "q": "En una tabla, ¿qué son <code>tr</code>, <code>th</code> y <code>td</code>?", "a": "<code>tr</code>: fila. <code>th</code>: celda de cabecera. <code>td</code>: celda normal."}, {"t": "hc", "q": "¿Para qué sirve el <code>for</code> de un <code>label</code>?", "a": "Lo une al <code>input</code> con ese <code>id</code>: al hacer clic en el texto, el campo coge el foco."}, {"t": "hc", "q": "¿Qué diferencia hay entre <code>value</code> y <code>placeholder</code>?", "a": "<code>value</code> es un valor ya escrito, que se envía. <code>placeholder</code> es un texto de ejemplo que desaparece al escribir."}, {"t": "hc", "q": "¿Qué diferencia hay entre <code>radio</code> y <code>checkbox</code>, y cómo se agrupan?", "a": "Radio: solo uno. Checkbox: varios. Se agrupan con el mismo <code>name</code> (en checkbox, con <code>[]</code>: <code>name=\"animal[]\"</code>)."}, {"t": "hc", "q": "¿En qué se diferencia enviar un formulario por GET y por POST?", "a": "GET: los datos van en la URL tras el <code>?</code> (<code>?nombre=Paco&amp;edad=13</code>). POST: van por dentro, sin verse. Para contraseñas, POST."}, {"t": "hc", "q": "¿<code>maxlength</code> o <code>min</code> hacen segura una página?", "a": "No: es validación en cliente, para ayudar al usuario. Se puede quitar desde el navegador. La seguridad se valida en el servidor."}, {"t": "hc", "q": "¿Cuáles son las 3 formas de poner CSS y cuál se recomienda?", "a": "Inline (<code>style=\"…\"</code>), etiqueta <code>&lt;style&gt;</code> y archivo aparte con <code>&lt;link rel=\"stylesheet\" href=\"styles.css\"&gt;</code>. Se recomienda el archivo aparte."}];
+  const nombres = { git: 'Terminal y Git', js: 'JavaScript', arr: 'Arrays y objetos', sql: 'SQL', node: 'Node y API', hc: 'HTML y CSS' };
   const KEY = 'repaso-fsd';
   let nivel = {};
   try { nivel = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}

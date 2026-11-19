@@ -80,6 +80,7 @@ body.searching .pager{display:none}
 section.area{margin-top:22px}
 nav.toc .sub{display:none}
 nav.toc a.here + .sub{display:flex}
+nav.toc a.here.plegado + .sub{display:none}
 .pager{display:flex;justify-content:space-between;gap:10px;margin:26px 0 8px;flex-wrap:wrap}
 .pg{font:600 14px var(--f-body);text-decoration:none;color:var(--fg);padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface)}
 .pg:hover{border-color:var(--dot)}
@@ -3862,7 +3863,7 @@ cards.forEach(c => {
 const btnAll = document.getElementById('btnAll');
 btnAll.addEventListener('click', () => {
   const open = btnAll.textContent === 'Abrir todo';
-  cards.forEach(c => c._set && c._set(open || c.classList.contains('esencial')));
+  cards.forEach(c => c._set && c._set(open));
   btnAll.textContent = open ? 'Cerrar todo' : 'Abrir todo';
 });
 
@@ -3936,6 +3937,11 @@ function irAHash() {
   mostrar(sec ? sec.id : (guardada || orden[0]), h);
 }
 addEventListener('hashchange', irAHash);
+// Pulsar otra vez la sección abierta pliega (o despliega) su lista de apartados
+links.forEach(l => l.addEventListener('click', e => {
+  if (l.classList.contains('here')) { e.preventDefault(); e.stopPropagation(); l.classList.toggle('plegado'); }
+  else links.forEach(x => x.classList.remove('plegado'));
+}));
 document.addEventListener('click', e => { const l = e.target.closest('a[href^="#"]'); if (l && l.getAttribute('href') === location.hash) irAHash(); });
 irAHash();
 

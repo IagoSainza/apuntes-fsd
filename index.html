@@ -10,7 +10,7 @@
 :root{
   --bg:#f3f5f9; --surface:#ffffff; --fg:#17202e; --muted:#5b6678; --line:#dbe1ea;
   --accent:#2545c4; --accent-soft:#e4e9fb; --mark:#fff1a8; --code-bg:#f0f2f7;
-  --c-term:#0f7a5a; --c-git:#c2410c; --c-html:#7c3aed; --c-js:#2545c4; --c-cond:#b4237a; --c-loop:#0e7490; --c-fn:#a16207; --c-arr:#4d7c0f; --c-ia:#6b5b95; --c-sql:#9f1239; --c-obj:#a21caf; --c-node:#15803d; --c-hc:#be185d;
+  --c-term:#0f7a5a; --c-git:#c2410c; --c-html:#7c3aed; --c-js:#2545c4; --c-cond:#b4237a; --c-loop:#0e7490; --c-fn:#a16207; --c-arr:#4d7c0f; --c-ia:#6b5b95; --c-sql:#9f1239; --c-obj:#a21caf; --c-node:#15803d; --c-hc:#be185d; --c-base:#b45309;
   --ok:#0f7a5a; --bad:#b42318;
   --tok-com:#6b7686; --tok-str:#0f7a5a; --tok-kw:#9f1f9f; --tok-num:#b45309;
   --f-display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
@@ -20,13 +20,13 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#0f141c; --surface:#171e2a; --fg:#e6ebf3; --muted:#9aa5b8; --line:#2a3445;
   --accent:#8ea4ff; --accent-soft:#1f2a4a; --mark:#5a4b0d; --code-bg:#111823;
-  --c-term:#4fd1a5; --c-git:#fb923c; --c-html:#b79cff; --c-js:#8ea4ff; --c-cond:#f472b6; --c-loop:#22d3ee; --c-fn:#facc15; --c-arr:#a3e635; --c-ia:#c4b5fd; --c-sql:#fb7185; --c-obj:#e879f9; --c-node:#86efac; --c-hc:#f9a8d4;
+  --c-term:#4fd1a5; --c-git:#fb923c; --c-html:#b79cff; --c-js:#8ea4ff; --c-cond:#f472b6; --c-loop:#22d3ee; --c-fn:#facc15; --c-arr:#a3e635; --c-ia:#c4b5fd; --c-sql:#fb7185; --c-obj:#e879f9; --c-node:#86efac; --c-hc:#f9a8d4; --c-base:#fbbf24;
   --ok:#4fd1a5; --bad:#f87171;
   --tok-com:#7d889b; --tok-str:#6ee7b7; --tok-kw:#f0abfc; --tok-num:#fdba74; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0f141c; --surface:#171e2a; --fg:#e6ebf3; --muted:#9aa5b8; --line:#2a3445;
   --accent:#8ea4ff; --accent-soft:#1f2a4a; --mark:#5a4b0d; --code-bg:#111823;
-  --c-term:#4fd1a5; --c-git:#fb923c; --c-html:#b79cff; --c-js:#8ea4ff; --c-cond:#f472b6; --c-loop:#22d3ee; --c-fn:#facc15; --c-arr:#a3e635; --c-ia:#c4b5fd; --c-sql:#fb7185; --c-obj:#e879f9; --c-node:#86efac; --c-hc:#f9a8d4;
+  --c-term:#4fd1a5; --c-git:#fb923c; --c-html:#b79cff; --c-js:#8ea4ff; --c-cond:#f472b6; --c-loop:#22d3ee; --c-fn:#facc15; --c-arr:#a3e635; --c-ia:#c4b5fd; --c-sql:#fb7185; --c-obj:#e879f9; --c-node:#86efac; --c-hc:#f9a8d4; --c-base:#fbbf24;
   --ok:#4fd1a5; --bad:#f87171;
   --tok-com:#7d889b; --tok-str:#6ee7b7; --tok-kw:#f0abfc; --tok-num:#fdba74; color-scheme:dark}
 
@@ -153,7 +153,7 @@ svg text{font-family:var(--f-body)}
 .fc-dot2{fill:var(--c-git)}
 
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
-[data-a="term"]{--dot:var(--c-term)}[data-a="git"]{--dot:var(--c-git)}[data-a="html"]{--dot:var(--c-html)}[data-a="js"]{--dot:var(--c-js)}[data-a="cond"]{--dot:var(--c-cond)}[data-a="ej"]{--dot:var(--accent)}[data-a="loop"]{--dot:var(--c-loop)}[data-a="fn"]{--dot:var(--c-fn)}[data-a="arr"]{--dot:var(--c-arr)}[data-a="ia"]{--dot:var(--c-ia)}[data-a="sql"]{--dot:var(--c-sql)}[data-a="obj"]{--dot:var(--c-obj)}[data-a="node"]{--dot:var(--c-node)}[data-a="hc"]{--dot:var(--c-hc)}
+[data-a="term"]{--dot:var(--c-term)}[data-a="git"]{--dot:var(--c-git)}[data-a="html"]{--dot:var(--c-html)}[data-a="js"]{--dot:var(--c-js)}[data-a="cond"]{--dot:var(--c-cond)}[data-a="ej"]{--dot:var(--accent)}[data-a="loop"]{--dot:var(--c-loop)}[data-a="fn"]{--dot:var(--c-fn)}[data-a="arr"]{--dot:var(--c-arr)}[data-a="ia"]{--dot:var(--c-ia)}[data-a="sql"]{--dot:var(--c-sql)}[data-a="obj"]{--dot:var(--c-obj)}[data-a="node"]{--dot:var(--c-node)}[data-a="hc"]{--dot:var(--c-hc)}[data-a="base"]{--dot:var(--c-base)}
 .demo{margin:10px 0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
 .demo-lbl{display:block;font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);background:var(--code-bg);padding:5px 10px;border-bottom:1px solid var(--line)}
 .demo iframe{display:block;width:100%;border:0;background:#fff}
@@ -163,6 +163,11 @@ svg text{font-family:var(--f-body)}
 .bm-c{background:#8cb6c0;color:#111;text-align:center;padding:14px 4px;border:1px solid #555}
 .bm-l{position:absolute;left:6px;top:4px;font-weight:700}
 .bm-n{position:absolute}.bm-t{top:5px;left:50%;transform:translateX(-50%)}.bm-b{bottom:5px;left:50%;transform:translateX(-50%)}.bm-lft{left:9px;top:50%;transform:translateY(-50%)}.bm-r{right:9px;top:50%;transform:translateY(-50%)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:8px 0 12px}
+.fl-box{flex:1 1 120px;border:2px solid var(--dot);border-radius:10px;padding:8px 10px;text-align:center;background:var(--surface)}
+.fl-box b{display:block;font-size:15px}.fl-box span{display:block;font-size:12.5px;color:var(--muted)}
+.fl-arrow{font-weight:700;color:var(--dot);text-align:center;font-size:14px}
+.fl-back{justify-content:center;margin-top:-4px}.fl-sm .fl-box{flex:0 1 130px}
 </style>
 
 <div class="wrap">
@@ -178,6 +183,7 @@ svg text{font-family:var(--f-body)}
 </div>
 <div class="layout">
 <nav class="toc" id="toc" aria-label="Índice">
+  <a href="#base" data-a="base">⭐ Lo esencial</a>
   <a href="#terminal" data-a="term">Terminal</a>
   <a href="#git" data-a="git">Git</a>
   <a href="#html" data-a="html">HTML + JS</a>
@@ -195,6 +201,304 @@ svg text{font-family:var(--f-body)}
   <a href="#repaso" data-a="rep">Repaso</a>
 </nav>
 <main>
+
+<!-- ============ LO ESENCIAL ============ -->
+<section class="area" id="base" data-a="base">
+<h2>Lo esencial para trabajar</h2>
+<p class="intro">La base de un junior full stack. Lo que se usa <b>cada día</b>. El resto, se busca.</p>
+<div class="grid">
+
+  <h3 class="grp">1 · El mapa</h3>
+
+  <div class="card span2 esencial"><h3>Cómo encaja todo</h3>
+  <div class="flow" role="img" aria-label="Navegador, petición a la API, MySQL y vuelta en JSON">
+    <div class="fl-box"><b>Navegador</b><span>HTML · CSS · JS</span></div>
+    <div class="fl-arrow">pide →<br><small>GET /api/…</small></div>
+    <div class="fl-box"><b>API (Node)</b><span>ruta → controlador → modelo</span></div>
+    <div class="fl-arrow">SQL →</div>
+    <div class="fl-box"><b>MySQL</b><span>tablas</span></div>
+  </div>
+  <div class="flow fl-back"><div class="fl-arrow">← responde en <b>JSON</b></div></div>
+  <div class="tbl"><table>
+    <tr><th>Parte</th><th>Hace</th></tr>
+    <tr><td>HTML</td><td>qué hay</td></tr>
+    <tr><td>CSS</td><td>cómo se ve</td></tr>
+    <tr><td>JS</td><td>qué hace</td></tr>
+    <tr><td>API</td><td>da los datos</td></tr>
+    <tr><td>MySQL</td><td>guarda los datos</td></tr>
+  </table></div></div>
+
+  <h3 class="grp">2 · JavaScript (lo más importante)</h3>
+
+  <div class="card"><h3>Lo básico</h3>
+  <div class="tbl"><table>
+    <tr><th>Cosa</th><th>Ejemplo</th></tr>
+    <tr><td>variable fija</td><td><code>const iva = 21</code></td></tr>
+    <tr><td>variable que cambia</td><td><code>let total = 0</code></td></tr>
+    <tr><td>comparar</td><td><code>===</code> (siempre)</td></tr>
+    <tr><td>decidir</td><td><code>if / else if / else</code></td></tr>
+    <tr><td>repetir</td><td><code>for (let x of lista)</code></td></tr>
+    <tr><td>función</td><td><code>const doble = n =&gt; n * 2</code></td></tr>
+    <tr><td>devolver</td><td><code>return</code></td></tr>
+    <tr><td>texto + variable</td><td><code>`Hola ${nombre}`</code></td></tr>
+  </table></div></div>
+
+  <div class="card"><h3>Array y objeto</h3>
+<pre><code>const lista = ['a', 'b', 'c']        // array: [ ]
+lista[0]          // 'a' (empieza en 0)
+lista.length      // 3
+lista.push('d')   // añade al final
+
+const prenda = { nombre: 'Camiseta', precio: 10 }   // objeto: { }
+prenda.precio     // 10</code></pre>
+  <ul>
+    <li><b><code>[ ]</code></b> = lista.</li>
+    <li><b><code>{ }</code></b> = una cosa con datos.</li>
+  </ul></div>
+
+  <div class="card span2"><h3>Arrays de objetos: el 80% del trabajo</h3>
+<pre><code>const productos = [
+    { id: 1, nombre: 'Camiseta', precio: 10 },
+    { id: 2, nombre: 'Gorra',    precio: 8  },
+    { id: 3, nombre: 'Sudadera', precio: 30 }
+]</code></pre>
+  <div class="tbl"><table>
+    <tr><th>Quiero…</th><th>Uso</th><th>Devuelve</th></tr>
+    <tr><td><b>uno</b></td><td><code>productos.find(p =&gt; p.id === 2)</code></td><td>el objeto (o <code>undefined</code>)</td></tr>
+    <tr><td><b>varios</b></td><td><code>productos.filter(p =&gt; p.precio &lt; 20)</code></td><td>array (o <code>[]</code>)</td></tr>
+    <tr><td><b>transformar</b></td><td><code>productos.map(p =&gt; p.nombre)</code></td><td>array nuevo, mismo tamaño</td></tr>
+    <tr><td><b>recorrer</b></td><td><code>for (let p of productos) { … }</code></td><td>—</td></tr>
+  </table></div>
+  <p class="tip"><b>Truco:</b> <code>p</code> = cada producto, uno a uno.</p></div>
+
+  <div class="card"><h3>Asíncrono</h3>
+<pre><code>const getAll = async (req, res) =&gt; {
+    const datos = await selectAll()   // espera
+    res.json(datos)
+}</code></pre>
+  <ul>
+    <li>Pedir datos → <b>tarda</b>.</li>
+    <li><code>await</code> → <b>espera</b>.</li>
+    <li><code>await</code> → solo dentro de <code>async</code>.</li>
+  </ul></div>
+
+  <div class="card"><h3>Conectar archivos</h3>
+<pre><code>// archivo A
+export { getAll, getById }      // varios → con llaves
+export default router           // uno solo
+
+// archivo B
+import { getAll } from './a.js' // con llaves, mismo nombre
+import router from './a.js'     // sin llaves</code></pre>
+  <ul>
+    <li><b><code>./</code></b> = esta carpeta.</li>
+    <li><b><code>../</code></b> = sube una.</li>
+    <li>Siempre con <b><code>.js</code></b>.</li>
+  </ul></div>
+
+  <h3 class="grp">3 · Git</h3>
+
+  <div class="card span2"><h3>El ciclo</h3>
+  <div class="flow">
+    <div class="fl-box"><b>git pull</b><span>traer lo nuevo</span></div>
+    <div class="fl-arrow">→</div>
+    <div class="fl-box"><b>trabajar</b><span>cambios</span></div>
+    <div class="fl-arrow">→</div>
+    <div class="fl-box"><b>git add .</b><span>preparar</span></div>
+    <div class="fl-arrow">→</div>
+    <div class="fl-box"><b>git commit -m ""</b><span>guardar foto</span></div>
+    <div class="fl-arrow">→</div>
+    <div class="fl-box"><b>git push</b><span>subir</span></div>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>Comando</th><th>Para</th></tr>
+    <tr><td><code>git status</code></td><td>ver cambios</td></tr>
+    <tr><td><code>git checkout -b rama</code></td><td>rama nueva</td></tr>
+    <tr><td><code>.gitignore</code></td><td><code>node_modules</code>, <code>.env</code></td></tr>
+  </table></div>
+  <p class="tip">Commits <b>pequeños y a menudo</b>.</p></div>
+
+  <h3 class="grp">4 · La API</h3>
+
+  <div class="card"><h3>Verbos (CRUD)</h3>
+  <div class="tbl"><table>
+    <tr><th>Verbo</th><th>Hace</th><th>Datos en</th></tr>
+    <tr><td><code>GET</code></td><td>leer</td><td>URL</td></tr>
+    <tr><td><code>POST</code></td><td>crear</td><td>body</td></tr>
+    <tr><td><code>PUT</code></td><td>actualizar</td><td>URL + body</td></tr>
+    <tr><td><code>DELETE</code></td><td>borrar</td><td>URL</td></tr>
+  </table></div>
+  <div class="tbl"><table>
+    <tr><th>Código</th><th>Significa</th></tr>
+    <tr><td>200</td><td>todo bien</td></tr>
+    <tr><td>404</td><td>no existe</td></tr>
+    <tr><td>500</td><td>fallo servidor</td></tr>
+  </table></div></div>
+
+  <div class="card"><h3>Ruta → controlador → modelo</h3>
+  <div class="tbl"><table>
+    <tr><th>Archivo</th><th>Es</th><th>Hace</th></tr>
+    <tr><td>routes</td><td>la carta</td><td>verbo + URL</td></tr>
+    <tr><td>controller</td><td>el camarero</td><td>recibe y responde</td></tr>
+    <tr><td>model</td><td>el cocinero</td><td>consulta SQL</td></tr>
+  </table></div>
+  <ul>
+    <li>Escribir: <b>izquierda → derecha</b>.</li>
+    <li>Conectar: <b>derecha → izquierda</b>.</li>
+  </ul></div>
+
+  <div class="card span2"><h3>Un endpoint entero</h3>
+<pre><code>// RUTA
+router.get('/:id', getById)
+
+// CONTROLADOR
+const getById = async (req, res) =&gt; {
+    const item = await selectById(Number(req.params.id))
+    res.json(item)
+}
+
+// MODELO
+const selectById = async (id) =&gt; {
+    const [result] = await db.execute('select * from tabla where id = ?', [id])
+    return result[0]
+}</code></pre>
+  <div class="tbl"><table>
+    <tr><th>Regla</th><th>Por qué</th></tr>
+    <tr><td><code>req.params</code> → texto</td><td>id → <code>Number()</code></td></tr>
+    <tr><td><code>req.body</code></td><td>datos del POST/PUT</td></tr>
+    <tr><td><code>?</code> + <code>[valor]</code></td><td>evita inyección SQL</td></tr>
+    <tr><td><code>const [result]</code></td><td>quita array de fuera</td></tr>
+    <tr><td>uno → <code>result[0]</code></td><td>varios → <code>result</code></td></tr>
+    <tr><td>contraseñas</td><td>en <code>.env</code></td></tr>
+  </table></div></div>
+
+  <h3 class="grp">5 · SQL</h3>
+
+  <div class="card"><h3>Consultar</h3>
+<pre><code>SELECT nombre, precio
+FROM productos
+WHERE precio &lt; 20
+ORDER BY precio DESC;</code></pre>
+  <div class="tbl"><table>
+    <tr><th>Quiero</th><th>Uso</th></tr>
+    <tr><td>filtrar</td><td><code>WHERE</code></td></tr>
+    <tr><td>contiene</td><td><code>LIKE '%texto%'</code></td></tr>
+    <tr><td>ordenar</td><td><code>ORDER BY</code></td></tr>
+    <tr><td>contar/sumar</td><td><code>COUNT</code> / <code>SUM</code> + <code>GROUP BY</code></td></tr>
+    <tr><td>dos tablas</td><td><code>JOIN … ON</code></td></tr>
+  </table></div></div>
+
+  <div class="card"><h3>Tablas y cambios</h3>
+  <div class="flow fl-sm">
+    <div class="fl-box"><b>dueno</b><span>id (PK)</span></div>
+    <div class="fl-arrow">1 → N</div>
+    <div class="fl-box"><b>mascota</b><span>id_dueno (FK)</span></div>
+  </div>
+  <ul>
+    <li><b>PK</b> = identifica la fila.</li>
+    <li><b>FK</b> = apunta a otra.</li>
+    <li>FK → en el "hijo".</li>
+  </ul>
+<pre><code>INSERT INTO t (a, b) VALUES (1, 2);
+UPDATE t SET a = 5 WHERE id = 3;
+DELETE FROM t WHERE id = 3;</code></pre>
+  <p class="tip">⚠️ <code>UPDATE</code>/<code>DELETE</code> <b>siempre con WHERE</b>.</p></div>
+
+  <h3 class="grp">6 · HTML y CSS</h3>
+
+  <div class="card"><h3>HTML</h3>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;  … info, title, link CSS …  &lt;/head&gt;
+&lt;body&gt;  … lo que se ve …  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  <div class="tbl"><table>
+    <tr><th>Etiqueta</th><th>Para</th></tr>
+    <tr><td><code>div</code></td><td>caja</td></tr>
+    <tr><td><code>h1</code>…<code>h6</code>, <code>p</code></td><td>títulos, texto</td></tr>
+    <tr><td><code>a href</code></td><td>ir a sitio</td></tr>
+    <tr><td><code>button</code></td><td>hacer acción</td></tr>
+    <tr><td><code>img src alt</code></td><td>imagen</td></tr>
+    <tr><td><code>ul/ol</code> + <code>li</code></td><td>listas</td></tr>
+    <tr><td><code>form</code> + <code>input</code> + <code>label</code></td><td>formulario</td></tr>
+  </table></div></div>
+
+  <div class="card"><h3>CSS: apuntar</h3>
+  <div class="tbl"><table>
+    <tr><th>Selector</th><th>Apunta a</th></tr>
+    <tr><td><code>p</code></td><td>todos los p</td></tr>
+    <tr><td><code>.tarjeta</code></td><td>clase (usa esto)</td></tr>
+    <tr><td><code>#menu</code></td><td>id (único)</td></tr>
+    <tr><td><code>.tarjeta img</code></td><td>img dentro de</td></tr>
+    <tr><td><code>a:hover</code></td><td>ratón encima</td></tr>
+  </table></div>
+  <p class="tip">Choque → gana <b>lo más específico</b>.</p></div>
+
+  <div class="card"><h3>La caja</h3>
+  <div class="boxm" style="max-width:300px">
+    <div class="bm bm-m"><span class="bm-l">margin</span>
+      <div class="bm bm-b2"><span class="bm-l">border</span>
+        <div class="bm bm-p"><span class="bm-l">padding</span>
+          <div class="bm-c">contenido</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ul>
+    <li><b>padding</b> = hueco dentro.</li>
+    <li><b>margin</b> = hueco fuera.</li>
+    <li><code>* { box-sizing: border-box }</code></li>
+  </ul></div>
+
+  <div class="card"><h3>Flexbox: colocar todo</h3>
+<pre><code>.padre {
+    display: flex;
+    justify-content: space-between;  /* ↔ */
+    align-items: center;             /* ↕ */
+    flex-wrap: wrap;                 /* si no cabe, baja */
+}</code></pre>
+  <ul>
+    <li>Flex → en el <b>padre</b>.</li>
+    <li>Centrar → <code>center</code> + <code>center</code>.</li>
+  </ul></div>
+
+  <h3 class="grp">7 · Cuando algo falla</h3>
+
+  <div class="card span2"><h3>Depurar en 5 pasos</h3>
+  <div class="flow">
+    <div class="fl-box"><b>1. Leer</b><span>el error rojo</span></div>
+    <div class="fl-arrow">→</div>
+    <div class="fl-box"><b>2. Ubicar</b><span>archivo y línea</span></div>
+    <div class="fl-arrow">→</div>
+    <div class="fl-box"><b>3. Mirar</b><span>console.log / F12</span></div>
+    <div class="fl-arrow">→</div>
+    <div class="fl-box"><b>4. Probar</b><span>un cambio</span></div>
+    <div class="fl-arrow">→</div>
+    <div class="fl-box"><b>5. Buscar</b><span>docs / IA</span></div>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>Ves</th><th>Suele ser</th></tr>
+    <tr><td><code>is not defined</code></td><td>falta import / errata</td></tr>
+    <tr><td><code>Cannot find module</code></td><td>ruta o <code>.js</code></td></tr>
+    <tr><td><code>undefined</code></td><td>nombre no coincide</td></tr>
+    <tr><td>se queda cargando</td><td>falta <code>res.json</code></td></tr>
+    <tr><td><code>Unknown column</code></td><td>columna mal escrita</td></tr>
+    <tr><td><code>EADDRINUSE</code></td><td>puerto ocupado</td></tr>
+    <tr><td>CSS no aplica</td><td>selector mal (F12)</td></tr>
+  </table></div></div>
+
+  <div class="card span2"><h3>Buscar y la IA</h3>
+  <div class="tbl"><table>
+    <tr><th>Sí</th><th>No</th></tr>
+    <tr><td>"explícame esto"</td><td>copiar sin entender</td></tr>
+    <tr><td>"dame una pista"</td><td>"hazme el ejercicio"</td></tr>
+    <tr><td>revisar lo que cambia</td><td>dejarla sola</td></tr>
+    <tr><td>W3Schools, docs</td><td>memorizarlo todo</td></tr>
+  </table></div>
+  <p class="tip"><b>Se busca:</b> animaciones, fuentes, sombras exactas, SQL raro, configuraciones. <b>No se busca:</b> lo de esta pestaña.</p></div>
+
+</div>
+</section>
 
 <!-- ============ TERMINAL ============ -->
 <section class="area" id="terminal" data-a="term">

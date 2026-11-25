@@ -87,6 +87,23 @@ nav.toc a.here.plegado + .sub{display:none}
 .pg.next{margin-left:auto}
 
 [data-a="rep"]{--dot:#d97706}
+/* Diccionario flotante */
+.dic-btn{position:fixed;left:16px;bottom:16px;z-index:50;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:600 14px/1 inherit;box-shadow:0 4px 14px rgba(0,0,0,.15);cursor:pointer}
+.dic-btn:hover{border-color:var(--accent)}
+.dic-pan{position:fixed;left:16px;bottom:64px;z-index:51;width:min(460px,calc(100vw - 32px));max-height:min(70vh,560px);display:none;flex-direction:column;background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.25);overflow:hidden}
+.dic-pan.open{display:flex}
+.dic-pan input{margin:12px;padding:10px 12px;font:inherit;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:inherit}
+.dic-res{overflow:auto;padding:0 12px 12px}
+.dic-row{padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+.dic-row code{font-weight:600}
+.dic-row span{color:var(--muted);font-size:12px;margin-left:6px}
+.dic-tip{color:var(--muted);font-size:13px;padding:4px 0}
+.dic-row{cursor:pointer}
+.dic-row:hover code,#glo td:first-child code:hover{text-decoration:underline;color:var(--accent)}
+#glo td:first-child code{cursor:pointer}
+.dic-flash{outline:3px solid var(--accent);outline-offset:3px;transition:outline-color 1.5s}
+.dic-aviso{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:60;background:var(--fg);color:var(--surface);padding:8px 14px;border-radius:8px;font-size:14px}
+
 .glo-tema{color:var(--muted);font-size:.85em;white-space:nowrap}
 .rp{max-width:680px;padding-bottom:64px}
 .rp-temas{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
@@ -4797,6 +4814,27 @@ function addSquare(event) {
     <tr data-k="@keyframes define una animación css"><td><code>@keyframes</code></td><td>define una animación</td><td class="glo-tema">CSS</td></tr>
     <tr data-k="@media css que solo se aplica desde cierto ancho css"><td><code>@media</code></td><td>CSS que solo se aplica desde cierto ancho</td><td class="glo-tema">CSS</td></tr>
     <tr data-k="calc() hace cuentas: calc(100% - 300px) css"><td><code>calc()</code></td><td>hace cuentas: calc(100% - 300px)</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k="node archivo.js ejecuta un archivo de js en la terminal node"><td><code>node archivo.js</code></td><td>ejecuta un archivo de JS en la terminal</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="live server abre tu html en el navegador y lo recarga al guardar css"><td><code>Live Server</code></td><td>abre tu HTML en el navegador y lo recarga al guardar</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k="f12 abre las herramientas del navegador (elements, console) dom"><td><code>F12</code></td><td>abre las herramientas del navegador (Elements, Console)</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k="api un servidor que te da o guarda datos por urls node"><td><code>API</code></td><td>un servidor que te da o guarda datos por URLs</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="crud crear, leer, actualizar y borrar (post, get, put, delete) node"><td><code>CRUD</code></td><td>crear, leer, actualizar y borrar (POST, GET, PUT, DELETE)</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="endpoint cada url de la api (/api/usuarios/:id) node"><td><code>endpoint</code></td><td>cada URL de la API (/api/usuarios/:id)</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="localhost:3000 tu propio ordenador, puerto 3000 node"><td><code>localhost:3000</code></td><td>tu propio ordenador, puerto 3000</td><td class="glo-tema">Node</td></tr>
+    <tr data-k=".env archivo con contraseñas y datos secretos (no se sube) node"><td><code>.env</code></td><td>archivo con contraseñas y datos secretos (no se sube)</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="cors permiso para que otra web use tu api node"><td><code>cors</code></td><td>permiso para que otra web use tu API</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="404 no encontrado node"><td><code>404</code></td><td>no encontrado</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="500 error del servidor node"><td><code>500</code></td><td>error del servidor</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="eaddrinuse el puerto ya está ocupado (otro servidor abierto) node"><td><code>EADDRINUSE</code></td><td>el puerto ya está ocupado (otro servidor abierto)</td><td class="glo-tema">Node</td></tr>
+    <tr data-k=".value lo que hay escrito en un input dom"><td><code>.value</code></td><td>lo que hay escrito en un input</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k=".prepend() mete algo dentro, al principio dom"><td><code>.prepend()</code></td><td>mete algo dentro, al principio</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k="nodelist la lista que devuelve queryselectorall dom"><td><code>NodeList</code></td><td>la lista que devuelve querySelectorAll</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k="onclick forma antigua de poner un evento (mejor addeventlistener) eventos"><td><code>onclick</code></td><td>forma antigua de poner un evento (mejor addEventListener)</td><td class="glo-tema">Eventos</td></tr>
+    <tr data-k="vh / vw % de la altura / anchura de la pantalla css"><td><code>vh / vw</code></td><td>% de la altura / anchura de la pantalla</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k="object-fit: cover la imagen rellena sin deformarse css"><td><code>object-fit: cover</code></td><td>la imagen rellena sin deformarse</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k="::before / ::after añade contenido antes / después con css css"><td><code>::before / ::after</code></td><td>añade contenido antes / después con CSS</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k="ámbito (scope) lo creado dentro de { } solo existe ahí dentro js"><td><code>ámbito (scope)</code></td><td>lo creado dentro de { } solo existe ahí dentro</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="camelcase escribir así: backgroundcolor, mivariable js"><td><code>camelCase</code></td><td>escribir así: backgroundColor, miVariable</td><td class="glo-tema">JS</td></tr>
   </table></div>
   <p id="glo-vacio" style="display:none">No está en el diccionario. Prueba con el buscador de arriba.</p></div>
 </div>
@@ -5045,4 +5083,101 @@ document.querySelectorAll('.demo').forEach(d => {
   f.srcdoc = '<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"></head><body style="margin:12px">' + t.innerHTML + '</body></html>';
   d.appendChild(f);
 });
+</script>
+
+<button type="button" class="dic-btn" id="dicBtn" aria-expanded="false" title="Diccionario (tecla D)">Diccionario</button>
+<div class="dic-pan" id="dicPan" role="dialog" aria-label="Diccionario">
+  <input type="search" id="dicQ" placeholder="¿Qué palabra buscas?" autocomplete="off">
+  <div class="dic-res" id="dicRes"></div>
+</div>
+<script>
+(() => {
+  const btn = document.getElementById('dicBtn'), pan = document.getElementById('dicPan');
+  const q = document.getElementById('dicQ'), res = document.getElementById('dicRes');
+  const datos = [...document.querySelectorAll('#glo tr[data-k]')].map(tr => ({
+    k: tr.dataset.k, t: tr.cells[0].textContent, d: tr.cells[1].textContent, c: tr.cells[2].textContent }));
+  const esc = x => x.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
+  function pintar() {
+    const t = q.value.trim().toLowerCase();
+    if (!t) { res.innerHTML = '<p class="dic-tip">Escribe una palabra: querySelector, push, flex, WHERE…</p>'; return; }
+    const hits = datos.filter(x => x.k.includes(t)).sort((a, b) => (b.t.toLowerCase().includes(t)) - (a.t.toLowerCase().includes(t)));
+    res.innerHTML = hits.length
+      ? hits.map(x => `<div class="dic-row" data-t="${esc(x.t)}" title="Ir a los apuntes"><code>${esc(x.t)}</code><span>${esc(x.c)}</span><br>${esc(x.d)}</div>`).join('')
+      : '<p class="dic-tip">No está. Prueba con el buscador de arriba.</p>';
+  }
+  function abrir(sino) {
+    const open = sino ?? !pan.classList.contains('open');
+    pan.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open);
+    if (open) { q.focus(); q.select(); pintar(); }
+  }
+  // Saltar al apartado de los apuntes
+  function clave(t) {
+    return t.split(' / ')[0].split(' … ')[0].replace(/\(.*\)$/, '').replace(/^\./, '').replace(/^\$/, '').trim().toLowerCase();
+  }
+  function aviso(txt) {
+    const a = document.createElement('div');
+    a.className = 'dic-aviso'; a.textContent = txt;
+    document.body.append(a);
+    setTimeout(() => a.remove(), 2200);
+  }
+  const IR = {"let": ["js", "Variables"], "const": ["js", "Variables"], "=": ["js", "Variables"], "console.log()": ["js", "Lo esencial"], "===": ["js", "comparación"], "!==": ["js", "comparación"], "!": ["js", "lógicos"], "%": ["js", "matemáticos"], "`${ }`": ["js", "Template"], "true / false": ["js", "Tipos de datos"], "null": ["js", "Tipos de datos"], "undefined": ["js", "Tipos de datos"], "? :": ["cond", "ternario"], "function": ["funciones", "Las dos partes"], "=>": ["funciones", "flecha"], "in": ["objetos", "que cuentan"], "[ ]": ["objetos", "Lista u objeto"], "{ }": ["objetos", "Lista u objeto"], "lista[0]": ["arrays", "Crear y leer"], ".length": ["arrays", "Crear y leer"], "lista[lista.length - 1]": ["arrays", "Crear y leer"], ".push()": ["objetos", "Añadir y quitar"], ".includes()": ["objetos", "Chuleta"], ".indexOf()": ["objetos", "Chuleta"], ".forEach()": ["objetos", "Chuleta"], ".sort()": ["objetos", "Chuleta"], ".splice(pos, n)": ["objetos", "Chuleta"], ".find()": ["objetos", "find:"], ".filter()": ["objetos", "filter:"], ".map()": ["objetos", "map:"], "obj.cajón": ["objetos", "clave"], "obj[variable]": ["objetos", "clave"], "JSON": ["objetos", "clave"], "document": ["dom", "HTML vivo"], ".classList.add()": ["dom", "Clases"], ".classList.remove()": ["dom", "Clases"], ".style": ["dom", "style y otros"], "$nombre": ["dom", "querySelector y"], "[atributo]": ["dom", "Selectores nuevos"], "data-…": ["dom", "Selectores nuevos"], "click": ["dom", "addEventListener"], "focus": ["dom", "habituales"], "import / export": ["node", "export"], "LIKE '%x%'": ["sql", "WHERE"], "ls": ["terminal", ""], "transform": ["htmlcss", "transform"], "calc()": ["htmlcss", "Restar píxeles"], "display: flex": ["htmlcss", "flex"], "flex-wrap: wrap": ["htmlcss", "wrap"], "position: absolute": ["htmlcss", "absolute"], "Number()": ["js", "Tipos de datos"], ".value": null, ".prepend()": null, "?": ["node", "Lo esencial"]};
+  function elegir(cards, k) {
+    return cards.find(c => ((c.querySelector('h3') || {}).textContent || '').toLowerCase().includes(k))
+        || cards.find(c => [...c.querySelectorAll('code')].some(x => x.textContent.toLowerCase().includes(k)))
+        || cards.find(c => c.textContent.toLowerCase().includes(k))
+        || cards[0];
+  }
+  function irA(t) {
+    if (t in IR) {
+      if (!IR[t]) { aviso('«' + t + '» aún no tiene apartado propio en los apuntes'); return; }
+      const [sec, needle] = IR[t];
+      const cards = [...document.querySelectorAll('#' + sec + ' .card')];
+      return mostrar(elegir(cards, needle.toLowerCase()));
+    }
+    const k = clave(t);
+    if (!k) return;
+    const cards = [...document.querySelectorAll('section.area:not(#glosario):not(#repaso) .card')];
+    let mejor = null, top = 0;
+    for (const c of cards) {
+      const h = (c.querySelector('h3') || {}).textContent || '';
+      const code = [...c.querySelectorAll('code')].map(x => x.textContent).join(' ').toLowerCase();
+      const txt = c.textContent.toLowerCase();
+      let p = 0;
+      if (h.toLowerCase().includes(k)) p = 3;
+      else if (code.includes(k)) p = 2;
+      else if (txt.includes(k)) p = 1;
+      if (p && c.closest('#base')) p -= 0.5;           // mejor la explicación larga que el resumen
+      if (p > top) { top = p; mejor = c; }
+    }
+    if (!mejor) { aviso('No hay un apartado con «' + t + '» en los apuntes'); return; }
+    mostrar(mejor);
+  }
+  function mostrar(mejor) {
+    if (!mejor) return;
+    const buscador = document.getElementById('q');
+    if (buscador && buscador.value) { buscador.value = ''; buscador.dispatchEvent(new Event('input')); }
+    if (mejor._set) mejor._set(true);
+    abrir(false);
+    mejor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    mejor.classList.add('dic-flash');
+    setTimeout(() => mejor.classList.remove('dic-flash'), 1800);
+  }
+  res.addEventListener('click', e => { const r = e.target.closest('.dic-row'); if (r) irA(r.dataset.t); });
+  const tabla = document.getElementById('glo');
+  if (tabla) tabla.addEventListener('click', e => {
+    const c = e.target.closest('td:first-child code'); if (c) irA(c.textContent);
+  });
+
+  btn.addEventListener('click', () => abrir());
+  q.addEventListener('input', pintar);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && pan.classList.contains('open')) abrir(false);
+    const escribiendo = /INPUT|TEXTAREA/.test(document.activeElement.tagName);
+    if (!escribiendo && (e.key === 'd' || e.key === 'D') && !e.ctrlKey && !e.metaKey && !e.altKey) { e.preventDefault(); abrir(true); }
+  });
+  document.addEventListener('click', e => {
+    if (pan.classList.contains('open') && !pan.contains(e.target) && e.target !== btn) abrir(false);
+  });
+})();
 </script>

@@ -87,6 +87,7 @@ nav.toc a.here.plegado + .sub{display:none}
 .pg.next{margin-left:auto}
 
 [data-a="rep"]{--dot:#d97706}
+.glo-tema{color:var(--muted);font-size:.85em;white-space:nowrap}
 .rp{max-width:680px;padding-bottom:64px}
 .rp-temas{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
 .rp-tema{font:600 13px var(--f-body);padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
@@ -154,7 +155,7 @@ svg text{font-family:var(--f-body)}
 .fc-dot2{fill:var(--c-git)}
 
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
-[data-a="term"]{--dot:var(--c-term)}[data-a="git"]{--dot:var(--c-git)}[data-a="html"]{--dot:var(--c-html)}[data-a="js"]{--dot:var(--c-js)}[data-a="cond"]{--dot:var(--c-cond)}[data-a="ej"]{--dot:var(--accent)}[data-a="loop"]{--dot:var(--c-loop)}[data-a="fn"]{--dot:var(--c-fn)}[data-a="arr"]{--dot:var(--c-arr)}[data-a="ia"]{--dot:var(--c-ia)}[data-a="sql"]{--dot:var(--c-sql)}[data-a="obj"]{--dot:var(--c-obj)}[data-a="node"]{--dot:var(--c-node)}[data-a="hc"]{--dot:var(--c-hc)}[data-a="base"]{--dot:var(--c-base)}[data-a="dom"]{--dot:var(--c-dom)}
+[data-a="term"]{--dot:var(--c-term)}[data-a="git"]{--dot:var(--c-git)}[data-a="html"]{--dot:var(--c-html)}[data-a="js"]{--dot:var(--c-js)}[data-a="cond"]{--dot:var(--c-cond)}[data-a="ej"]{--dot:var(--accent)}[data-a="loop"]{--dot:var(--c-loop)}[data-a="fn"]{--dot:var(--c-fn)}[data-a="arr"]{--dot:var(--c-arr)}[data-a="ia"]{--dot:var(--c-ia)}[data-a="sql"]{--dot:var(--c-sql)}[data-a="obj"]{--dot:var(--c-obj)}[data-a="node"]{--dot:var(--c-node)}[data-a="hc"]{--dot:var(--c-hc)}[data-a="base"]{--dot:var(--c-base)}[data-a="dom"]{--dot:var(--c-dom)}[data-a="glo"]{--dot:#64748b}
 .demo{margin:10px 0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
 .demo-lbl{display:block;font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);background:var(--code-bg);padding:5px 10px;border-bottom:1px solid var(--line)}
 .demo iframe{display:block;width:100%;border:0;background:#fff}
@@ -200,6 +201,7 @@ svg text{font-family:var(--f-body)}
   <a href="#node" data-a="node">Node.js y API</a>
   <a href="#htmlcss" data-a="hc">HTML y CSS</a>
   <a href="#dom" data-a="dom">DOM y eventos</a>
+  <a href="#glosario" data-a="glo">Diccionario</a>
   <a href="#repaso" data-a="rep">Repaso</a>
 </nav>
 <main>
@@ -4638,6 +4640,183 @@ function addSquare(event) {
   </ul>
   <div class="demo" data-h="180"><span class="demo-lbl">Así se ve en el navegador (haz clic dentro del recuadro)</span><template><style>body{font:12px sans-serif;height:150px;border:1px dashed #999;position:relative;margin:0}.square{position:absolute;border:2px solid #111;background:red;width:20px;height:20px}</style>Haz clic en cualquier sitio<script>document.body.addEventListener('click',function addSquare(event){const $sq=document.createElement('div');$sq.classList.add('square');$sq.style.left=event.clientX+'px';$sq.style.top=event.clientY+'px';document.body.append($sq);});</script></template></div></div>
 </div>
+</section>
+
+<section class="area" id="glosario" data-a="glo">
+<h2>Diccionario</h2>
+<p class="intro">Busca una palabra y te dice en una frase qué hace. Para más detalle, usa el buscador de arriba.</p>
+<div class="grid">
+  <div class="card span2 esencial"><h3>Busca una palabra</h3>
+  <input id="glo-q" type="search" placeholder="Escribe: querySelector, push, flex, WHERE…" autocomplete="off" style="width:100%;padding:10px 12px;font:inherit;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:inherit;margin-bottom:10px">
+  <div class="tbl"><table id="glo">
+    <tr><th>Palabra</th><th>Qué hace</th><th>Tema</th></tr>
+    <tr data-k="let crea una variable que puede cambiar js"><td><code>let</code></td><td>crea una variable que puede cambiar</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="const crea una variable que no se puede reasignar js"><td><code>const</code></td><td>crea una variable que no se puede reasignar</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="console.log() enseña algo en la consola js"><td><code>console.log()</code></td><td>enseña algo en la consola</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="console.error() enseña un error en la consola (en rojo) js"><td><code>console.error()</code></td><td>enseña un error en la consola (en rojo)</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="typeof dice qué tipo de dato es: &#x27;number&#x27;, &#x27;string&#x27;… js"><td><code>typeof</code></td><td>dice qué tipo de dato es: &#x27;number&#x27;, &#x27;string&#x27;…</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="= guarda un valor (asigna) js"><td><code>=</code></td><td>guarda un valor (asigna)</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="=== compara si dos cosas son iguales (valor y tipo) js"><td><code>===</code></td><td>compara si dos cosas son iguales (valor y tipo)</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="!== compara si dos cosas son distintas js"><td><code>!==</code></td><td>compara si dos cosas son distintas</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="&amp;&amp; y: se tienen que cumplir las dos js"><td><code>&amp;&amp;</code></td><td>y: se tienen que cumplir las dos</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="|| o: con que se cumpla una vale js"><td><code>||</code></td><td>o: con que se cumpla una vale</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="! no: le da la vuelta (true ↔ false) js"><td><code>!</code></td><td>no: le da la vuelta (true ↔ false)</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="% el resto de una división (par: n % 2 === 0) js"><td><code>%</code></td><td>el resto de una división (par: n % 2 === 0)</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="++ suma 1 (i = i + 1) js"><td><code>++</code></td><td>suma 1 (i = i + 1)</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="-- resta 1 (i = i - 1) js"><td><code>--</code></td><td>resta 1 (i = i - 1)</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="+= suma a lo que ya tenía (total += 5) js"><td><code>+=</code></td><td>suma a lo que ya tenía (total += 5)</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="`${ }` mete una variable dentro de un texto js"><td><code>`${ }`</code></td><td>mete una variable dentro de un texto</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="true / false sí / no (booleano) js"><td><code>true / false</code></td><td>sí / no (booleano)</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="null vacío a propósito js"><td><code>null</code></td><td>vacío a propósito</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="undefined no tiene valor (o no existe) js"><td><code>undefined</code></td><td>no tiene valor (o no existe)</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="if si se cumple esto, haz esto js"><td><code>if</code></td><td>si se cumple esto, haz esto</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="else si no, haz esto otro js"><td><code>else</code></td><td>si no, haz esto otro</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="else if si no, pero si se cumple esto otro… js"><td><code>else if</code></td><td>si no, pero si se cumple esto otro…</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="? : ternario: if/else en una línea (cond ? sí : no) js"><td><code>? :</code></td><td>ternario: if/else en una línea (cond ? sí : no)</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="switch elige entre varios casos de un mismo valor js"><td><code>switch</code></td><td>elige entre varios casos de un mismo valor</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="for repite contando (i = 0; i &lt; x; i++) js"><td><code>for</code></td><td>repite contando (i = 0; i &lt; x; i++)</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="for…of recorre una lista, cosa a cosa js"><td><code>for…of</code></td><td>recorre una lista, cosa a cosa</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="for…in recorre los nombres de los cajones de un objeto js"><td><code>for…in</code></td><td>recorre los nombres de los cajones de un objeto</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="while repite mientras se cumpla algo js"><td><code>while</code></td><td>repite mientras se cumpla algo</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="function crea una función (un trozo de código con nombre) js"><td><code>function</code></td><td>crea una función (un trozo de código con nombre)</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="=&gt; función flecha: forma corta de escribir una función js"><td><code>=&gt;</code></td><td>función flecha: forma corta de escribir una función</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="return devuelve un resultado y termina la función js"><td><code>return</code></td><td>devuelve un resultado y termina la función</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="parámetro el dato que recibe una función (entre sus paréntesis) js"><td><code>parámetro</code></td><td>el dato que recibe una función (entre sus paréntesis)</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="async / await espera a que acabe algo lento (como la base de datos) js"><td><code>async / await</code></td><td>espera a que acabe algo lento (como la base de datos)</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="try / catch intenta algo; si falla, haz esto otro js"><td><code>try / catch</code></td><td>intenta algo; si falla, haz esto otro</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="promise una tarea que acabará más tarde, bien o mal js"><td><code>Promise</code></td><td>una tarea que acabará más tarde, bien o mal</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="in ¿tiene este objeto ese cajón? (&#x27;name&#x27; in persona) js"><td><code>in</code></td><td>¿tiene este objeto ese cajón? (&#x27;name&#x27; in persona)</td><td class="glo-tema">JS</td></tr>
+    <tr data-k="[ ] una lista (array) arrays"><td><code>[ ]</code></td><td>una lista (array)</td><td class="glo-tema">Arrays</td></tr>
+    <tr data-k="lista[0] el elemento de la posición 0 (el primero) arrays"><td><code>lista[0]</code></td><td>el elemento de la posición 0 (el primero)</td><td class="glo-tema">Arrays</td></tr>
+    <tr data-k=".length cuántos elementos hay (o cuántas letras) arrays"><td><code>.length</code></td><td>cuántos elementos hay (o cuántas letras)</td><td class="glo-tema">Arrays</td></tr>
+    <tr data-k="lista[lista.length - 1] el último elemento arrays"><td><code>lista[lista.length - 1]</code></td><td>el último elemento</td><td class="glo-tema">Arrays</td></tr>
+    <tr data-k=".push() mete al final arrays"><td><code>.push()</code></td><td>mete al final</td><td class="glo-tema">Arrays</td></tr>
+    <tr data-k=".pop() quita el último (y te lo da) arrays"><td><code>.pop()</code></td><td>quita el último (y te lo da)</td><td class="glo-tema">Arrays</td></tr>
+    <tr data-k=".shift() quita el primero arrays"><td><code>.shift()</code></td><td>quita el primero</td><td class="glo-tema">Arrays</td></tr>
+    <tr data-k=".unshift() mete al principio arrays"><td><code>.unshift()</code></td><td>mete al principio</td><td class="glo-tema">Arrays</td></tr>
+    <tr data-k=".splice(pos, n) corta n elementos desde la posición pos arrays"><td><code>.splice(pos, n)</code></td><td>corta n elementos desde la posición pos</td><td class="glo-tema">Arrays</td></tr>
+    <tr data-k=".includes() ¿está esto dentro? true / false arrays"><td><code>.includes()</code></td><td>¿está esto dentro? true / false</td><td class="glo-tema">Arrays</td></tr>
+    <tr data-k=".indexof() en qué posición está (o -1 si no está) arrays"><td><code>.indexOf()</code></td><td>en qué posición está (o -1 si no está)</td><td class="glo-tema">Arrays</td></tr>
+    <tr data-k=".find() el primero que cumpla una condición arrays"><td><code>.find()</code></td><td>el primero que cumpla una condición</td><td class="glo-tema">Arrays</td></tr>
+    <tr data-k=".filter() todos los que cumplan una condición (lista nueva) arrays"><td><code>.filter()</code></td><td>todos los que cumplan una condición (lista nueva)</td><td class="glo-tema">Arrays</td></tr>
+    <tr data-k=".map() transforma cada elemento (lista nueva, mismo tamaño) arrays"><td><code>.map()</code></td><td>transforma cada elemento (lista nueva, mismo tamaño)</td><td class="glo-tema">Arrays</td></tr>
+    <tr data-k=".reduce() junta todo en un solo valor (por ejemplo, una suma) arrays"><td><code>.reduce()</code></td><td>junta todo en un solo valor (por ejemplo, una suma)</td><td class="glo-tema">Arrays</td></tr>
+    <tr data-k=".foreach() hace algo con cada elemento arrays"><td><code>.forEach()</code></td><td>hace algo con cada elemento</td><td class="glo-tema">Arrays</td></tr>
+    <tr data-k=".sort() ordena la lista arrays"><td><code>.sort()</code></td><td>ordena la lista</td><td class="glo-tema">Arrays</td></tr>
+    <tr data-k="{ } un objeto: datos con nombre (nombre: valor) objetos"><td><code>{ }</code></td><td>un objeto: datos con nombre (nombre: valor)</td><td class="glo-tema">Objetos</td></tr>
+    <tr data-k="obj.cajón abre un cajón del objeto (toy.price) objetos"><td><code>obj.cajón</code></td><td>abre un cajón del objeto (toy.price)</td><td class="glo-tema">Objetos</td></tr>
+    <tr data-k="obj[variable] abre el cajón cuyo nombre está en una variable objetos"><td><code>obj[variable]</code></td><td>abre el cajón cuyo nombre está en una variable</td><td class="glo-tema">Objetos</td></tr>
+    <tr data-k="json el formato de texto en el que viajan los objetos objetos"><td><code>JSON</code></td><td>el formato de texto en el que viajan los objetos</td><td class="glo-tema">Objetos</td></tr>
+    <tr data-k=".tolowercase() pasa el texto a minúsculas texto"><td><code>.toLowerCase()</code></td><td>pasa el texto a minúsculas</td><td class="glo-tema">Texto</td></tr>
+    <tr data-k=".touppercase() pasa el texto a mayúsculas texto"><td><code>.toUpperCase()</code></td><td>pasa el texto a mayúsculas</td><td class="glo-tema">Texto</td></tr>
+    <tr data-k="number() convierte un texto en número (&#x27;5&#x27; → 5) texto"><td><code>Number()</code></td><td>convierte un texto en número (&#x27;5&#x27; → 5)</td><td class="glo-tema">Texto</td></tr>
+    <tr data-k="dom la página viva que puede cambiar javascript dom"><td><code>DOM</code></td><td>la página viva que puede cambiar JavaScript</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k="document la página entera dom"><td><code>document</code></td><td>la página entera</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k="document.body el body de la página dom"><td><code>document.body</code></td><td>el body de la página</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k="defer ejecuta el js cuando ya está todo el html dom"><td><code>defer</code></td><td>ejecuta el JS cuando ya está todo el HTML</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k="queryselector() busca en la página el primer elemento que coincida con esto dom"><td><code>querySelector()</code></td><td>busca en la página el primer elemento que coincida con esto</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k="queryselectorall() busca todos los que coincidan (te da una lista) dom"><td><code>querySelectorAll()</code></td><td>busca todos los que coincidan (te da una lista)</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k="getelementbyid() busca por id (sin #) dom"><td><code>getElementById()</code></td><td>busca por id (sin #)</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k=".textcontent el texto de dentro (para leerlo o cambiarlo) dom"><td><code>.textContent</code></td><td>el texto de dentro (para leerlo o cambiarlo)</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k=".innerhtml el html de dentro (crea etiquetas de verdad) dom"><td><code>.innerHTML</code></td><td>el HTML de dentro (crea etiquetas de verdad)</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k=".classlist.add() le pone una clase dom"><td><code>.classList.add()</code></td><td>le pone una clase</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k=".classlist.remove() le quita una clase dom"><td><code>.classList.remove()</code></td><td>le quita una clase</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k=".classlist.toggle() si tiene la clase la quita; si no, la pone dom"><td><code>.classList.toggle()</code></td><td>si tiene la clase la quita; si no, la pone</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k=".classlist.contains() ¿tiene esa clase? true / false dom"><td><code>.classList.contains()</code></td><td>¿tiene esa clase? true / false</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k=".style cambia el css directamente (style.backgroundcolor) dom"><td><code>.style</code></td><td>cambia el CSS directamente (style.backgroundColor)</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k="createelement() fabrica una etiqueta nueva (aún no se ve) dom"><td><code>createElement()</code></td><td>fabrica una etiqueta nueva (aún no se ve)</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k=".append() mete algo dentro, al final (dónde.append(qué)) dom"><td><code>.append()</code></td><td>mete algo dentro, al final (dónde.append(qué))</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k="insertbefore() mete algo justo antes de otro dom"><td><code>insertBefore()</code></td><td>mete algo justo antes de otro</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k=".remove() borra el elemento de la página dom"><td><code>.remove()</code></td><td>borra el elemento de la página</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k="nodo cada etiqueta de la página, vista desde js dom"><td><code>nodo</code></td><td>cada etiqueta de la página, vista desde JS</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k="$nombre costumbre: variable que guarda un elemento de la página dom"><td><code>$nombre</code></td><td>costumbre: variable que guarda un elemento de la página</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k="[atributo] selector por atributo ([type=&quot;text&quot;]) dom"><td><code>[atributo]</code></td><td>selector por atributo ([type=&quot;text&quot;])</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k="data-… atributo inventado para guardar datos tuyos dom"><td><code>data-…</code></td><td>atributo inventado para guardar datos tuyos</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k=":nth-child() el elemento número x (empieza en 1) dom"><td><code>:nth-child()</code></td><td>el elemento número X (empieza en 1)</td><td class="glo-tema">DOM</td></tr>
+    <tr data-k="addeventlistener() cuando pase esto (un clic…), haz esto otro eventos"><td><code>addEventListener()</code></td><td>cuando pase esto (un clic…), haz esto otro</td><td class="glo-tema">Eventos</td></tr>
+    <tr data-k="event la información de lo que ha pasado (dónde, qué tecla…) eventos"><td><code>event</code></td><td>la información de lo que ha pasado (dónde, qué tecla…)</td><td class="glo-tema">Eventos</td></tr>
+    <tr data-k="click al pulsar con el ratón eventos"><td><code>click</code></td><td>al pulsar con el ratón</td><td class="glo-tema">Eventos</td></tr>
+    <tr data-k="keypress al pulsar una tecla eventos"><td><code>keypress</code></td><td>al pulsar una tecla</td><td class="glo-tema">Eventos</td></tr>
+    <tr data-k="focus al entrar en un input eventos"><td><code>focus</code></td><td>al entrar en un input</td><td class="glo-tema">Eventos</td></tr>
+    <tr data-k="blur al salir de un input eventos"><td><code>blur</code></td><td>al salir de un input</td><td class="glo-tema">Eventos</td></tr>
+    <tr data-k="change cuando cambia el valor de un input o select eventos"><td><code>change</code></td><td>cuando cambia el valor de un input o select</td><td class="glo-tema">Eventos</td></tr>
+    <tr data-k="mouseenter / mouseleave cuando el ratón entra / sale eventos"><td><code>mouseenter / mouseleave</code></td><td>cuando el ratón entra / sale</td><td class="glo-tema">Eventos</td></tr>
+    <tr data-k="mousemove mientras se mueve el ratón eventos"><td><code>mousemove</code></td><td>mientras se mueve el ratón</td><td class="glo-tema">Eventos</td></tr>
+    <tr data-k="clientx / clienty dónde estaba el ratón (en píxeles) eventos"><td><code>clientX / clientY</code></td><td>dónde estaba el ratón (en píxeles)</td><td class="glo-tema">Eventos</td></tr>
+    <tr data-k="ctrlkey ¿tenía pulsado ctrl? true / false eventos"><td><code>ctrlKey</code></td><td>¿tenía pulsado Ctrl? true / false</td><td class="glo-tema">Eventos</td></tr>
+    <tr data-k="alert() saca una ventanita con un mensaje eventos"><td><code>alert()</code></td><td>saca una ventanita con un mensaje</td><td class="glo-tema">Eventos</td></tr>
+    <tr data-k="npm init -y crea el package.json del proyecto node"><td><code>npm init -y</code></td><td>crea el package.json del proyecto</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="npm install instala librerías (las que diga el package.json) node"><td><code>npm install</code></td><td>instala librerías (las que diga el package.json)</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="npm run dev arranca el servidor (y lo reinicia al guardar) node"><td><code>npm run dev</code></td><td>arranca el servidor (y lo reinicia al guardar)</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="import / export pasar funciones de un archivo a otro node"><td><code>import / export</code></td><td>pasar funciones de un archivo a otro</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="express() crea la aplicación del servidor node"><td><code>express()</code></td><td>crea la aplicación del servidor</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="router.get() ruta para pedir datos node"><td><code>router.get()</code></td><td>ruta para pedir datos</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="router.post() ruta para crear node"><td><code>router.post()</code></td><td>ruta para crear</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="router.put() ruta para actualizar node"><td><code>router.put()</code></td><td>ruta para actualizar</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="router.delete() ruta para borrar node"><td><code>router.delete()</code></td><td>ruta para borrar</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="req.params los datos que vienen en la url (/:id) node"><td><code>req.params</code></td><td>los datos que vienen en la URL (/:id)</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="req.body los datos que vienen en el cuerpo (json) node"><td><code>req.body</code></td><td>los datos que vienen en el cuerpo (JSON)</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="res.json() responde con datos node"><td><code>res.json()</code></td><td>responde con datos</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="db.execute() lanza una consulta sql a la base de datos node"><td><code>db.execute()</code></td><td>lanza una consulta SQL a la base de datos</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="? hueco en el sql que se rellena con el array (evita inyección) node"><td><code>?</code></td><td>hueco en el SQL que se rellena con el array (evita inyección)</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="insertid el id del registro que se acaba de crear node"><td><code>insertId</code></td><td>el id del registro que se acaba de crear</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="affectedrows cuántas filas se han cambiado o borrado node"><td><code>affectedRows</code></td><td>cuántas filas se han cambiado o borrado</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="ruta → controlador → modelo carta → camarero → cocinero node"><td><code>ruta → controlador → modelo</code></td><td>carta → camarero → cocinero</td><td class="glo-tema">Node</td></tr>
+    <tr data-k="select pide columnas sql"><td><code>SELECT</code></td><td>pide columnas</td><td class="glo-tema">SQL</td></tr>
+    <tr data-k="from de qué tabla sql"><td><code>FROM</code></td><td>de qué tabla</td><td class="glo-tema">SQL</td></tr>
+    <tr data-k="where solo las filas que cumplan esto sql"><td><code>WHERE</code></td><td>solo las filas que cumplan esto</td><td class="glo-tema">SQL</td></tr>
+    <tr data-k="like &#x27;%x%&#x27; que contenga x sql"><td><code>LIKE &#x27;%x%&#x27;</code></td><td>que contenga x</td><td class="glo-tema">SQL</td></tr>
+    <tr data-k="order by ordena sql"><td><code>ORDER BY</code></td><td>ordena</td><td class="glo-tema">SQL</td></tr>
+    <tr data-k="insert into añade una fila sql"><td><code>INSERT INTO</code></td><td>añade una fila</td><td class="glo-tema">SQL</td></tr>
+    <tr data-k="update … set cambia datos sql"><td><code>UPDATE … SET</code></td><td>cambia datos</td><td class="glo-tema">SQL</td></tr>
+    <tr data-k="delete from borra filas (¡con where!) sql"><td><code>DELETE FROM</code></td><td>borra filas (¡con WHERE!)</td><td class="glo-tema">SQL</td></tr>
+    <tr data-k="join junta dos tablas relacionadas sql"><td><code>JOIN</code></td><td>junta dos tablas relacionadas</td><td class="glo-tema">SQL</td></tr>
+    <tr data-k="foreign key columna que apunta a otra tabla sql"><td><code>FOREIGN KEY</code></td><td>columna que apunta a otra tabla</td><td class="glo-tema">SQL</td></tr>
+    <tr data-k="cd entrar en una carpeta (cd .. sube una) git"><td><code>cd</code></td><td>entrar en una carpeta (cd .. sube una)</td><td class="glo-tema">Git</td></tr>
+    <tr data-k="ls ver qué hay en la carpeta git"><td><code>ls</code></td><td>ver qué hay en la carpeta</td><td class="glo-tema">Git</td></tr>
+    <tr data-k="git status qué ha cambiado git"><td><code>git status</code></td><td>qué ha cambiado</td><td class="glo-tema">Git</td></tr>
+    <tr data-k="git add . prepara todos los cambios git"><td><code>git add .</code></td><td>prepara todos los cambios</td><td class="glo-tema">Git</td></tr>
+    <tr data-k="git commit -m guarda una foto de los cambios, con un mensaje git"><td><code>git commit -m</code></td><td>guarda una foto de los cambios, con un mensaje</td><td class="glo-tema">Git</td></tr>
+    <tr data-k="git push sube los commits a github git"><td><code>git push</code></td><td>sube los commits a GitHub</td><td class="glo-tema">Git</td></tr>
+    <tr data-k="git pull baja lo nuevo de github git"><td><code>git pull</code></td><td>baja lo nuevo de GitHub</td><td class="glo-tema">Git</td></tr>
+    <tr data-k="git clone descarga un repositorio entero git"><td><code>git clone</code></td><td>descarga un repositorio entero</td><td class="glo-tema">Git</td></tr>
+    <tr data-k=".gitignore lo que git no debe subir (node_modules, .env) git"><td><code>.gitignore</code></td><td>lo que Git no debe subir (node_modules, .env)</td><td class="glo-tema">Git</td></tr>
+    <tr data-k="display: flex coloca los hijos en fila (va en el padre) css"><td><code>display: flex</code></td><td>coloca los hijos en fila (va en el padre)</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k="justify-content reparte en la dirección del flex css"><td><code>justify-content</code></td><td>reparte en la dirección del flex</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k="align-items alinea en la otra dirección css"><td><code>align-items</code></td><td>alinea en la otra dirección</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k="flex-wrap: wrap si no caben, bajan a otra fila css"><td><code>flex-wrap: wrap</code></td><td>si no caben, bajan a otra fila</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k="padding hueco por dentro css"><td><code>padding</code></td><td>hueco por dentro</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k="margin hueco por fuera css"><td><code>margin</code></td><td>hueco por fuera</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k="box-sizing: border-box el ancho incluye padding y borde css"><td><code>box-sizing: border-box</code></td><td>el ancho incluye padding y borde</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k="position: absolute lo colocas donde quieras, respecto a la página css"><td><code>position: absolute</code></td><td>lo colocas donde quieras, respecto a la página</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k="position: fixed se queda pegado a la pantalla al hacer scroll css"><td><code>position: fixed</code></td><td>se queda pegado a la pantalla al hacer scroll</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k="z-index qué capa va encima css"><td><code>z-index</code></td><td>qué capa va encima</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k=":hover cuando el ratón está encima css"><td><code>:hover</code></td><td>cuando el ratón está encima</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k="transition hace los cambios suaves css"><td><code>transition</code></td><td>hace los cambios suaves</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k="transform escala, gira o mueve (scale, rotate, translate) css"><td><code>transform</code></td><td>escala, gira o mueve (scale, rotate, translate)</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k="@keyframes define una animación css"><td><code>@keyframes</code></td><td>define una animación</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k="@media css que solo se aplica desde cierto ancho css"><td><code>@media</code></td><td>CSS que solo se aplica desde cierto ancho</td><td class="glo-tema">CSS</td></tr>
+    <tr data-k="calc() hace cuentas: calc(100% - 300px) css"><td><code>calc()</code></td><td>hace cuentas: calc(100% - 300px)</td><td class="glo-tema">CSS</td></tr>
+  </table></div>
+  <p id="glo-vacio" style="display:none">No está en el diccionario. Prueba con el buscador de arriba.</p></div>
+</div>
+<script>
+(() => {
+  const q = document.getElementById('glo-q');
+  const filas = [...document.querySelectorAll('#glo tr[data-k]')];
+  const vacio = document.getElementById('glo-vacio');
+  q.addEventListener('input', () => {
+    const t = q.value.trim().toLowerCase();
+    let hay = 0;
+    for (const f of filas) {
+      const ok = !t || f.dataset.k.includes(t);
+      f.style.display = ok ? '' : 'none';
+      if (ok) hay++;
+    }
+    vacio.style.display = hay ? 'none' : 'block';
+  });
+})();
+</script>
 </section>
 
 <section class="area" id="repaso" data-a="rep">
